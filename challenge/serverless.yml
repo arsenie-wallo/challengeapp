@@ -5,13 +5,15 @@ frameworkVersion: "4"
 provider:
   name: aws
   runtime: nodejs20.x
+  stage: ${env:SERVERLESS_STAGE, 'AKrQP537O8bumxeWghz49xiCQbZGI6rR7NQjbd3yIqqUE'}
+
 plugins:
   - serverless-offline
 
 functions:
-  hello:
-    handler: handler.hello
+  dashboard:
+    handler: handler.dashboard
     events:
       - httpApi:
           path: /
-          method: get
+          method: post

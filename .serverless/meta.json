@@ -5,7 +5,9 @@
     "isWithinCompose": false,
     "composeOrgName": null,
     "composeServiceName": null,
-    "command": [],
+    "command": [
+      "login"
+    ],
     "options": {},
     "error": null,
     "machineId": "c981ba449be23fb5c2047278b2b01182",

@@ -18,3 +18,10 @@ functions:
       - httpApi:
           path: /
           method: get
+
+  employees:
+    handler: handler.employees
+    events:
+      - httpApi:
+          path: employees
+          method: get

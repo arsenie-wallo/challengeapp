@@ -1,18 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose')
 
-// const express = require('express')
-// const cors = require('cors');
-
-// MongoDB Schema
-// Schema and Model
-const DepartmentSchema = mongoose.Schema({
-    name: String,
-    line_manager: String
-})
-
-const Department = mongoose.model('department', DepartmentSchema);
-
 // Reuse connection for offline mode
 let isConnected;
 
@@ -27,6 +15,14 @@ async function connectToDatabase() {
     console.log('Connected to MongoDB');
 }
 
+// MongoDB Schema
+// DEPARTMENT: Schema and Model
+const DepartmentSchema = mongoose.Schema({
+    name: String,
+    line_manager: String
+})
+
+const Department = mongoose.model('department', DepartmentSchema);
 
 module.exports.dashboard = async (event) => {
     try {
@@ -40,7 +36,37 @@ module.exports.dashboard = async (event) => {
         console.error(error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch items' }),
+            body: JSON.stringify({ error: 'Failed to fetch departments' }),
+        };
+    }
+};
+
+
+// EMPLOYEE: Schema and Model
+const EmployeeSchema = mongoose.Schema({
+    _id: String,
+    email: String,
+    name: String,
+    address: String,
+    department: String,
+    line_manager: String
+})
+
+const Employee = mongoose.model('employee', EmployeeSchema);
+
+module.exports.employees = async (event) => {
+    try {
+        await connectToDatabase();
+        const employees = await Employee.find();
+        return {
+            statusCode: 200,
+            body: JSON.stringify(employees),
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Failed to fetch employees' }),
         };
     }
 };

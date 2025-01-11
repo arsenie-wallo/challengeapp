@@ -41,7 +41,6 @@ module.exports.dashboard = async (event) => {
     }
 };
 
-
 // EMPLOYEE: Schema and Model
 const EmployeeSchema = mongoose.Schema({
     _id: String,

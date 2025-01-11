@@ -5,6 +5,8 @@ frameworkVersion: "4"
 provider:
   name: aws
   runtime: nodejs20.x
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
   stage: ${env:SERVERLESS_STAGE, 'AKrQP537O8bumxeWghz49xiCQbZGI6rR7NQjbd3yIqqUE'}
 
 plugins:
@@ -25,3 +27,4 @@ functions:
       - httpApi:
           path: employees
           method: get
+  

@@ -16,5 +16,5 @@ functions:
     handler: handler.dashboard
     events:
       - httpApi:
-          path: /departments
-          method: post
+          path: /
+          method: get

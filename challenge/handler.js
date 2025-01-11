@@ -11,7 +11,7 @@ const DepartmentSchema = mongoose.Schema({
     line_manager: String
 })
 
-const Department = mongoose.model('Department', DepartmentSchema);
+const Department = mongoose.model('department', DepartmentSchema);
 
 // Reuse connection for offline mode
 let isConnected;
@@ -22,10 +22,7 @@ async function connectToDatabase() {
         return;
     }
     console.log('Connecting to MongoDB...');
-    await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGO_URI);
     isConnected = mongoose.connection.readyState;
     console.log('Connected to MongoDB');
 }

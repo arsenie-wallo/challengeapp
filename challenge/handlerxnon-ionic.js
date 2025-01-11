@@ -1,7 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose')
 // const { MongoClient } = require ('mongodb')
-
 const uri = process.env.MONGO_URI;
 // Reuse connection for offline mode
 let isConnected;

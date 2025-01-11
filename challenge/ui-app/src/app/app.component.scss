@@ -117,3 +117,25 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+
+
+/* Basic styling for the layout */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+ion-card {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 767px) {
+  /* Make sure the menu is hidden on small screens */
+  ion-menu {
+    display: none;
+  }
+}

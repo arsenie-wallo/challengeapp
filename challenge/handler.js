@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose')
-
+// const { MongoClient } = require ('mongodb')
+const uri = process.env.MONGO_URI;
 // Reuse connection for offline mode
 let isConnected;
 
@@ -10,7 +11,7 @@ async function connectToDatabase() {
         return;
     }
     console.log('Connecting to MongoDB...');
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(uri);
     isConnected = mongoose.connection.readyState;
     console.log('Connected to MongoDB');
 }

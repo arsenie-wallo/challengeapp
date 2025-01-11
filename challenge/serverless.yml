@@ -1,5 +1,6 @@
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: challenge
+# app: challengeapp
 frameworkVersion: "4"
 
 provider:
@@ -14,17 +15,23 @@ plugins:
   - serverless-offline
 
 functions:
-  dashboard:
-    handler: handler.dashboard
+  getDepartments:
+    handler: handler.getDepartments
     events:
       - httpApi:
-          path: /
+          path: departments
           method: get
 
-  employees:
-    handler: handler.employees
+  # createEmployees:
+  #   handler: handler.createEmployees
+  #   events:
+  #     - httpApi:
+  #         path: employees
+  #         method: post
+
+  getEmployees:
+    handler: handler.getEmployees
     events:
       - httpApi:
           path: employees
           method: get
-  

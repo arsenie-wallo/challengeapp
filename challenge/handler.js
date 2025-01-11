@@ -26,7 +26,7 @@ const DepartmentSchema = mongoose.Schema({
 
 const Department = mongoose.model('department', DepartmentSchema);
 
-module.exports.dashboard = async (event) => {
+module.exports.getDepartments = async (event) => {
     try {
         await connectToDatabase();
         const departments = await Department.find();

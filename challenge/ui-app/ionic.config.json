@@ -1,5 +1,7 @@
 {
   "name": "ui-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular-standalone"
 }

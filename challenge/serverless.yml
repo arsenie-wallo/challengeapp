@@ -8,6 +8,7 @@ provider:
   stage: ${env:SERVERLESS_STAGE, 'AKrQP537O8bumxeWghz49xiCQbZGI6rR7NQjbd3yIqqUE'}
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-offline
 
 functions:
@@ -15,5 +16,5 @@ functions:
     handler: handler.dashboard
     events:
       - httpApi:
-          path: /
+          path: /departments
           method: post

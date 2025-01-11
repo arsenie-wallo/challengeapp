@@ -1,7 +1,0 @@
-{
-  "name": "wallopay-app",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}

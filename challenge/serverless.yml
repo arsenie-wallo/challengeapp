@@ -15,6 +15,13 @@ plugins:
   - serverless-offline
 
 functions:
+  getDashboard:
+    handler: handler.getDashboard
+    events:
+      - httpApi:
+          path: /
+          method: get
+
   getDepartments:
     handler: handler.getDepartments
     events:

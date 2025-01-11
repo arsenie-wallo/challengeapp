@@ -55,7 +55,7 @@ const EmployeeSchema = mongoose.Schema({
 
 const Employee = mongoose.model('employee', EmployeeSchema);
 
-module.exports.employees = async (event) => {
+module.exports.getEmployees = async (event) => {
     try {
         await connectToDatabase();
         const employees = await Employee.find();
@@ -68,6 +68,22 @@ module.exports.employees = async (event) => {
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to fetch employees' }),
+        };
+    }
+};
+
+module.exports.getDashboard = async (event) => {
+    try {
+        // Return a simple text response instead of querying the database
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: 'Hello, this is the dashboard!' }),
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Failed to fetch dashboard' }),
         };
     }
 };

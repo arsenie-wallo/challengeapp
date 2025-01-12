@@ -29,16 +29,16 @@ functions:
           path: departments
           method: get
 
-  # createEmployees:
-  #   handler: handler.createEmployees
-  #   events:
-  #     - httpApi:
-  #         path: employees
-  #         method: post
-
   getEmployees:
     handler: handler.getEmployees
     events:
       - httpApi:
           path: employees
           method: get
+
+  # createEmployees:
+  #   handler: handler.createEmployees
+  #   events:
+  #     - httpApi:
+  #         path: employees
+  #         method: post

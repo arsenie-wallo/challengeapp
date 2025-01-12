@@ -1,7 +1,0 @@
-{
-  "name": "challenge",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "custom"
-}

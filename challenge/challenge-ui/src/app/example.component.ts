@@ -3,8 +3,8 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle }
 
 @Component({
   selector: 'app-example',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  templateUrl: 'example.component.html',
+  styleUrls: ['example.component.css'],
   imports: [IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle],
 })
 export class ExampleComponent {}

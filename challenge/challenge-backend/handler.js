@@ -14,7 +14,7 @@ async function connectToDatabase() {
     console.log('Connecting to MongoDB...');
     client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
-    db = client.db();  // Initialize the db object after a successful connection
+    db = client.db('WalloPay');  // Initialize the db object after a successful connection
     isConnected = true;
     console.log('Connected to MongoDB');
 }

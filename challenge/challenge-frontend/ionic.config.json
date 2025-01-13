@@ -1,0 +1,7 @@
+{
+  "name": "challenge-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

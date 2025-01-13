@@ -1,7 +1,0 @@
-{
-  "name": "challenge-ui",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}

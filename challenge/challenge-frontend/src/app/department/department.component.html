@@ -3,12 +3,12 @@
     [routerLink]="'/department/' + department.id"
     [detail]="false"
     >
-    <div slot="start" [class]="!department.read ? 'dot dot-unread' : 'dot'"></div>
+    <div slot="start" [class]="!department.name ? 'dot dot-unread' : 'dot'"></div>
     <ion-label class="ion-text-wrap">
       <h2>
-        {{ department.fromName }}
-        <span class="date">
-          <ion-note>{{ department.date }}</ion-note>
+        {{ department.name }}
+        <span class="name">
+          <ion-note>{{ department.name }}</ion-note>
           @if (isIos()) {
             <ion-icon
               aria-hidden="true"
@@ -18,7 +18,7 @@
           }
         </span>
       </h2>
-      <h3>{{ department.subject }}</h3>
+      <h3>{{ department.lineManager }}</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

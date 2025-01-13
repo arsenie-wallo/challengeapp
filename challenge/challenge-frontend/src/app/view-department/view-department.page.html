@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-@if (employee) {
+@if (department) {
   <ion-content [fullscreen]="true">
     <ion-item>
       <ion-icon
@@ -19,16 +19,16 @@
       ></ion-icon>
       <ion-label class="ion-text-wrap">
         <h2>
-          {{ employee.fromName }}
+          {{ department.fromName }}
           <span class="date">
-            <ion-note>{{ employee.date }}</ion-note>
+            <ion-note>{{ department.date }}</ion-note>
           </span>
         </h2>
         <h3>To: <ion-note>Me</ion-note></h3>
       </ion-label>
     </ion-item>
     <div class="ion-padding">
-      <h1>{{ employee.subject }}</h1>
+      <h1>{{ department.subject }}</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

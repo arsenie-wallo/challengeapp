@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Employees
+      Departments
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,14 +14,14 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-        Employees
+        Departments
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-list>
-    @for (employee of getEmployees(); track employee) {
-      <app-employee [employee]="employee"></app-employee>
+    @for (department of getdepartments(); track department) {
+      <app-department [department]="department"></app-department>
     }
   </ion-list>
 </ion-content>

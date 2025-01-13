@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface Employee {
+export interface Department {
   fromName: string;
   subject: string;
   date: string;
@@ -13,7 +13,7 @@ export interface Employee {
   providedIn: 'root'
 })
 export class DataService {
-  public employees: Employee[] = [
+  public departments: Department[] = [
     {
       fromName: 'Matt Chorsey',
       subject: 'New event: Trip to Vegas',
@@ -82,11 +82,11 @@ export class DataService {
 
   constructor() { }
 
-  public getEmployees(): Employee[] {
-    return this.employees;
+  public getdepartments(): Department[] {
+    return this.departments;
   }
 
-  public getEmployeesById(id: number): Employee {
-    return this.employees[id];
+  public getdepartmentsById(id: number): Department {
+    return this.departments[id];
   }
 }

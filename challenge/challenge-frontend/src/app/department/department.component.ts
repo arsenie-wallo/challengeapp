@@ -4,18 +4,18 @@ import { RouterLink } from '@angular/router';
 import { Platform, IonItem, IonLabel, IonNote, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronForward } from 'ionicons/icons';
-import { Employee } from '../services/data.service';
+import { Department } from '../services/data.service';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss'],
+  selector: 'app-department',
+  templateUrl: './department.component.html',
+  styleUrls: ['./department.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, IonItem, IonLabel, IonNote, IonIcon],
 })
-export class EmployeeComponent {
+export class departmentComponent {
   private platform = inject(Platform);
-  @Input() employee?: Employee;
+  @Input() department?: Department;
   isIos() {
     return this.platform.is('ios')
   }

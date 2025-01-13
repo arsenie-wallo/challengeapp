@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { ViewEmployeePage } from '../view-employee/view-employee.page';
+import { ViewdepartmentPage } from '../view-department/view-department.page';
 
-import { EmployeeComponent } from './employee.component';
+import { departmentComponent } from './department.component';
 
-describe('EmployeeComponent', () => {
-  let component: EmployeeComponent;
-  let fixture: ComponentFixture<EmployeeComponent>;
+describe('departmentComponent', () => {
+  let component: departmentComponent;
+  let fixture: ComponentFixture<departmentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmployeeComponent, ViewEmployeePage],
+      imports: [departmentComponent, ViewdepartmentPage],
       providers: [provideRouter([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EmployeeComponent);
+    fixture = TestBed.createComponent(departmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

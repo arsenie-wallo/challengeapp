@@ -1,14 +1,14 @@
-@if (employee) {
+@if (department) {
   <ion-item
-    [routerLink]="'/employee/' + employee.id"
+    [routerLink]="'/department/' + department.id"
     [detail]="false"
     >
-    <div slot="start" [class]="!employee.read ? 'dot dot-unread' : 'dot'"></div>
+    <div slot="start" [class]="!department.read ? 'dot dot-unread' : 'dot'"></div>
     <ion-label class="ion-text-wrap">
       <h2>
-        {{ employee.fromName }}
+        {{ department.fromName }}
         <span class="date">
-          <ion-note>{{ employee.date }}</ion-note>
+          <ion-note>{{ department.date }}</ion-note>
           @if (isIos()) {
             <ion-icon
               aria-hidden="true"
@@ -18,7 +18,7 @@
           }
         </span>
       </h2>
-      <h3>{{ employee.subject }}</h3>
+      <h3>{{ department.subject }}</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

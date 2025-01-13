@@ -1,15 +1,15 @@
 
 import { Component, inject } from '@angular/core';
 import { RefresherCustomEvent, IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonList } from '@ionic/angular/standalone';
-import { EmployeeComponent } from '../employee/employee.component';
+import { departmentComponent } from '../department/department.component';
 
-import { DataService, Employee } from '../services/data.service';
+import { DataService, Department } from '../services/data.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonList, EmployeeComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonList, departmentComponent],
 })
 export class HomePage {
   private data = inject(DataService);
@@ -21,7 +21,7 @@ export class HomePage {
     }, 3000);
   }
 
-  getEmployees(): Employee[] {
-    return this.data.getEmployees();
+  getdepartments(): Department[] {
+    return this.data.getdepartments();
   }
 }

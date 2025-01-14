@@ -13,6 +13,9 @@ provider:
 plugins:
   - serverless-dotenv-plugin
   - serverless-offline
+custom:
+  serverless-offline:
+    httpsProtocol: "security"
 
 functions:
   getDashboard:
@@ -35,10 +38,3 @@ functions:
       - httpApi:
           path: employees
           method: get
-
-  # createEmployees:
-  #   handler: handler.createEmployees
-  #   events:
-  #     - httpApi:
-  #         path: employees
-  #         method: post

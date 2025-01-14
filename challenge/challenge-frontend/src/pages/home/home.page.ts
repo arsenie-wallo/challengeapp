@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { RefresherCustomEvent, IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonList } from '@ionic/angular/standalone';
 import { departmentComponent } from '../department/department.component';
 
-import { DataService, Department } from '../services/data.service';
+import { DataService, Department } from '../../services/data.service';
 
 @Component({
   selector: 'app-home',

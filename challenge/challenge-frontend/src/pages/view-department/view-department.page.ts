@@ -24,7 +24,7 @@ export class ViewDepartmentPage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.department = this.data.getdepartmentsById(parseInt(id, 10));
+    this.department = this.data.getDepartmentsById(parseInt(id, 10));
   }
 
   getBackButtonText() {

@@ -22,6 +22,6 @@ export class HomePage {
   }
 
   getdepartments(): Department[] {
-    return this.data.getdepartments();
+    return this.data.getDepartments();
   }
 }

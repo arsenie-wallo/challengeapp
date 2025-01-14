@@ -40,21 +40,6 @@ export class DataService {
       id: 4,
       name: "",
       lineManager: "",
-    },
-    {
-      id: 5,
-      name: "",
-      lineManager: "",
-    },
-    {
-      id: 6,
-      name: "",
-      lineManager: "",
-    },
-    {
-      id: 7,
-      name: "",
-      lineManager: "",
     }
   ];
 

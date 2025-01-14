@@ -1,28 +1,31 @@
-import { Routes } from '@angular/router';
+// import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AppRoutes } from './app-routes.enum';
 
 export const routes: Routes = [
   {
-    path: 'home',
+    path: AppRoutes.HOME,
+    pathMatch: 'full',
     loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
   },
   {
-    path: 'department/:id',
+    path: `${AppRoutes.DEPARTMENT}/:id`,
     loadComponent: () =>
       import('./pages/view-department/view-department.page').then((m) => m.ViewDepartmentPage),
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: AppRoutes.HOME,
     pathMatch: 'full',
   },
   {
-    path: 'line-manager',
+    path: AppRoutes.LINE_MANAGER,
     loadComponent: () => import('./pages/line-manager/line-manager.page').then( m => m.LineManagerPage)
-  },  {
-    path: 'department',
+  },
+  {
+    path: AppRoutes.DEPARTMENT,
     loadComponent: () => import('./pages/department/department.page').then( m => m.DepartmentPage)
   },
-
-
 ];
 

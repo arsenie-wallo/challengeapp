@@ -6,7 +6,7 @@ import { AppRoutes } from './app-routes.enum';
 const routes: Routes = [
    {
     path: ``,
-    redirectTo: `home-page`,
+    redirectTo: AppRoutes.HOME,
     pathMatch: `full`,
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
     // loadChildren: () => import(`./line-manager.module`).then( m => m.LineManagerPageModule)
   },
   {
-    path: AppRoutes.DEPARTMENTS,
+    path: AppRoutes.DEPARTMENT,
     loadChildren: () => import(`./pages/department/department.module`).then( m => m.DepartmentPageModule)
   },
 //   {

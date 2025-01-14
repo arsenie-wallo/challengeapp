@@ -5,7 +5,6 @@ import { Platform, IonItem, IonLabel, IonNote, IonIcon } from '@ionic/angular/st
 import { addIcons } from 'ionicons';
 import { chevronForward } from 'ionicons/icons';
 import { Department } from '../services/data.service';
-// import { Department } from '../../services/data.service';
 
 @Component({
   selector: 'app-department',

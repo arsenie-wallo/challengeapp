@@ -16,6 +16,8 @@ plugins:
 custom:
   serverless-offline:
     httpsProtocol: "security"
+    # httpPort: 3000
+    # noAuth: true  # Disable authentication for local testing
 
 functions:
   getDashboard:

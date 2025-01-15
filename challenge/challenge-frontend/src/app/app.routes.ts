@@ -1,6 +1,6 @@
-// import { Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+// import { NgModule } from '@angular/core';
+// import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './app-routes.enum';
 
 export const routes: Routes = [

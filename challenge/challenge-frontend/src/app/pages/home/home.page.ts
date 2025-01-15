@@ -1,27 +1,61 @@
 
-import { Component, inject } from '@angular/core';
-import { RefresherCustomEvent, IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonList } from '@ionic/angular/standalone';
-import { departmentComponent } from '../../components/department.component';
-
-import { DataService, Department } from '../../services/data.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { DepartmentApi } from '../../services/data.service';
+import { RefresherCustomEvent, IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonNote, IonRefresherContent, IonList, IonIcon,IonLabel } from '@ionic/angular/standalone';
+import { DepartmentComponent } from '../../components/department.component';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonRefresherContent, IonList, departmentComponent],
-})
-export class HomePage {
-  private data = inject(DataService);
-  constructor() {}
+  imports: [
+    CommonModule,
+    IonicModule,
+    // IonHeader,
+    // IonToolbar,
+    // IonTitle,
+    // IonContent,
+    // IonRefresher,
+    // IonRefresherContent,
+    // IonList,
+    IonLabel
+  ],
 
+})
+export class HomePage implements OnInit {
+  private department = [
+    {
+      id: 1,
+      name: "test",
+      lineManager: "Sussan"
+    }
+  ];
+  // private department = inject(DepartmentApi);
+
+  // departments: DepartmentApi[] = [];
+  constructor(private apiService: DepartmentApi) {}
+
+  ngOnInit() {
+    this.apiService.getDepartments().subscribe({
+      next: (department) => {
+        // this.departments = department;
+        console.log('Department Data:', this.department);
+      },
+      error: (error) => {
+        console.error('Error fetching department data', console.error);
+      },
+    });
+  }
   refresh(ev: any) {
     setTimeout(() => {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
   }
 
-  getdepartments(): Department[] {
-    return this.data.getDepartments();
+  getdepartments() {
+    return this.department;
+    // return this.data.getDepartments();
   }
 }

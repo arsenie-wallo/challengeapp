@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-// import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 
 // import { HomePagePageRoutingModule } from './home-page-routing.module';
 
@@ -12,9 +12,10 @@ import { HomePage } from './home.page';
 
 @NgModule({
   imports: [
-    // CommonModule,
-    // FormsModule,
-    // IonicModule,
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    HomePage
     // HomePagePageRoutingModule,
     // BaseModule,
     // ComponentModule,

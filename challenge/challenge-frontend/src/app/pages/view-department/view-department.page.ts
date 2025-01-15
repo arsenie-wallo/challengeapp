@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Platform, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonItem, IonIcon, IonLabel, IonNote } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
-import { DataService, Department } from '../../services/data.service';
+import { DepartmentApi } from '../../services/data.service';
+import { DepartmentInformation } from '../../models/data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-department',
@@ -13,8 +15,8 @@ import { DataService, Department } from '../../services/data.service';
   imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonItem, IonIcon, IonLabel, IonNote],
 })
 export class ViewDepartmentPage implements OnInit {
-  public department!: Department;
-  private data = inject(DataService);
+  public department!: DepartmentInformation;
+  private data = inject(DepartmentApi);
   private activatedRoute = inject(ActivatedRoute);
   private platform = inject(Platform);
 
@@ -24,7 +26,7 @@ export class ViewDepartmentPage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.department = this.data.getDepartmentsById(parseInt(id, 10));
+    // this.department = this.data.getDepartmentsById(parseInt(id, 10));
   }
 
   getBackButtonText() {

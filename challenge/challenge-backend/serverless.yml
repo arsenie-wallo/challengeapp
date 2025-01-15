@@ -29,7 +29,7 @@ plugins:
 custom:
   serverless-offline:
     httpPort: 3000
-    # httpsProtocol: "security"
+    httpsProtocol: "security"
     # httpsProtocol: true
     # httpsKey: './security/private.key'
     # httpsCertificate: './security/cert.crt'

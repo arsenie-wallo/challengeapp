@@ -8,15 +8,32 @@ provider:
   runtime: nodejs20.x
   environment:
     MONGO_URI: ${env:MONGO_URI}
-  stage: ${env:SERVERLESS_STAGE, 'AKrQP537O8bumxeWghz49xiCQbZGI6rR7NQjbd3yIqqUE'}
+    stage: ${env:SERVERLESS_STAGE, 'AKrQP537O8bumxeWghz49xiCQbZGI6rR7NQjbd3yIqqUE'}
+  # httpApi:
+  #   cors:
+  #     allowedOrigins:
+  #       - '*'
+  #     allowedHeaders:
+  #       - Content-Type
+  #       - X-Custom-Header
+  #     allowedMethods:
+  #       -GET
+  #       -POST
+  #       -OPTIONS
+  #     allowedCredentials: false
+
 
 plugins:
   - serverless-dotenv-plugin
   - serverless-offline
 custom:
   serverless-offline:
-    httpsProtocol: "security"
-    # httpPort: 3000
+    httpPort: 3000
+    # httpsProtocol: "security"
+    # httpsProtocol: true
+    # httpsKey: './security/private.key'
+    # httpsCertificate: './security/cert.crt'
+
     # noAuth: true  # Disable authentication for local testing
 
 functions:
@@ -26,6 +43,7 @@ functions:
       - httpApi:
           path: /
           method: get
+          # cors: true
 
   getDepartments:
     handler: handler.getDepartments
@@ -33,6 +51,7 @@ functions:
       - httpApi:
           path: departments
           method: get
+          # cors: true
 
   getEmployees:
     handler: handler.getEmployees
@@ -40,3 +59,4 @@ functions:
       - httpApi:
           path: employees
           method: get
+          # cors: true

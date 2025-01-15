@@ -8,15 +8,16 @@ import { DepartmentInformation } from '../models/data';
   {providedIn: 'root'}
 )
 export class DepartmentApi {
-  private departmentData: DepartmentInformation | null = null;
-  private apiUrl = 'https://localhost:3000/employees';
+  private departmentData: Observable<DepartmentInformation> | null = null;
+  private apiUrl = 'http://localhost:3000/departments';
 
   constructor(private http: HttpClient) {}
   //"20230104-FSM029"
 
   // public 
   getDepartments(): Observable<DepartmentInformation> {
-    return this.http.get<DepartmentInformation>(this.apiUrl);
+    this.departmentData = this.http.get<DepartmentInformation>(this.apiUrl);
+    return this.departmentData;
   }
   // public getDepartmentsById(id: number): DepartmentInformation {
   //   const url = `${this.apiUrl}/${id}`

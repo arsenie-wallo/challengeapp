@@ -9,13 +9,20 @@ import { DepartmentInformation } from '../models/data';
 )
 export class DepartmentApi {
   private departmentData: Observable<DepartmentInformation> | null = null;
-  private apiUrl = 'http://localhost:3000/departments';
-
+  private apiUrl = 'https://localhost:3000/departments';
+  // [
+  //   {
+  //     id: 23,
+  //     name: "Susan Doe",
+  //     lineManager: "Sam"
+  //   }
+  // ];
   constructor(private http: HttpClient) {}
   //"20230104-FSM029"
 
   // public 
   getDepartments(): Observable<DepartmentInformation> {
+    console.log("test2");
     this.departmentData = this.http.get<DepartmentInformation>(this.apiUrl);
     return this.departmentData;
   }

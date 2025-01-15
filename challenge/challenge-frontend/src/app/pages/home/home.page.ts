@@ -35,10 +35,10 @@ export class HomePage implements OnInit {
         if (Array.isArray(d)) {
           this.department.push(...d);  // Spread the array into this.department
         }
-        //  else {
-        //   // If it's a single object, push it directly
-        //   this.department.push(d);
-        // }
+         else {
+          // If it's a single object, push it directly
+          this.department.push(d);
+        }
         // console.log(d);  // Log the data for debugging
         // console.log(typeof(d));  // Log the data for debugging
 

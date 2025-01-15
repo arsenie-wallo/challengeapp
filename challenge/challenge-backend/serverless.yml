@@ -1,0 +1,62 @@
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: challenge
+# app: challengeapp
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+    stage: ${env:SERVERLESS_STAGE, 'AKrQP537O8bumxeWghz49xiCQbZGI6rR7NQjbd3yIqqUE'}
+  # httpApi:
+  #   cors:
+  #     allowedOrigins:
+  #       - '*'
+  #     allowedHeaders:
+  #       - Content-Type
+  #       - X-Custom-Header
+  #     allowedMethods:
+  #       -GET
+  #       -POST
+  #       -OPTIONS
+  #     allowedCredentials: false
+
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+custom:
+  serverless-offline:
+    httpPort: 3000
+    httpsProtocol: "security"
+    # httpsProtocol: true
+    # httpsKey: './security/private.key'
+    # httpsCertificate: './security/cert.crt'
+
+    # noAuth: true  # Disable authentication for local testing
+
+functions:
+  getDashboard:
+    handler: handler.getDashboard
+    events:
+      - httpApi:
+          path: /
+          method: get
+          # cors: true
+
+  getDepartments:
+    handler: handler.getDepartments
+    events:
+      - httpApi:
+          path: departments
+          method: get
+          # cors: true
+
+  getEmployees:
+    handler: handler.getEmployees
+    events:
+      - httpApi:
+          path: employees
+          method: get
+          # cors: true

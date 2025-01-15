@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@angular/common": "^7.2.16"
+  }
+}

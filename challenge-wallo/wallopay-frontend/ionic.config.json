@@ -1,7 +1,0 @@
-{
-  "name": "wallopay-frontend",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}

@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-// import { routes } from '../../app.routes';
-import { 
-  // IonRouterOutlet,
+// import { IonRefresherContent } from '@ionic/angular';
+import {
+  RefresherCustomEvent,
+  IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
+  IonItem,
   IonList,
   IonMenu,
-  IonContent,
-  IonItem,
-  // IonLabel,
-  IonSplitPane
+  IonRefresher,
+  IonRefresherContent,
+  IonSplitPane,
+  IonTitle,
+  IonToolbar
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -19,16 +20,16 @@ import {
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   imports: [
-    // IonRouterOutlet,
+    IonContent,
     IonHeader,
-    IonTitle,
-    IonToolbar,
+    IonItem,
     IonList,
     IonMenu,
-    IonContent,
-    IonItem,
-    // IonLabel,
-    IonSplitPane
+    IonRefresher,
+    IonRefresherContent,
+    IonSplitPane,
+    IonTitle,
+    IonToolbar
   ]
 })
 export class HomePage {
@@ -37,6 +38,13 @@ export class HomePage {
   ngOnInit() {
     console.log(`Hello from home.page.ts`);
   }
+
+  refresh(ev: any) {
+    setTimeout(() => {
+      (ev as RefresherCustomEvent).detail.complete();
+    }, 3000);
+  }
+
   navigateTo(page: string) {
     this.router.navigate([`${page}`]);
   }

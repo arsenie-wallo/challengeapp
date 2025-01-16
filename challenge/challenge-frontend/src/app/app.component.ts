@@ -1,3 +1,16 @@
+import { Component } from '@angular/core';
+import { IonApp, IonSplitPane, IonMenu, IonRouterOutlet, IonContent, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [IonApp, IonSplitPane, IonMenu, IonRouterOutlet, IonContent, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
+})
+export class AppComponent {
+  constructor() {}
+}
+
 // import { Component } from '@angular/core';
 // import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 // import { NavigationEnd, Router, Event } from '@angular/router'

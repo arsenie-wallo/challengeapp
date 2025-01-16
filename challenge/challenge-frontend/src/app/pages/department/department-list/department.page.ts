@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
   IonContent,
   IonHeader,
   IonItem,
@@ -29,6 +34,11 @@ import { DepartmentInformation } from '../../../models/data';
   styleUrls: ['./department.page.scss'],
   standalone: true,
   imports: [
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
     IonContent,
     IonHeader,
     IonItem,
@@ -85,10 +95,6 @@ export class DepartmentPage implements OnInit {
   navigateTo(page: string) {
     this.router.navigate([`${page}`]);
   }
-  // getemployees() {
-  //   return this.employees;
-  //   // return this.data.getDepartments();
-  // }
 
   
 

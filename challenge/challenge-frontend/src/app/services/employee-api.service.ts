@@ -5,32 +5,31 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { DepartmentInformation } from '../models/data';
+import { EmployeeInformation } from '../models/data';
 
 @Injectable(
   {providedIn: 'root'}
 )
-export class DepartmentApi {
+export class EmployeeApiService {
   constructor(private http: HttpClient) {}
 
   // private activatedRoute = inject(ActivatedRoute);
 
-  private departmentApiUrl = 'https://localhost:3000/departments';
-  // private employeeApiUrl = 'https://localhost:3000/employees';
+  private employeeApiUrl = 'https://localhost:3000/employees';
 
-  // private departmentData: Observable<DepartmentInformation> | null = null;
+  // private departmentData: Observable<EmployeeInformation> | null = null;
 
-  // getDepartments(): Observable<DepartmentInformation> {
+  // getEmployees(): Observable<EmployeeInformation> {
   //   console.log("test2");
-  //   this.departmentData = this.http.get<DepartmentInformation>(this.departmentApiUrl);
+  //   this.departmentData = this.http.get<EmployeeInformation>(this.departmentApiUrl);
   //   return this.departmentData;
   // }
 
-  getDepartments(): Observable<DepartmentInformation> {
+  getEmployees(): Observable<EmployeeInformation> {
     // console.log(`xx ${this.activatedRoute}`);
-    console.log(`Hello from data.service.ts`);
+    console.log(`Hello from employee-api.service.ts`);
 
-    return this.http.get<DepartmentInformation>(this.departmentApiUrl)
+    return this.http.get<EmployeeInformation>(this.employeeApiUrl)
     .pipe(
       map(this.extractData),
       tap(this.logResponse),
@@ -38,21 +37,9 @@ export class DepartmentApi {
     )
   }
 
-  // getEmployees(): Observable<DepartmentEmployees> {
-  //   // console.log(`xx ${this.activatedRoute}`);
-  //   console.log(`Hello from data.service.ts`);
-
-  //   return this.http.get<DepartmentInformation>(this.departmentApiUrl)
-  //   .pipe(
-  //     map(this.extractData),
-  //     tap(this.logResponse),
-  //     catchError(this.catchError)
-  //   )
-  // }
-
-  // public getDepartmentsById(id: number): DepartmentInformation {
+  // public getEmployeesById(id: number): EmployeeInformation {
   //   const url = `${this.departmentApiUrl}/${id}`
-  //   return this.http.get<DepartmentInformation>(url);
+  //   return this.http.get<EmployeeInformation>(url);
   //   // return new BehaviorSubject<Department[]>.asObservable();
   //   // return this.departmentSubject.asObservable();
   // }
@@ -60,7 +47,7 @@ export class DepartmentApi {
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);
     // Handle errors properly based on the environment
-    return throwError(() => new Error(`ERROR: Incorrect PIN ${error.error}`));
+    return throwError(() => new Error(`ERROR: ${error.error}`));
   }
   
   private logResponse(res: any) {
@@ -71,4 +58,4 @@ export class DepartmentApi {
     return res || {};  // Here we assume res is the body of the HTTP response
   }
 }
-// export const DEPARTMENT_COLLECTION = new Observable<DepartmentInformation[]>;
+// export const DEPARTMENT_COLLECTION = new Observable<EmployeeInformation[]>;

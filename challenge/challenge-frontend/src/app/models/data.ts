@@ -1,21 +1,22 @@
 // export type Department = {
 //     departmentInformation?: DepartmentInformation;
-//     departmentEmployees?: DepartmentEmployees;
+//     EmployeeInformation?: EmployeeInformation;
 //     lineManager?: LineManager;
 // }
 
 export type DepartmentInformation = {
-    id: number;
+    pictureUrl: string;
+    _id: string;
     name: string;
-    lineManager: string;
-    employees: DepartmentEmployees[]
+    line_manager: string;
+    employees: EmployeeInformation[]
 }
 
-export type DepartmentEmployees = {
-    id: number;
+export type EmployeeInformation = {
+    _id: string;
     email: string;
     name: string;
     address: string;
-    lineManager: DepartmentEmployees | null;
+    line_manager: EmployeeInformation | null;
     department: DepartmentInformation;
 }

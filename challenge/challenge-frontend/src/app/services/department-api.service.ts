@@ -10,13 +10,13 @@ import { DepartmentInformation } from '../models/data';
 @Injectable(
   {providedIn: 'root'}
 )
-export class DepartmentApi {
+export class DepartmentApiService {
   constructor(private http: HttpClient) {}
 
-  // private activatedRoute = inject(ActivatedRoute);
+  private activatedRoute = inject(ActivatedRoute);
 
   private departmentApiUrl = 'https://localhost:3000/departments';
-  // private employeeApiUrl = 'https://localhost:3000/employees';
+  private employeeApiUrl = 'https://localhost:3000/employees';
 
   // private departmentData: Observable<DepartmentInformation> | null = null;
 

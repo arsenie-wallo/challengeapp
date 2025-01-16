@@ -8,21 +8,14 @@ export type DepartmentInformation = {
     id: number;
     name: string;
     lineManager: string;
+    employees: DepartmentEmployees[]
 }
 
-// export type DepartmentEmployees = {
-//     id: number;
-//     email: string;
-//     name: string;
-//     address: string;
-//     department: string;
-//     line_manager: string;
-// }
-
-// export type LineManager = {
-//     id: number;
-//     email: string;
-//     name: string;
-//     address: string;
-//     department: string;
-//   };
+export type DepartmentEmployees = {
+    id: number;
+    email: string;
+    name: string;
+    address: string;
+    lineManager: DepartmentEmployees | null;
+    department: DepartmentInformation;
+}

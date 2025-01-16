@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-// import { HttpClient } from '@angular/common/http';
-// import { provideHttpClient } from "@angular/common/http";
+import { NavigationEnd, Router, Event } from '@angular/router'
+import { Observable, filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
   imports: [
     IonApp,
     IonRouterOutlet,
@@ -17,75 +18,26 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   ]
 })
 export class AppComponent {
-  constructor() {}
-  //private http: HttpClient
+  public appPages = [
+    { title: 'Dashboard', url: '/folder/home', icon: 'archive' },
+    { title: 'CEO', url: '/folder/ceo', icon: 'trash' },
+    { title: 'Line Managers', url: '/folder/linemanager', icon: 'trash' },
+    { title: 'Departments', url: '/folder/departments', icon: 'mail' },
+    { title: 'Employees', url: '/folder/employees', icon: 'warning' },
+  ];
+
+  public labels = ['Version: '];
+  public navigationEnd: Observable<NavigationEnd>;
+
+  constructor(public router: Router) { 
+    this.navigationEnd = router.events.pipe(filter((event: Event) => event instanceof NavigationEnd)) as Observable<NavigationEnd>
+  }
+  ngOnInit() {
+    console.log('App Component Init');
+    this.navigationEnd.subscribe((event: NavigationEnd) => {
+      console.debug(`[AppComponent][NavigationEnd][Entry]`);
+      console.debug(`[Navigation end event]`, {event})
+      console.debug(`[AppComponent][NavigationEnd][Exit]`);
+    })
+  }
 }
-
-// import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common'; // Import CommonModule
-// import { IonicModule } from '@ionic/angular';
-
-// import {
-//   IonApp,
-//   IonRouterOutlet,
-//   IonMenu,
-//   IonHeader,
-//   // IonToolbar,
-//   // IonTitle,
-//   // IonContent,
-//   // IonList,
-//   // IonItem,
-//   // IonIcon,
-//   IonLabel,
-//   // IonButtons,
-//   IonMenuButton,
-//   IonSplitPane,
-//   IonFooter,
-//   // IonTabs,
-//   // IonTabBar,
-//   IonTabButton
-// } from '@ionic/angular/standalone';
-
-// @Component({
-//   selector: 'app-root',
-//   templateUrl: 'app.component.html',
-//   standalone: true,
-
-//   imports: [
-//     IonApp,
-//     IonRouterOutlet,
-//     IonMenu,
-//     IonHeader,
-//     // IonToolbar,
-//     // IonTitle,
-//     // IonContent,
-//     // IonList,
-//     // IonItem,
-//     // IonIcon,
-//     IonLabel,
-//     // IonButtons,
-//     // IonMenuButton,
-//     IonSplitPane,
-//     IonFooter,
-//     // IonTabs,
-//     // IonTabBar,
-//     IonTabButton,
-//     CommonModule, IonicModule
-//   ],
-//   providers: [
-//   ]
-// })
-// export class AppComponent {
-//   constructor() {}
-
-//   // isMobile: boolean = false;
-
-//   // ngOnInit() {
-//   //   this.checkScreenSize();
-//   //   window.addEventListener('resize', () => this.checkScreenSize());
-//   // }
-
-//   // checkScreenSize() {
-//   //   this.isMobile = window.innerWidth < 768; // Define mobile breakpoint (e.g., <768px)
-//   // }
-// }

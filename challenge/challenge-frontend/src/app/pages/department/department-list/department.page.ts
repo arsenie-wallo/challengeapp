@@ -1,35 +1,52 @@
 import { Component, OnInit, 
   inject
 } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
-  IonContent, IonHeader, IonTitle, IonToolbar,
-  RefresherCustomEvent, IonRefresher, IonNote, IonRefresherContent, IonList, IonIcon,IonLabel 
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonTitle,
+  IonToolbar,
+  RefresherCustomEvent,
+  IonRefresher,
+  IonRefresherContent,
+  IonList,
+  // IonLabel
 } from '@ionic/angular/standalone';
 
 // From Home
-import { IonicModule } from '@ionic/angular';
 import { DepartmentApi } from '../../../services/data.service';
 import { DepartmentInformation } from '../../../models/data';
-// import { RefresherCustomEvent, IonHeader, IonToolbar, IonTitle, IonContent, IonRefresher, IonNote, IonRefresherContent, IonList, IonIcon,IonLabel } from '@ionic/angular/standalone';
-// import { DepartmentComponent } from '../../components/department.component';
 
 @Component({
   selector: 'app-department',
   templateUrl: './department.page.html',
   styleUrls: ['./department.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
-    IonLabel, IonContent, IonTitle, IonRefresher, IonList, IonRefresherContent
-
+  imports: [
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    // IonLabel,
+    IonTitle,
+    IonRefresher,
+    IonList,
+    IonRefresherContent
   ]
 })
 export class DepartmentPage implements OnInit {
   private department: DepartmentInformation[] = [];
 
-  constructor(private apiService: DepartmentApi) {}
+  constructor(private apiService: DepartmentApi, private router: Router) {}
 
   ngOnInit() {
     console.log(`Hello from department.page.ts`);
@@ -64,7 +81,10 @@ export class DepartmentPage implements OnInit {
     return this.department;
     // return this.data.getDepartments();
   }
-
+  
+  navigateTo(page: string) {
+    this.router.navigate([`${page}`]);
+  }
   // getemployees() {
   //   return this.employees;
   //   // return this.data.getDepartments();

@@ -1,32 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Dashboard
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Departments
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-list>
-    <ion-label *ngFor="let d of getdepartments()">
-        <!-- <span *ngFor="let d of getdepartments()"> -->
-      <h2>{{ d.id }}</h2>
-      <p>{{ d.name }}</p>
-      <p>{{ d.lineManager }}</p>
-      <!-- </span> -->
-  </ion-label>
-  </ion-list>
-
+  <ion-split-pane when="xs" contentId="main">
+    <ion-menu contentId="main">
+      <ion-header>
+        <ion-toolbar color="tertiary">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-item button (click)="navigateTo('linemanager')">
+          LineManager
+        </ion-item>
+        <ion-item button (click)="navigateTo('department')">
+          Department
+        </ion-item>
+        <ion-item button (click)="navigateTo('employee')">
+          Employee
+        </ion-item>
+      </ion-content>
+    </ion-menu>
+  
+    <div class="ion-page" id="main">
+      <ion-content>
+        <ion-list class="ion-padding">
+          Dashboard
+        </ion-list>
+      </ion-content>
+    </div>
+  </ion-split-pane>
 </ion-content>

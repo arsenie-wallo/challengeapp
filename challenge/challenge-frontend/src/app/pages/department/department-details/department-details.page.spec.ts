@@ -1,11 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+
 import { DepartmentDetailsPage } from './department-details.page';
 
 describe('DepartmentDetailsPage', () => {
   let component: DepartmentDetailsPage;
   let fixture: ComponentFixture<DepartmentDetailsPage>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [DepartmentDetailsPage],
+      providers: [provideRouter([])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(DepartmentDetailsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();

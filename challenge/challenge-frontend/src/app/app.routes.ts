@@ -11,7 +11,7 @@ export const routes: Routes = [
   {
     path: `${AppRoutes.DEPARTMENT}/:id`,
     loadComponent: () =>
-      import('./pages/view-department/view-department.page').then((m) => m.ViewDepartmentPage),
+      import('./pages/department/department-details/department-details.page').then((m) => m.DepartmentDetailsPage),
   },
   {
     path: '',

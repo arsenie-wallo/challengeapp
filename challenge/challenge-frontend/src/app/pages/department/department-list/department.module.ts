@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 // import { LineManagePageRoutingModule } from './home-page-routing.module';
 
-import { DepartmentPage } from '../department/department.page';
+import { DepartmentPage } from '../department-list/department.page';
 
 @NgModule({
   imports: [

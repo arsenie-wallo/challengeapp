@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.DEPARTMENT,
-    loadChildren: () => import(`./pages/department/department.module`).then( m => m.DepartmentPageModule)
+    loadChildren: () => import(`./pages/department/department-list/department.module`).then( m => m.DepartmentPageModule)
   },
 //   {
 //     path: `department/:id`,

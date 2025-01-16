@@ -12,7 +12,8 @@ export const routes: Routes = [
   {
     path: `${AppRoutes.DEPARTMENT}/:id`,
     loadComponent: () =>
-      import('./pages/view-department/view-department.page').then((m) => m.ViewDepartmentPage),
+      import('./pages/department/department-details/department-details.page').then((m) => m.DepartmentDetailsPage),
+      // import('./pages/view-department/view-department.page').then((m) => m.ViewDepartmentPage),
   },
   {
     path: '',
@@ -25,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: AppRoutes.DEPARTMENT,
-    loadComponent: () => import('./pages/department/department.page').then( m => m.DepartmentPage)
+    loadComponent: () => import('./pages/department/department-list/department.page').then( m => m.DepartmentPage)
   },
 ];
 

@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-// import { HttpClient } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 
-// import 'rxjs/add/operator/do';
-// import 'rxjs/add/operator/catch';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DepartmentInformation } from '../models/data';
 
@@ -13,13 +11,14 @@ import { DepartmentInformation } from '../models/data';
   {providedIn: 'root'}
 )
 export class DepartmentApi {
-  
   constructor(private http: HttpClient) {}
+
+  private activatedRoute = inject(ActivatedRoute);
 
   private departmentApiUrl = 'https://localhost:3000/departments';
   private employeeApiUrl = 'https://localhost:3000/employees';
 
-  private departmentData: Observable<DepartmentInformation> | null = null;
+  // private departmentData: Observable<DepartmentInformation> | null = null;
 
   // getDepartments(): Observable<DepartmentInformation> {
   //   console.log("test2");
@@ -28,6 +27,9 @@ export class DepartmentApi {
   // }
 
   getDepartments(): Observable<DepartmentInformation> {
+    // console.log(`xx ${this.activatedRoute}`);
+    console.log(`Hello from data.service.ts`);
+
     return this.http.get<DepartmentInformation>(this.departmentApiUrl)
     .pipe(
       map(this.extractData),
@@ -36,6 +38,25 @@ export class DepartmentApi {
     )
   }
 
+  // getEmployees(): Observable<DepartmentEmployees> {
+  //   // console.log(`xx ${this.activatedRoute}`);
+  //   console.log(`Hello from data.service.ts`);
+
+  //   return this.http.get<DepartmentInformation>(this.departmentApiUrl)
+  //   .pipe(
+  //     map(this.extractData),
+  //     tap(this.logResponse),
+  //     catchError(this.catchError)
+  //   )
+  // }
+
+  // public getDepartmentsById(id: number): DepartmentInformation {
+  //   const url = `${this.departmentApiUrl}/${id}`
+  //   return this.http.get<DepartmentInformation>(url);
+  //   // return new BehaviorSubject<Department[]>.asObservable();
+  //   // return this.departmentSubject.asObservable();
+  // }
+/* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);
     // Handle errors properly based on the environment
@@ -49,12 +70,5 @@ export class DepartmentApi {
   private extractData(res: any) {
     return res || {};  // Here we assume res is the body of the HTTP response
   }
-  
-  // public getDepartmentsById(id: number): DepartmentInformation {
-  //   const url = `${this.departmentApiUrl}/${id}`
-  //   return this.http.get<DepartmentInformation>(url);
-  //   // return new BehaviorSubject<Department[]>.asObservable();
-  //   // return this.departmentSubject.asObservable();
-  // }
 }
 // export const DEPARTMENT_COLLECTION = new Observable<DepartmentInformation[]>;

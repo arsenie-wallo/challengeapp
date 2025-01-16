@@ -15,6 +15,8 @@ export class LineManagerPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(`Hello from line-manager.component.ts`);
+
   }
 
 }

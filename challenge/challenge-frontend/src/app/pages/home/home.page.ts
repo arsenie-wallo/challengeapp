@@ -23,13 +23,15 @@ import { DepartmentInformation } from '../../models/data';
     // IonList,
     // IonLabel
   ],
-
 })
 export class HomePage implements OnInit {
   private department: DepartmentInformation[] = [];
+  // private employees: DepartmentEmployees[] = [];
   constructor(private apiService: DepartmentApi) {}
 
   ngOnInit() {
+    console.log(`Hello from home.page.ts`);
+
     this.apiService.getDepartments().subscribe({
       next: (d) => {
         if (Array.isArray(d)) {
@@ -59,4 +61,9 @@ export class HomePage implements OnInit {
     return this.department;
     // return this.data.getDepartments();
   }
+
+  // getemployees() {
+  //   return this.employees;
+  //   // return this.data.getDepartments();
+  // }
 }

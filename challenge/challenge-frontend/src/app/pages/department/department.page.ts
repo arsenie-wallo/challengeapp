@@ -15,6 +15,7 @@ export class DepartmentPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(`Hello from department.page.ts`);
   }
 
 }

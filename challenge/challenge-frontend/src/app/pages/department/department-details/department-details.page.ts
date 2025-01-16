@@ -6,7 +6,7 @@ import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
 import { DepartmentApi } from '../../../services/data.service';
 import { DepartmentInformation } from '../../../models/data';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-department',

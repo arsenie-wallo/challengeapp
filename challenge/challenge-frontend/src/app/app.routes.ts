@@ -1,43 +1,43 @@
 import { Routes } from '@angular/router';
-import { AppRoutes } from './app-routes.enum';
+import { AppRoutes, AppComponentPaths } from './app.enum';
 // import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: AppRoutes.HOME,
-    pathMatch: 'full',
-    loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: `${AppRoutes.DEPARTMENT}/:id`,
-    loadComponent: () =>
-      import('./pages/department/department-details/department-details.page').then((m) => m.DepartmentDetailsPage),
-  },
   {
     path: '',
     redirectTo: AppRoutes.HOME,
     pathMatch: 'full',
   },
   {
-    path: AppRoutes.LINE_MANAGER,
-    loadComponent: () => import('./pages/line-manager/line-manager.page').then( m => m.LineManagerPage)
+    path: AppRoutes.HOME,
+    pathMatch: 'full',
+    loadComponent: () => import(AppComponentPaths.HOME).then((m) => m.HomePage),
   },
   {
     path: AppRoutes.DEPARTMENT,
-    loadComponent: () => import('./pages/department/department-list/department.page').then( m => m.DepartmentPage)
+    loadComponent: () => import(AppComponentPaths.DEPARTMENT).then( m => m.DepartmentPage)
   },
   {
-    path: 'employee-details',
-    loadComponent: () => import('./pages/employee/employee-details/employee-details.page').then( m => m.EmployeeDetailsPage)
+    path: AppRoutes.DEPARTMENT_DETAILS,
+    loadComponent: () => import(AppComponentPaths.DEPARTMENT_DETAILS).then( m => m.DepartmentDetailsPage)
   },
   {
-    path: 'employee',
-    loadComponent: () => import('./pages/employee/employee-list/employee.page').then( m => m.EmployeePage)
+    path: AppRoutes.EMPLOYEES,
+    loadComponent: () => import(AppComponentPaths.EMPLOYEES).then( m => m.EmployeePage)
   },
   {
-    path: 'department-details',
-    loadComponent: () => import('./pages/department/department-details/department-details.page').then( m => m.DepartmentDetailsPage)
+    path: AppRoutes.EMPLOYEE_DETAILS,
+    loadComponent: () => import(AppComponentPaths.EMPLOYEE_DETAILS).then( m => m.EmployeeDetailsPage)
   },
+  {
+    path: AppRoutes.LINE_MANAGER,
+    loadComponent: () => import(AppComponentPaths.LINE_MANAGER).then( m => m.LineManagerPage)
+  },
+  {
+    path: AppRoutes.CEO,
+    loadComponent: () => import(AppComponentPaths.CEO).then( m => m.LineManagerPage)
+  },
+];
 
 
 //   {
@@ -75,5 +75,3 @@ export const routes: Routes = [
 //     path: AppRoutes.EDIT_EMPLOYEE,
 //     loadChildren: () => import(`./pages/employee/edit-employee.module`).then( m => m.EditEmployeePageModule)
 //   },
-];
-

@@ -1,15 +1,7 @@
 import { Routes } from '@angular/router';
-import { AppRoutes, AppComponentPaths } from './app.enum';
+import { AppRoutes } from './app.enum';
 // import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-/*
- HOME = './pages/home/home.page',
-  CEO = './pages/line-manager/line-manager.page',
-  LINE_MANAGER = './pages/line-manager/line-manager.page',
-  DEPARTMENT = './pages/department/department-list/department.page',
-  DEPARTMENT_DETAILS = './pages/department/department-details/department-details.page',
-  EMPLOYEES = './pages/employee/employee-list/employee.page',
-  EMPLOYEE_DETAILS = './pages/employee/employee-details/employee-details.page',
-*/
+
 export const routes: Routes = [
   {
     path: '',

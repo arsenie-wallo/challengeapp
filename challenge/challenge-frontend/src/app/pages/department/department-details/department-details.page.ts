@@ -6,7 +6,6 @@ import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
 import { DepartmentApi } from '../../../services/data.service';
 import { DepartmentInformation } from '../../../models/data';
-// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-department',
@@ -26,7 +25,6 @@ export class DepartmentDetailsPage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    // this.department = this.data.getDepartmentsById(parseInt(id, 10));
   }
 
   getBackButtonText() {

@@ -69,10 +69,6 @@ export class EmployeePage implements OnInit {
           // If it's a single object, push it directly
           this.employee.push(e);
         }
-        // console.log(e);  // Log the data for debugging
-        // console.log(typeof(e));  // Log the data for debugging
-
-        // console.log('Employee Data:', this.employeeApiService);
       },
       error: (error) => {
         console.error('Error fetching employee data', console.error);
@@ -104,7 +100,6 @@ export class EmployeePage implements OnInit {
       const manager = this.employee.find(e => e._id === ma?._id);
       return manager ? manager.name : null;
     }
-  
     return null;
   }
 }

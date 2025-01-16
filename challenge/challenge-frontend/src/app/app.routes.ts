@@ -24,8 +24,22 @@ export const routes: Routes = [
   },
   {
     path: AppRoutes.DEPARTMENT,
-    loadComponent: () => import('./pages/department/department.page').then( m => m.DepartmentPage)
+    loadComponent: () => import('./pages/department/department-list/department.page').then( m => m.DepartmentPage)
   },
+  {
+    path: 'employee-details',
+    loadComponent: () => import('./pages/employee/employee-details/employee-details.page').then( m => m.EmployeeDetailsPage)
+  },
+  {
+    path: 'employee',
+    loadComponent: () => import('./pages/employee/employee-list/employee.page').then( m => m.EmployeePage)
+  },
+  {
+    path: 'department-details',
+    loadComponent: () => import('./pages/department/department-details/department-details.page').then( m => m.DepartmentDetailsPage)
+  },
+
+
 //   {
 //     path: `department/:id`,
 //     loadChildren: () =>

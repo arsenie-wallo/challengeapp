@@ -1,7 +1,15 @@
 import { Routes } from '@angular/router';
 import { AppRoutes, AppComponentPaths } from './app.enum';
 // import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+/*
+ HOME = './pages/home/home.page',
+  CEO = './pages/line-manager/line-manager.page',
+  LINE_MANAGER = './pages/line-manager/line-manager.page',
+  DEPARTMENT = './pages/department/department-list/department.page',
+  DEPARTMENT_DETAILS = './pages/department/department-details/department-details.page',
+  EMPLOYEES = './pages/employee/employee-list/employee.page',
+  EMPLOYEE_DETAILS = './pages/employee/employee-details/employee-details.page',
+*/
 export const routes: Routes = [
   {
     path: '',
@@ -11,34 +19,33 @@ export const routes: Routes = [
   {
     path: AppRoutes.HOME,
     pathMatch: 'full',
-    loadComponent: () => import(AppComponentPaths.HOME).then((m) => m.HomePage),
-  },
-  {
-    path: AppRoutes.DEPARTMENT,
-    loadComponent: () => import(AppComponentPaths.DEPARTMENT).then( m => m.DepartmentPage)
-  },
-  {
-    path: AppRoutes.DEPARTMENT_DETAILS,
-    loadComponent: () => import(AppComponentPaths.DEPARTMENT_DETAILS).then( m => m.DepartmentDetailsPage)
-  },
-  {
-    path: AppRoutes.EMPLOYEES,
-    loadComponent: () => import(AppComponentPaths.EMPLOYEES).then( m => m.EmployeePage)
-  },
-  {
-    path: AppRoutes.EMPLOYEE_DETAILS,
-    loadComponent: () => import(AppComponentPaths.EMPLOYEE_DETAILS).then( m => m.EmployeeDetailsPage)
-  },
-  {
-    path: AppRoutes.LINE_MANAGER,
-    loadComponent: () => import(AppComponentPaths.LINE_MANAGER).then( m => m.LineManagerPage)
+    loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
   },
   {
     path: AppRoutes.CEO,
-    loadComponent: () => import(AppComponentPaths.CEO).then( m => m.LineManagerPage)
+    loadComponent: () => import('./pages/line-manager/line-manager.page').then( m => m.LineManagerPage)
+  },
+  {
+    path: AppRoutes.LINE_MANAGER,
+    loadComponent: () => import('./pages/line-manager/line-manager.page').then( m => m.LineManagerPage)
+  },
+  {
+    path: AppRoutes.DEPARTMENT,
+    loadComponent: () => import('./pages/department/department-list/department.page').then( m => m.DepartmentPage)
+  },
+  {
+    path: AppRoutes.DEPARTMENT_DETAILS,
+    loadComponent: () => import('./pages/department/department-details/department-details.page').then( m => m.DepartmentDetailsPage)
+  },
+  {
+    path: AppRoutes.EMPLOYEES,
+    loadComponent: () => import('./pages/employee/employee-list/employee.page').then( m => m.EmployeePage)
+  },
+  {
+    path: AppRoutes.EMPLOYEE_DETAILS,
+    loadComponent: () => import('./pages/employee/employee-details/employee-details.page').then( m => m.EmployeeDetailsPage)
   },
 ];
-
 
 //   {
 //     path: `department/:id`,

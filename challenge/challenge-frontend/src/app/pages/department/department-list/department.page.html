@@ -11,20 +11,22 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!-- <ion-list> -->
-    <ion-item *ngFor="let d of getdepartments()" button (click)="navigateTo(d.name)">
+    <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)">
       <ion-card class="department-card">
         <!-- Card Header with Image -->
         <!-- <img [src]="d.pictureUrl" alt="{{ d.name }} Picture" /> -->
         
         <!-- Card Content -->
         <!-- <ion-card-header> -->
-          <ion-card-title>{{ d.name }} Deppartment</ion-card-title>
+          <ion-card-title>{{ d.name }} Department</ion-card-title>
+          <!-- <ion-card-title>{{ d.line_manager }} Department</ion-card-title> -->
         <!-- </ion-card-header> -->
-  
         <!-- Card Body (Detailed Info) -->
-        <!-- <ion-card-content> -->
+        <ion-card-subtitle>
           <p>ID: {{ d._id }}</p>
+        </ion-card-subtitle> 
           <!-- You can add other details as necessary -->
+          <!-- <ion-card-content> -->
         <!-- </ion-card-content> -->
       </ion-card>
     </ion-item>

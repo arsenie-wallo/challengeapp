@@ -8,10 +8,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
   IonCard,
-  IonCardHeader,
+  // IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
-  IonCardContent,
+  // IonCardContent,
   IonContent,
   IonHeader,
   IonItem,
@@ -20,13 +20,14 @@ import {
   RefresherCustomEvent,
   IonRefresher,
   IonRefresherContent,
-  IonList,
+  // IonList,
   // IonLabel
 } from '@ionic/angular/standalone';
 
 // From Home
 import { DepartmentApi } from '../../../services/data.service';
 import { DepartmentInformation } from '../../../models/data';
+// import { EmployeeInformation } from '../../../models/data';
 
 @Component({
   selector: 'app-department',
@@ -35,10 +36,10 @@ import { DepartmentInformation } from '../../../models/data';
   standalone: true,
   imports: [
     IonCard,
-    IonCardHeader,
+    // IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
-    IonCardContent,
+    // IonCardContent,
     IonContent,
     IonHeader,
     IonItem,
@@ -49,7 +50,7 @@ import { DepartmentInformation } from '../../../models/data';
     // IonLabel,
     IonTitle,
     IonRefresher,
-    IonList,
+    // IonList,
     IonRefresherContent
   ]
 })
@@ -87,9 +88,14 @@ export class DepartmentPage implements OnInit {
     }, 3000);
   }
 
-  getdepartments() {
+  getAllDepartments() {
     return this.department;
     // return this.data.getDepartments();
+  }
+
+  getManager(id: string) {
+    let _id = id;
+
   }
   
   navigateTo(page: string) {

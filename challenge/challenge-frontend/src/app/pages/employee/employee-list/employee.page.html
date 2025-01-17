@@ -11,7 +11,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!-- <ion-list> -->
-    <ion-item *ngFor="let e of getEmployees()" button (click)="navigateTo(e.name)">
+    <ion-item *ngFor="let e of getAllEmployees()" button (click)="navigateTo(e.name)">
       <ion-card class="employee-card">
         <!-- Card Header with Image -->
         <!-- <img [src]="d.pictureUrl" alt="{{ d.name }} Picture" /> -->

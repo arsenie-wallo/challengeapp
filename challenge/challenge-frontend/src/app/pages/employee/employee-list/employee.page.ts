@@ -7,10 +7,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
   IonCard,
-  IonCardHeader,
+  // IonCardHeader,
   IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
+  // IonCardSubtitle,
+  // IonCardContent,
   IonContent,
   IonHeader,
   IonItem,
@@ -34,10 +34,10 @@ import { EmployeeInformation } from '../../../models/data';
   standalone: true,
   imports: [
     IonCard,
-    IonCardHeader,
+    // IonCardHeader,
     IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
+    // IonCardSubtitle,
+    // IonCardContent,
     IonContent,
     IonHeader,
     IonItem,
@@ -48,12 +48,13 @@ import { EmployeeInformation } from '../../../models/data';
     // IonLabel,
     IonTitle,
     IonRefresher,
-    IonList,
+    // IonList,
     IonRefresherContent
   ]
 })
 export class EmployeePage implements OnInit {
-  private employee: EmployeeInformation[] = [];
+  private employeeArray: EmployeeInformation[] = [];
+  private employee: EmployeeInformation | undefined = undefined;
 
   constructor(private employeeApiService: EmployeeApiService, private router: Router) {}
 
@@ -63,11 +64,11 @@ export class EmployeePage implements OnInit {
     this.employeeApiService.getEmployees().subscribe({
       next: (e) => {
         if (Array.isArray(e)) {
-          this.employee.push(...e);  // Spread the array into this.employee
+          this.employeeArray.push(...e);  // Spread the array into this.employee
         }
          else {
           // If it's a single object, push it directly
-          this.employee.push(e);
+          this.employeeArray.push(e);
         }
       },
       error: (error) => {
@@ -82,8 +83,8 @@ export class EmployeePage implements OnInit {
     }, 3000);
   }
 
-  getEmployees() {
-    return this.employee;
+  getAllEmployees() {
+    return this.employeeArray;
     // return this.data.getEmployees();
   }
   
@@ -91,15 +92,21 @@ export class EmployeePage implements OnInit {
     this.router.navigate([`${page}`]);
   }
 
-  getManager(employeeId: string): string | null {
-    const employee = this.employee.find(e => e._id === employeeId);
-    const ma = employee?.line_manager;
-
-    console.log(employee);
-    if (employee && employee.line_manager) {
-      const manager = this.employee.find(e => e._id === ma?._id);
-      return manager ? manager.name : null;
-    }
-    return null;
+  getEmployeeById(id: string) {
+    const employee = this.employeeArray.find(e => e._id === id);
+    this.employee = employee
+    return this.employee;
   }
+
+  // getManager(employeeId: string): string | null {
+  //   const employee = this.employeeArray.find(e => e._id === employeeId);
+  //   const ma = employee?.line_manager;
+
+  //   console.log(employee);
+  //   if (employee && employee.line_manager) {
+  //     const manager = this.employeeArray.find(e => e._id === ma?._id);
+  //     return manager ? manager.name : null;
+  //   }
+  //   return null;
+  // }
 }

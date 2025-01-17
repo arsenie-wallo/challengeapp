@@ -6,11 +6,11 @@ import {
   IonContent,
   IonHeader,
   IonItem,
-  IonList,
-  IonMenu,
+  // IonList,
+  // IonMenu,
   IonRefresher,
   IonRefresherContent,
-  IonSplitPane,
+  // IonSplitPane,
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
@@ -23,11 +23,11 @@ import {
     IonContent,
     IonHeader,
     IonItem,
-    IonList,
-    IonMenu,
+    // IonList,
+    // IonMenu,
     IonRefresher,
     IonRefresherContent,
-    IonSplitPane,
+    // IonSplitPane,
     IonTitle,
     IonToolbar
   ]

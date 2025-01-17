@@ -11,6 +11,7 @@ export const routes: Routes = [
   {
     path: AppRoutes.HOME,
     pathMatch: 'full',
+    // loadComponent: () => import('./components/app.component').then((m) => m.AppComponent),
     loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
   },
   {

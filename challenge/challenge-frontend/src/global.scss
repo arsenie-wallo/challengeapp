@@ -35,3 +35,15 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+/* src/global.scss */
+html, body {
+    overflow: hidden !important;
+  }
+  
+  /* Hide scrollbar for specific elements (e.g., content) */
+  ion-content {
+    overflow: hidden !important;
+  }
+  

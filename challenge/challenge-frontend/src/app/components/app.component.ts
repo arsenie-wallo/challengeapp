@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { 
+  IonApp,
+  // IonHeader,
+  // IonRouterOutlet,
+  // IonContent
+} from '@ionic/angular/standalone';
+import { HeaderComponent } from './header/header.component';
+import { ContentComponent } from './content/content.component';
+// import { HomePage } from '../pages/home/home.page';
+import { IonicModule } from '@ionic/angular';
+// import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +17,15 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   templateUrl: 'app.component.html',
   imports: [
     IonApp,
-    IonRouterOutlet,
+    // IonHeader,
+    // IonRouterOutlet,
+    // IonContent,
+
+    HeaderComponent,
+    ContentComponent,
+    // HomePage
+    IonicModule,
+    // RouterModule
   ],
   providers: [
   ]

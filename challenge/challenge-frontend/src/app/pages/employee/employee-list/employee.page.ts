@@ -48,7 +48,6 @@ import { EmployeeInformation } from '../../../models/data';
     CommonModule,
     FormsModule,
     // IonLabel,
-    IonTitle,
     IonRefresher,
     // IonList,
     IonRefresherContent

@@ -106,13 +106,14 @@ export class EmployeePage implements OnInit {
   findEmployee(id: string) {
     return this.employeeArray.find(e => e._id === id);
   }
+
   onEmployeeCardClick(id: string) {
-    console.log(`retrieving details`)
     const employee = this.findEmployee(id);
     let index;
     if (employee) {
       index = this.employeeArray.indexOf(employee)
-      this.retriever.getDetailsById(employee, index);
+      console.log(`retrieving details`)
+      this.retriever.getDetailsById(employee, index, "employee");
       // this.getEmployeeDetailsById(index);
     }
     else {

@@ -8,6 +8,8 @@ import { DepartmentInformation } from '../../models/data';
 })
 export class DetailRetrieverService<T> {
   private collection: T[] = [];
+  private item: EmployeeInformation | DepartmentInformation | undefined= undefined;
+  private title: string = "Not Found";
   constructor(
     private navigator: NavigationService
   ) { }
@@ -20,13 +22,20 @@ export class DetailRetrieverService<T> {
     console.log(`Collection is set`)
     this.collection = collection;
   }
+  setItem(item: DepartmentInformation | EmployeeInformation) {
+    this.item = item;
+    this.title = item.name;
+  }
+
   getDetailsById(item: DepartmentInformation | EmployeeInformation, index: number) {
     // console.log(`Hello from retriever: ${item._id}`)
     // this.setCollection(collection);
     // let index;
     if (item) {
       // index = this.collection.indexOf(item);
-      this.getEmployeeDetailsById(index);
+      this.setItem(item);
+      // this.getEmployeeDetailsById(index);
+
     }
   }
 

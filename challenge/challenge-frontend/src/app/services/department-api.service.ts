@@ -16,7 +16,6 @@ export class DepartmentApiService {
   private activatedRoute = inject(ActivatedRoute);
 
   private departmentApiUrl = 'https://localhost:3000/departments';
-  private employeeApiUrl = 'https://localhost:3000/employees';
 
   // private departmentData: Observable<DepartmentInformation> | null = null;
 

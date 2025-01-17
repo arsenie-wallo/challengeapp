@@ -5,7 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { EmployeeInformation } from '../models/data';
+import { EmployeeInformation } from '../../models/data';
 
 @Injectable(
   {providedIn: 'root'}

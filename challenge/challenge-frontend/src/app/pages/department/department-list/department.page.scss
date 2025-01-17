@@ -7,6 +7,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 20px; /* Adds padding for better spacing inside the card */
+    line-height: 0%;
   }
   
   .department-card img {
@@ -17,6 +18,6 @@
   
   .department-card ion-card-header,
   .department-card ion-card-content {
-    // padding: 20px; /* Adds padding for better spacing inside the card */
+    padding: 20px; /* Adds padding for better spacing inside the card */
   }
   

@@ -24,10 +24,9 @@ import {
   // IonLabel
 } from '@ionic/angular/standalone';
 
-// From Home
-import { DepartmentApi } from '../../../services/data.service';
+import { DepartmentApiService } from '../../../services/department-api/department-api.service';
 import { DepartmentInformation } from '../../../models/data';
-// import { EmployeeInformation } from '../../../models/data';
+import { NavigationService } from '../../../services/navigation/navigation.service';
 
 @Component({
   selector: 'app-department',
@@ -57,7 +56,12 @@ import { DepartmentInformation } from '../../../models/data';
 export class DepartmentPage implements OnInit {
   private department: DepartmentInformation[] = [];
 
-  constructor(private apiService: DepartmentApi, private router: Router) {}
+  constructor(
+    private apiService: DepartmentApiService,
+    private router: Router,
+    private navigator: NavigationService
+    
+  ) {}
 
   ngOnInit() {
     console.log(`Hello from department.page.ts`);
@@ -99,7 +103,7 @@ export class DepartmentPage implements OnInit {
   }
   
   navigateTo(page: string) {
-    this.router.navigate([`${page}`]);
+    this.navigator.navigateTo(page);
   }
 
   

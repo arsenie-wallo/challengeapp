@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Platform, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonItem, IonIcon, IonLabel, IonNote } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
-import { DepartmentApi } from '../../../services/data.service';
+import { DepartmentApiService } from '../../../services/department-api/department-api.service';
+
 import { DepartmentInformation } from '../../../models/data';
 
 @Component({
@@ -15,7 +16,7 @@ import { DepartmentInformation } from '../../../models/data';
 })
 export class DepartmentDetailsPage implements OnInit {
   public department!: DepartmentInformation;
-  private data = inject(DepartmentApi);
+  private data = inject(DepartmentApiService);
   private activatedRoute = inject(ActivatedRoute);
   private platform = inject(Platform);
 

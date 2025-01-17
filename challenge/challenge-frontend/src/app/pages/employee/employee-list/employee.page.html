@@ -11,7 +11,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!-- <ion-list> -->
-    <ion-item *ngFor="let e of getAllEmployees()" button (click)="navigateTo(e.name)">
+    <ion-item *ngFor="let e of getAllEmployees()" button (click)="onEmployeeCardClick(e._id)">
       <ion-card class="employee-card">
         <!-- Card Header with Image -->
         <!-- <img [src]="d.pictureUrl" alt="{{ d.name }} Picture" /> -->
@@ -19,17 +19,17 @@
         <!-- Card Content -->
         <!-- <ion-card-header> -->
           <ion-card-title>{{ e.name }}</ion-card-title>
-          <!-- <ion-card-subtitle>ID: {{ e._id }}</ion-card-subtitle> -->
-          <p>ID: {{ e._id }}</p>
-          <p>Address: {{ e.address }}</p>
+          <ion-card-subtitle>ID: {{ e._id }}</ion-card-subtitle>
+          <!-- Card Body (Detailed Info) -->
+          <!-- <ion-card-content> -->
+            <!-- You can add other details as necessary -->
+          <!-- </ion-card-content> -->
+          <!-- <p>ID: {{ e._id }}</p> -->
+          <!-- <p>Address: {{ e.address }}</p> -->
           <!-- <p>Department {{ e.department }}</p> -->
           <!-- <p>Manager: {{ e.line_manager }}</p> -->
         <!-- </ion-card-header> -->
   
-        <!-- Card Body (Detailed Info) -->
-        <!-- <ion-card-content> -->
-          <!-- You can add other details as necessary -->
-        <!-- </ion-card-content> -->
       </ion-card>
     </ion-item>
   <!-- </ion-list> -->

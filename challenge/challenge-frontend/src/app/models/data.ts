@@ -13,6 +13,7 @@ export type DepartmentInformation = {
 }
 
 export type EmployeeInformation = {
+    // index: number;
     _id: string;
     email: string;
     name: string;

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavigationService } from '../../services/navigation/navigation.service';
+
 // import { IonRefresherContent } from '@ionic/angular';
 import {
   RefresherCustomEvent,
@@ -33,7 +35,9 @@ import {
   ]
 })
 export class HomePage {
-  constructor(private router: Router) {}
+  constructor(
+    private navigator: NavigationService,
+    private router: Router) {}
   
   ngOnInit() {
     console.log(`Hello from home.page.ts`);
@@ -46,6 +50,6 @@ export class HomePage {
   }
 
   navigateTo(page: string) {
-    this.router.navigate([`${page}`]);
+    this.navigator.navigateTo(page);
   }
 }

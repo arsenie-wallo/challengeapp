@@ -10,42 +10,22 @@ import { DepartmentModel } from '../../models/data';
 @Injectable(
   {providedIn: 'root'}
 )
-export class DepartmentApiService {
+export class DeleteDepartmentApiService {
   constructor(private http: HttpClient) {}
 
   private activatedRoute = inject(ActivatedRoute);
 
   private departmentApiUrl = 'https://localhost:3000/departments';
 
-  // private departmentData: Observable<DepartmentModel> | null = null;
-
-  // getDepartments(): Observable<DepartmentModel> {
-  //   console.log("test2");
-  //   this.departmentData = this.http.get<DepartmentModel>(this.departmentApiUrl);
-  //   return this.departmentData;
-  // }
-
-  getDepartments(): Observable<DepartmentModel> {
-    // console.log(`xx ${this.activatedRoute}`);
-    // console.log(`Hello from data.service.ts`);
-
-    return this.http.get<DepartmentModel>(this.departmentApiUrl)
+  deleteDepartment(departmentId: string): Observable<DepartmentModel>{
+    console.log(`Hello from department-api.service.ts. Deleting a department: ${departmentId}`)
+    return this.http.delete<DepartmentModel>(`${this.departmentApiUrl}/${departmentId}`)
     .pipe(
       map(this.extractData),
       tap(this.logResponse),
       catchError(this.catchError)
     )
   }
-
-  // deleteDepartment(departmentId: string): Observable<DepartmentModel>{
-  //   console.log(`Hello from department-api.service.ts. Deleting a department: ${departmentId}`)
-  //   return this.http.delete<DepartmentModel>(`${this.departmentApiUrl}/${departmentId}`)
-  //   .pipe(
-  //     map(this.extractData),
-  //     tap(this.logResponse),
-  //     catchError(this.catchError)
-  //   )
-  // }
 
   // getEmployees(): Observable<DepartmentEmployees> {
   //   // console.log(`xx ${this.activatedRoute}`);

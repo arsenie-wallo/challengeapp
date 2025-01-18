@@ -17,12 +17,12 @@ export class EmployeeApiService {
 
   private employeeApiUrl = 'https://localhost:3000/employees';
 
-  // private departmentData: Observable<EmployeeModel> | null = null;
+  // private employeeData: Observable<EmployeeModel> | null = null;
 
   // getEmployees(): Observable<EmployeeModel> {
   //   console.log("test2");
-  //   this.departmentData = this.http.get<EmployeeModel>(this.departmentApiUrl);
-  //   return this.departmentData;
+  //   this.employeeData = this.http.get<EmployeeModel>(this.employeeApiUrl);
+  //   return this.employeeData;
   // }
 
   getEmployees(): Observable<EmployeeModel> {
@@ -37,11 +37,21 @@ export class EmployeeApiService {
     )
   }
 
+  deleteEmployee(employeeId: string): Observable<EmployeeModel>{
+      console.log(`Hello from employee-api.service.ts. Deleting a employee: ${employeeId}`)
+      return this.http.delete<EmployeeModel>(`${this.employeeApiUrl}/${employeeId}`)
+      .pipe(
+        map(this.extractData),
+        tap(this.logResponse),
+        catchError(this.catchError)
+      )
+    }
+
   // public getEmployeesById(id: number): EmployeeModel {
-  //   const url = `${this.departmentApiUrl}/${id}`
+  //   const url = `${this.employeeApiUrl}/${id}`
   //   return this.http.get<EmployeeModel>(url);
-  //   // return new BehaviorSubject<Department[]>.asObservable();
-  //   // return this.departmentSubject.asObservable();
+  //   // return new BehaviorSubject<employee[]>.asObservable();
+  //   // return this.employeeSubject.asObservable();
   // }
 /* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
@@ -58,4 +68,4 @@ export class EmployeeApiService {
     return res || {};  // Here we assume res is the body of the HTTP response
   }
 }
-// export const DEPARTMENT_COLLECTION = new Observable<EmployeeModel[]>;
+// export const employee_COLLECTION = new Observable<EmployeeModel[]>;

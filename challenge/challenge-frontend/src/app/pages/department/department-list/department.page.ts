@@ -8,8 +8,12 @@ import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
+import { DepartmentModel } from '../../../models/data';
 import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
+import { DepartmentApiService } from '../../../services/api-department/department-api.service';
+import { DeleteDepartmentApiService } from '../../../services/department-delete/department-delete.service';
+import { NavigationService } from '../../../services/navigation/navigation.service';
 
 import { 
   IonBackButton,
@@ -36,9 +40,6 @@ import {
   // IonLabel
 } from '@ionic/angular/standalone';
 
-import { DepartmentApiService } from '../../../services/api-department/department-api.service';
-import { DepartmentModel } from '../../../models/data';
-import { NavigationService } from '../../../services/navigation/navigation.service';
 
 @Component({
   selector: 'app-department',
@@ -72,16 +73,17 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
     IonRefresherContent
   ]
 })
+
 export class DepartmentPage implements OnInit {
   isModalOpen = false;
   private departmentArray: DepartmentModel[] = [];
-  
-
-  constructor(
+    constructor(
+      private router: Router,
     private apiService: DepartmentApiService,
-    private router: Router,
     private navigator: NavigationService,
     private retriever: DetailRetrieverService<DepartmentModel>,
+    private deleter: DeleteDepartmentApiService,
+    private http: HttpClient
     
   ) {
     addIcons({expand,trash,create,logoIonic});
@@ -99,10 +101,6 @@ export class DepartmentPage implements OnInit {
           // If it's a single object, push it directly
           this.departmentArray.push(d);
         }
-        // console.log(d);  // Log the data for debugging
-        // console.log(typeof(d));  // Log the data for debugging
-
-        // console.log('Department Data:', this.apiService);
       },
       error: (error) => {
         console.error('Error fetching department data', console.error);
@@ -110,8 +108,33 @@ export class DepartmentPage implements OnInit {
     });
   }
 
+  
+  
+  findDepartment(id: string) {
+    return this.departmentArray.find(e => e._id === id);
+  }
+
+  navigateTo(page: string) {
+    this.navigator.navigateTo(page);
+  }
+  
+  // Data Controls
   onAddDepartmentClick() {
     console.log("Cicked!")
+  }
+  // private departmentApiUrl = 'https://localhost:3000/departments';
+
+  onDeleteDepartmentClick(targetId: string) {
+    console.log(`Deleting a department record ${targetId}`)
+    let found: DepartmentModel | undefined = this.findDepartment(targetId)
+    if(found) {
+      let numero = this.departmentArray.indexOf(found)
+      console.log(numero)
+    this.http.delete(`https://localhost:3000/departments/${numero}`)
+      console.log('Department deleted:', found);
+    this.navigateTo("department/")
+      this.departmentArray.splice(numero, 1);  // Remove department at given targetId
+    }
   }
 
   refresh(ev: any) {
@@ -119,7 +142,19 @@ export class DepartmentPage implements OnInit {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
   }
+    
+    // this.apiService.deleteDepartment(targetId).subscribe({
+    //   next: (response) => {
+    //     console.log("Department deleted successfully", response);
+    //     // You can handle additional logic here, like updating the UI to reflect the deletion.
+    //   },
+    //   error: (error) => {
+    //     console.error('Error fetching department data', console.error);
+    //   },
+    // });
+    // // console.log("Record deleted")
 
+  // Modal Controls
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
@@ -136,24 +171,15 @@ export class DepartmentPage implements OnInit {
 
   getManager(id: string) {
     let _id = id;
-
   }
 
-  findDepartment(id: string) {
-    return this.departmentArray.find(e => e._id === id);
-  }
-
-  navigateTo(page: string) {
-    this.navigator.navigateTo(page);
-  }
-  
   onDepartmentCardClick(id: string) {
     const department = this.findDepartment(id);
     let index;
     if (department) {
       index = this.departmentArray.indexOf(department)
       console.log(`retrieving details`)
-      this.retriever.getDetailsById(department, index, "department");
+      this.retriever.getDetailsById(department, index, "departments");
       // this.getDepartmentDetailsById(index);
     }
     else {

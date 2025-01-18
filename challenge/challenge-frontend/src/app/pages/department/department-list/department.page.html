@@ -20,7 +20,8 @@
 
     <div class="department-grid">
     <!-- <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)" class="content"> -->
-    <ion-item *ngFor="let d of getAllDepartments()" button (click)="onDepartmentCardClick(d._id)">
+    <ion-item *ngFor="let d of getAllDepartments()">
+      <!-- button (click)="onDepartmentCardClick(d._id)" -->
 
       <ion-card class="department-card">
         <!-- Card Header with Image -->
@@ -35,8 +36,8 @@
         </div>
 
         <div class="card-control">
-          <ion-icon name="expand" size="small" color="black"></ion-icon>
-          <ion-icon name="trash" size="small" color="black" (click)="onDepartmentCardClick(d._id)"></ion-icon>
+          <ion-icon name="expand" size="small" color="black" ></ion-icon>
+          <ion-icon name="trash" size="small" color="black" button (click)="onDeleteDepartmentClick(d._id)"></ion-icon>
         </div>
       </ion-card>
     </ion-item>

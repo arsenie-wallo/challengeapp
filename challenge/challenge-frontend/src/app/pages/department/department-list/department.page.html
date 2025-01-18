@@ -10,11 +10,13 @@
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-button (click)="onAddDepartmentClick()">
+  <ion-button id="open-modal" expand="block" (click)="onAddDepartmentClick()">
     Add Department
   </ion-button>
   <div class="department-grid">
-    <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)" class="content">
+    <!-- <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)" class="content"> -->
+    <ion-item *ngFor="let d of getAllDepartments()" button (click)="onDepartmentCardClick(d._id)">
+
       <ion-card class="department-card">
         <!-- Card Header with Image -->
         <ion-img

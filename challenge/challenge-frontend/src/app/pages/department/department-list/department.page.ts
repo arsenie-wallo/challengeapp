@@ -133,7 +133,7 @@ export class DepartmentPage implements OnInit {
     if (department) {
       index = this.departmentArray.indexOf(department)
       console.log(`retrieving details`)
-      this.retriever.getDetailsById(department, index, "Department");
+      this.retriever.getDetailsById(department, index, "department");
       // this.getDepartmentDetailsById(index);
     }
     else {

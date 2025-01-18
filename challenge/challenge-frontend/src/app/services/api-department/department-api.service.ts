@@ -67,9 +67,14 @@ export class DepartmentApiService {
   //   )
   // }
 
-  getDepartmentsById(id: number) {
+  getDepartmentById(id: string) {
     const url = `https://localhost:3000/dev/departments/${id}`
-    return this.http.get<DepartmentModel>(url);
+    return this.http.get<DepartmentModel>(url)
+    .pipe(
+      map(this.extractData),
+      tap(this.logResponse),
+      catchError(this.catchError)
+    )
     // return new BehaviorSubject<Department[]>.asObservable();
     // return this.departmentSubject.asObservable();
   }

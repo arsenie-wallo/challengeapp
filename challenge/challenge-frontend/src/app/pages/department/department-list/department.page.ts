@@ -176,6 +176,34 @@ async onDeleteDepartmentClick(targetId: string) {
   }
 }
 
+getDepartmentsById(id: string) {
+  
+  this.apiService.getDepartmentById(id).subscribe({
+    next: (response) => {
+      this.navigateTo(`dev/departments/${id}`)
+      // const url = `https://localhost:3000/dev/departments/${id}`
+      // console.log(`${url} ${response}`)
+      // return this.http.get<DepartmentModel>(url);
+
+      // if (Array.isArray(d)) {
+      //   this.departmentArray.push(...d);  // Spread the array into this.department
+      // }
+      //  else {
+      //   // If it's a single object, push it directly
+      //   this.departmentArray.push(d);
+      // }
+    },
+    error: (error) => {
+      console.error('Error fetching department data', console.error);
+    },
+  });
+
+  // const url = `https://localhost:3000/dev/departments/${id}`
+  // console.log(`${url}`)
+  // return this.http.get<DepartmentModel>(url);
+  // return new BehaviorSubject<Department[]>.asObservable();
+  // return this.departmentSubject.asObservable();
+}
 
   // console.log("Record deleted")
   

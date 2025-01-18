@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonTitle,
   IonToolbar
   } from '@ionic/angular/standalone';
@@ -20,9 +22,11 @@ import { EmployeeModel } from '../../../models/data';
   standalone: true,
   imports: [
     IonBackButton,
+    IonButton,
     IonButtons,
     IonContent,
     IonHeader,
+    IonIcon,
     IonTitle,
     IonToolbar,
     CommonModule,

@@ -18,7 +18,7 @@
   </ion-refresher>
 
   <!-- Add Employee Button -->
-  <ion-button id="open-modal" expand="block">Add Employees</ion-button>
+  <ion-button id="open-modal" expand="block" (click)="setOpen(true)">Add Employees</ion-button>
 
   <!-- Employee Cards Grid -->
   <div class="employee-grid">
@@ -43,12 +43,13 @@
   </div>
 
   <!-- Modal for Adding Employees -->
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ion-modal [isOpen]="isModalOpen">
+    <!-- <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)"> -->
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-button slot="start" (click)="navigateTo('employee')">Cancel</ion-button>
           <ion-title>Add Employee</ion-title>
+          <ion-button slot="start" (click)="cancel()">Cancel</ion-button>
           <ion-button slot="end" (click)="confirm()" [strong]="true">Confirm</ion-button>
         </ion-toolbar>
       </ion-header>

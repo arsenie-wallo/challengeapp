@@ -1,7 +1,7 @@
-// export type Department = {
-//     departmentInformation?: DepartmentModel;
-//     EmployeeModel?: EmployeeModel;
-//     lineManager?: LineManager;
+// export type Model = {
+//     department?: DepartmentModel;
+//     employee?: EmployeeModel;
+//     // lineManager?: LineManager;
 // }
 
 export type DepartmentModel = {

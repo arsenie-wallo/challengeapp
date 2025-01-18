@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationService } from '../../services/navigation/navigation.service';
-import { EmployeeModel } from '../../models/data';
-import { DepartmentModel } from '../../models/data';
+import { EmployeeModel, DepartmentModel} from '../../models/data';
 
 @Injectable({
   providedIn: 'root'

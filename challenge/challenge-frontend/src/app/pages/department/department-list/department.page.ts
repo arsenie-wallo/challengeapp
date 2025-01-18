@@ -73,6 +73,7 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
   ]
 })
 export class DepartmentPage implements OnInit {
+  isModalOpen = false;
   private departmentArray: DepartmentModel[] = [];
   
 
@@ -119,17 +120,14 @@ export class DepartmentPage implements OnInit {
     }, 3000);
   }
 
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
   cancel() {
-
+    this.setOpen(false)
   }
 
-  confirm () {
-
-  }
-
-  onWillDismiss(event: any) {
-
-  }
 
   getAllDepartments() {
     return this.departmentArray;
@@ -140,13 +138,15 @@ export class DepartmentPage implements OnInit {
     let _id = id;
 
   }
+
   findDepartment(id: string) {
     return this.departmentArray.find(e => e._id === id);
   }
+
   navigateTo(page: string) {
     this.navigator.navigateTo(page);
-  }  
-  //onDepartmentCardClick
+  }
+  
   onDepartmentCardClick(id: string) {
     const department = this.findDepartment(id);
     let index;
@@ -160,4 +160,22 @@ export class DepartmentPage implements OnInit {
       console.log(`Department Not Found`)
     }
   }
+
+  confirm() {
+    // // Handle the modal input and capture the entered department details
+    // if (this.departmentName.trim() && this.departmentDescription.trim() && this.departmentCode.trim()) {
+    //   console.log(`New Department Name: ${this.departmentName}`);
+    //   console.log(`Department Description: ${this.departmentDescription}`);
+    //   console.log(`Department Code: ${this.departmentCode}`);
+      
+    //   // Optionally, add the new department to the list or save it to the database
+    //   this.isModalOpen = false; // Close the modal
+    // } else {
+    //   console.error('All fields are required');
+    // }
+
+    // this.setOpen(false)
+
+  }
+
 }

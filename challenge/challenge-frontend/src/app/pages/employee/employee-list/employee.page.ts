@@ -78,7 +78,7 @@ import {
   ]
 })
 export class EmployeePage implements OnInit {
-  // isOpen = false;
+  isModalOpen = false;
   // data = { content: 'New Content' };
   // private message = "fsds"
   private name = "XXX"
@@ -125,12 +125,16 @@ export class EmployeePage implements OnInit {
     
   }
 
-  cancel() {
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 
+  cancel() {
+    this.setOpen(false)
   }
 
   confirm () {
-
+    this.setOpen(false)
   }
 
   onWillDismiss(event: any) {

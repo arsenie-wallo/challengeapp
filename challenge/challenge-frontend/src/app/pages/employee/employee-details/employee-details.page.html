@@ -5,8 +5,22 @@
         defaultHref="/"
       ></ion-back-button>
     </ion-buttons>
+    <ion-content slot="end">
+      <ion-icon
+        name="create"
+        size="small"
+        color="black"
+      ></ion-icon>
+    </ion-content>
   </ion-toolbar>
 </ion-header>
+
+
+<!-- <div class="card-control">
+  <ion-icon name="create" size="small" color="black"></ion-icon>
+  <ion-icon name="expand" size="small" color="black"></ion-icon>
+  <ion-icon name="trash" size="small" color="black" (click)="onEmployeeCardClick(e._id)"></ion-icon>
+</div> -->
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">

@@ -10,9 +10,12 @@
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-button id="open-modal" expand="block" (click)="onAddDepartmentClick()">
+  <!-- <ion-button id="open-modal" expand="block" (click)="onAddDepartmentClick()">
     Add Department
-  </ion-button>
+  </ion-button> -->
+    <!-- Add Department Button -->
+    <ion-button id="open-modal" expand="block">Add Departments</ion-button>
+
   <div class="department-grid">
     <!-- <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)" class="content"> -->
     <ion-item *ngFor="let d of getAllDepartments()" button (click)="onDepartmentCardClick(d._id)">
@@ -45,6 +48,29 @@
     </ion-item>
   </div>
   
+  <!-- Modal for Adding Departments -->
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-button slot="start" (click)="cancel()">Cancel</ion-button>
+          <ion-title>Add Department</ion-title>
+          <ion-button slot="end" (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Enter your name"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Your name"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
   
 
 </ion-content>

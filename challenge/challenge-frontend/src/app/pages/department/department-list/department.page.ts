@@ -22,7 +22,9 @@ import {
   IonHeader,
   IonIcon,
   IonImg,
+  IonInput,
   IonItem,
+  IonModal,
   IonTitle,
   IonToolbar,
   RefresherCustomEvent,
@@ -52,7 +54,9 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
     IonHeader,
     IonIcon,
     IonImg,
+    IonInput,
     IonItem,
+    IonModal,
     IonTitle,
     IonToolbar,
     CommonModule,
@@ -109,6 +113,18 @@ export class DepartmentPage implements OnInit {
     setTimeout(() => {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
+  }
+
+  cancel() {
+
+  }
+
+  confirm () {
+
+  }
+
+  onWillDismiss(event: any) {
+
   }
 
   getAllDepartments() {

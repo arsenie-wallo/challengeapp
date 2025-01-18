@@ -27,7 +27,7 @@ export class DepartmentApiService {
 
   getDepartments(): Observable<DepartmentModel> {
     // console.log(`xx ${this.activatedRoute}`);
-    console.log(`Hello from data.service.ts`);
+    // console.log(`Hello from data.service.ts`);
 
     return this.http.get<DepartmentModel>(this.departmentApiUrl)
     .pipe(
@@ -63,7 +63,7 @@ export class DepartmentApiService {
   }
   
   private logResponse(res: any) {
-    console.log(res);
+    // console.log(res);
   }
   
   private extractData(res: any) {

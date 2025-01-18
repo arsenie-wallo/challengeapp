@@ -37,7 +37,7 @@ export class EmployeeDetailsPage implements OnInit {
     private employee: EmployeeModel | undefined= undefined;
     // private employeeArray: EmployeeModel[] = [];
     private currentUrl: string = ""
-    private employeeId: number | null = null;
+    private employeeIndex: number | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,8 +52,8 @@ export class EmployeeDetailsPage implements OnInit {
     // Use a regular expression to extract the number at the end of the URL
     const match = url.match(/employee\/(\d+)$/);
     if (match) {
-      this.employeeId = +match[1];  // Convert matched string to a number
-      console.log('Extracted employee ID:', this.employeeId);
+      this.employeeIndex = +match[1];  // Convert matched string to a number
+      console.log('Extracted employee ID:', this.employeeIndex);
     }
   // }
   }

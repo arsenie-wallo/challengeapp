@@ -1,14 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button
+<!-- @if (department) { -->
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button
         defaultHref="/"
-      ></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-        <!-- [text]="getBackButtonText()" -->
-
+        ></ion-back-button>
+      </ion-buttons>
+      <!-- <h1>{{ department.name }}</h1> -->
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
+<!-- } -->
 @if (department) {
   <ion-content [fullscreen]="true">
     <ion-item>

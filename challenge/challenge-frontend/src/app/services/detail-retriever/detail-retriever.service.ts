@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavigationService } from '../../services/navigation/navigation.service';
 import { EmployeeModel, DepartmentModel} from '../../models/data';
-
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +9,8 @@ export class DetailRetrieverService<T> {
   private collection: T[] = [];
   private item: EmployeeModel | DepartmentModel | undefined= undefined;
   private title: string = "Not Found";
+  private currentSubject = new BehaviorSubject<DepartmentModel | EmployeeModel | null>(null);
+
   constructor(
     private navigator: NavigationService
   ) { }
@@ -17,9 +19,20 @@ export class DetailRetrieverService<T> {
     console.log(`Collection is set`)
     this.collection = collection;
   }
-  setItem(item: DepartmentModel | EmployeeModel) {
-    this.item = item;
-    this.title = item.name;
+  // setItem(item: DepartmentModel | EmployeeModel) {
+  //   this.item = item;
+  //   this.title = item.name;
+  // }
+
+  // Set the current employee
+  // setCurrentEmployee(employee: EmployeeModel) {
+  setCurrentItem(item: DepartmentModel | EmployeeModel | null) {
+    this.currentSubject.next(item);
+  }
+
+  // Get the current employee
+  getCurrentItem() {
+    return this.currentSubject.asObservable();
   }
 
   getDetailsById(item: DepartmentModel | EmployeeModel, index: number, objectType: string) {
@@ -28,7 +41,9 @@ export class DetailRetrieverService<T> {
     // let index;
     if (item) {
       // index = this.collection.indexOf(item);
-      this.setItem(item);
+      // this.setItem(item);
+      this.setCurrentItem(item)
+
       // this.navigateTo(`${objectType}/${index}`);
       this.navigator.navigateTo(`${objectType}/${index}`);
 

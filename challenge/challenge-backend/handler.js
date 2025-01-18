@@ -11,12 +11,14 @@ async function connectToDatabase() {
         console.log('Using existing database connection');
         return;
     }
-    console.log('Connecting to MongoDB...');
-    client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    await client.connect();
-    db = client.db('WalloPay');  // Initialize the db object after a successful connection
-    isConnected = true;
-    console.log('Connected to MongoDB');
+    else {
+        console.log('Connecting to MongoDB...');
+        client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await client.connect();
+        db = client.db('WalloPay');  // Initialize the db object after a successful connection
+        isConnected = true;
+        console.log('Connected to MongoDB');
+    }
 }
 
 // MongoDB Collections (initialize them inside the handler functions to ensure db is ready)
@@ -70,3 +72,28 @@ module.exports.getDashboard = async (event) => {
         };
     }
 };
+
+/*
+// handler.js
+const getDepartments = require('./handlers/getDepartments');
+const getEmployees = require('./handlers/getEmployees');
+const getDashboard = require('./handlers/getDashboard');
+
+module.exports = {
+    getDepartments,
+    getEmployees,
+    getDashboard,
+};
+*/
+
+/*
+import { getEmployees } from './handlers/getEmployees.js'
+import { getDepartments } from './handlers/getDepartments.js'
+import { getDashboard } from './handlers/getDashboard.js'
+
+module.exports = {
+    getEmployees,
+    getDepartments,
+    getDashboard
+}
+*/

@@ -14,10 +14,10 @@ export class HeaderComponent  implements OnInit {
 
   ngOnInit() {
     console.log('hello from header')
-    this.getHeaderTitle()
+    // this.getHeaderTitle()
   }
 
-  getHeaderTitle() {
+  // getHeaderTitle() {
 
-  }
+  // }
 }

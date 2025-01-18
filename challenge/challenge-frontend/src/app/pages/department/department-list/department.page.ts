@@ -3,10 +3,16 @@ import { Component, OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { addIcons } from 'ionicons';
+import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
+
 import { 
+  IonButton,
   IonCard,
   // IonCardHeader,
   IonCardTitle,
@@ -14,6 +20,8 @@ import {
   // IonCardContent,
   IonContent,
   IonHeader,
+  IonIcon,
+  IonImg,
   IonItem,
   IonTitle,
   IonToolbar,
@@ -25,7 +33,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { DepartmentApiService } from '../../../services/department-api/department-api.service';
-import { DepartmentInformation } from '../../../models/data';
+import { DepartmentModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
 
 @Component({
@@ -34,6 +42,7 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
   styleUrls: ['./department.page.scss'],
   standalone: true,
   imports: [
+    IonButton,
     IonCard,
     // IonCardHeader,
     IonCardTitle,
@@ -41,6 +50,8 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
     // IonCardContent,
     IonContent,
     IonHeader,
+    IonIcon,
+    IonImg,
     IonItem,
     IonTitle,
     IonToolbar,
@@ -54,14 +65,18 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
   ]
 })
 export class DepartmentPage implements OnInit {
-  private department: DepartmentInformation[] = [];
+  private departmentArray: DepartmentModel[] = [];
+  
 
   constructor(
     private apiService: DepartmentApiService,
     private router: Router,
-    private navigator: NavigationService
+    private navigator: NavigationService,
+    private retriever: DetailRetrieverService<DepartmentModel>,
     
-  ) {}
+  ) {
+    addIcons({expand,trash,create,logoIonic});
+  }
 
   ngOnInit() {
     console.log(`Hello from department.page.ts`);
@@ -69,11 +84,11 @@ export class DepartmentPage implements OnInit {
     this.apiService.getDepartments().subscribe({
       next: (d) => {
         if (Array.isArray(d)) {
-          this.department.push(...d);  // Spread the array into this.department
+          this.departmentArray.push(...d);  // Spread the array into this.department
         }
          else {
           // If it's a single object, push it directly
-          this.department.push(d);
+          this.departmentArray.push(d);
         }
         // console.log(d);  // Log the data for debugging
         // console.log(typeof(d));  // Log the data for debugging
@@ -86,6 +101,10 @@ export class DepartmentPage implements OnInit {
     });
   }
 
+  onAddDepartmentClick() {
+    console.log("Cicked!")
+  }
+
   refresh(ev: any) {
     setTimeout(() => {
       (ev as RefresherCustomEvent).detail.complete();
@@ -93,7 +112,7 @@ export class DepartmentPage implements OnInit {
   }
 
   getAllDepartments() {
-    return this.department;
+    return this.departmentArray;
     // return this.data.getDepartments();
   }
 
@@ -101,11 +120,24 @@ export class DepartmentPage implements OnInit {
     let _id = id;
 
   }
-  
+  findDepartment(id: string) {
+    return this.departmentArray.find(e => e._id === id);
+  }
   navigateTo(page: string) {
     this.navigator.navigateTo(page);
+  }  
+  //onDepartmentCardClick
+  onDepartmentCardClick(id: string) {
+    const department = this.findDepartment(id);
+    let index;
+    if (department) {
+      index = this.departmentArray.indexOf(department)
+      console.log(`retrieving details`)
+      this.retriever.getDetailsById(department, index, "Department");
+      // this.getDepartmentDetailsById(index);
+    }
+    else {
+      console.log(`Department Not Found`)
+    }
   }
-
-  
-
 }

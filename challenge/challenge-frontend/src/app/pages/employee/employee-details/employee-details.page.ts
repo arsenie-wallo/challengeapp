@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { EmployeeInformation } from '../../../models/data';
+import { EmployeeModel } from '../../../models/data';
 
 @Component({
   selector: 'app-employee-details',
@@ -14,8 +14,8 @@ import { EmployeeInformation } from '../../../models/data';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class EmployeeDetailsPage implements OnInit {
-    private employee: EmployeeInformation | undefined= undefined;
-    // private employeeArray: EmployeeInformation[] = [];
+    private employee: EmployeeModel | undefined= undefined;
+    // private employeeArray: EmployeeModel[] = [];
     private currentUrl: string = ""
     private employeeId: number | null = null;
 

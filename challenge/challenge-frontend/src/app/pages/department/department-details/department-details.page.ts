@@ -6,7 +6,7 @@ import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
 import { DepartmentApiService } from '../../../services/department-api/department-api.service';
 
-import { DepartmentInformation } from '../../../models/data';
+import { DepartmentModel } from '../../../models/data';
 
 @Component({
   selector: 'app-view-department',
@@ -15,7 +15,7 @@ import { DepartmentInformation } from '../../../models/data';
   imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonItem, IonIcon, IonLabel, IonNote],
 })
 export class DepartmentDetailsPage implements OnInit {
-  public department!: DepartmentInformation;
+  public department!: DepartmentModel;
   private data = inject(DepartmentApiService);
   private activatedRoute = inject(ActivatedRoute);
   private platform = inject(Platform);

@@ -6,15 +6,15 @@ import { NavigationService } from '../../services/navigation/navigation.service'
 import {
   RefresherCustomEvent,
   IonContent,
-  IonHeader,
+  // IonHeader,
   IonItem,
   // IonList,
   // IonMenu,
   IonRefresher,
   IonRefresherContent,
   // IonSplitPane,
-  IonTitle,
-  IonToolbar
+  // IonTitle,
+  // IonToolbar
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -23,17 +23,18 @@ import {
   styleUrls: ['./home.page.scss'],
   imports: [
     IonContent,
-    IonHeader,
+    // IonHeader,
     IonItem,
     // IonList,
     // IonMenu,
     IonRefresher,
     IonRefresherContent,
     // IonSplitPane,
-    IonTitle,
-    IonToolbar
+    // IonTitle,
+    // IonToolbar
   ]
 })
+
 export class HomePage {
   constructor(
     private navigator: NavigationService,

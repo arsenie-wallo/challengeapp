@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
 import { 
   IonContent,
   IonTitle,
@@ -25,3 +27,7 @@ export class ContentComponent  implements OnInit {
   ngOnInit() {}
 
 }
+
+// platformBrowserDynamic()
+//   .bootstrapModule(EmployeePage) // Bootstrap the EmployeePage
+//   .catch((err) => console.error(err));

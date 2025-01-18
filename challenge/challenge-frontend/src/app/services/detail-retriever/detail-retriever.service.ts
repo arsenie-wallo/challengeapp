@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { NavigationService } from '../../services/navigation/navigation.service';
-import { EmployeeInformation } from '../../models/data';
-import { DepartmentInformation } from '../../models/data';
+import { EmployeeModel } from '../../models/data';
+import { DepartmentModel } from '../../models/data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DetailRetrieverService<T> {
   private collection: T[] = [];
-  private item: EmployeeInformation | DepartmentInformation | undefined= undefined;
+  private item: EmployeeModel | DepartmentModel | undefined= undefined;
   private title: string = "Not Found";
   constructor(
     private navigator: NavigationService
@@ -18,12 +18,12 @@ export class DetailRetrieverService<T> {
     console.log(`Collection is set`)
     this.collection = collection;
   }
-  setItem(item: DepartmentInformation | EmployeeInformation) {
+  setItem(item: DepartmentModel | EmployeeModel) {
     this.item = item;
     this.title = item.name;
   }
 
-  getDetailsById(item: DepartmentInformation | EmployeeInformation, index: number, objectType: string) {
+  getDetailsById(item: DepartmentModel | EmployeeModel, index: number, objectType: string) {
     // console.log(`Hello from retriever: ${item._id}`)
     // this.setCollection(collection);
     // let index;

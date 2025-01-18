@@ -5,8 +5,17 @@ import { Router } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NavigationService } from '../../../services/navigation/navigation.service';
+// import { NavController } from 'ionic/@angular';
+
+// import { NavigationService } from '../../../services/navigation/navigation.service';
+// import { ModalController } from '@ionic/angular';
+// import { ModalComponent } from '../../../components/modal/modal.component'; 
+
+import { addIcons } from 'ionicons';
+import { logoIonic, create, trash, expand } from 'ionicons/icons';
+
 import { 
+  IonButton,
   IonCard,
   // IonCardHeader,
   IonCardTitle,
@@ -14,7 +23,12 @@ import {
   // IonCardContent,
   IonContent,
   IonHeader,
+  IonIcon,
+  IonImg,
+  IonInput,
   IonItem,
+  IonModal,
+  IonNav,
   IonTitle,
   IonToolbar,
   RefresherCustomEvent,
@@ -27,7 +41,8 @@ import {
 // From Home 
 import { EmployeeApiService } from '../../../services/employee-api/employee-api.service';
 import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
-import { EmployeeInformation } from '../../../models/data';
+import { EmployeeModel } from '../../../models/data';
+
 
 @Component({
   selector: 'app-employee',
@@ -35,6 +50,9 @@ import { EmployeeInformation } from '../../../models/data';
   styleUrls: ['./employee.page.scss'],
   standalone: true,
   imports: [
+    // ModalComponent,
+    // Form,
+    IonButton,
     IonCard,
     // IonCardHeader,
     IonCardTitle,
@@ -42,7 +60,12 @@ import { EmployeeInformation } from '../../../models/data';
     // IonCardContent,
     IonContent,
     IonHeader,
+    IonIcon,
+    IonImg,
+    IonInput,
     IonItem,
+    IonModal,
+    IonNav,
     IonTitle,
     IonToolbar,
     CommonModule,
@@ -54,15 +77,23 @@ import { EmployeeInformation } from '../../../models/data';
   ]
 })
 export class EmployeePage implements OnInit {
-  private employeeArray: EmployeeInformation[] = [];
-  private employee: EmployeeInformation | undefined = undefined;
+  // isOpen = false;
+  // data = { content: 'New Content' };
+  // private message = "fsds"
+  private name = "XXX"
+  private employeeArray: EmployeeModel[] = [];
+  // private employee: EmployeeModel | undefined = undefined;
 
   constructor(
     private employeeApiService: EmployeeApiService,
-    private router: Router,
-    private navigator: NavigationService,
-    private retriever: DetailRetrieverService<EmployeeInformation>
-  ) {}
+    // private router: Router,
+    // private navigator: NavigationService,
+    private retriever: DetailRetrieverService<EmployeeModel>,
+    // private modal: ModalComponent,
+    // private controller: ModalController
+  ) {
+    addIcons({create,trash,expand,logoIonic});
+  }
 
   ngOnInit() {
     console.log(`Hello from employee.page.ts`);
@@ -70,7 +101,6 @@ export class EmployeePage implements OnInit {
     this.employeeApiService.getEmployees().subscribe({
       next: (employee) => {
         if (Array.isArray(employee)) {
-          // employee.index = index;
           this.employeeArray.push(...employee);  // Spread the array into this.employee
         }
          else {
@@ -90,21 +120,32 @@ export class EmployeePage implements OnInit {
     }, 3000);
   }
 
-  getAllEmployees() {
-    // this.getEmployeeById(`${this.employeeArray[0]._id}`);
-    // console.log(`hey: ${this.employeeArray[0]._id}`)
-    // console.log(`${this.employeeArray.indexOf(this.employeeArray[0])}`)
-    return this.employeeArray;
-    // return this.data.getEmployees();
+  cancel() {
+
   }
-  
-  // navigateTo(page: string) {
-  //   this.navigator.navigateTo(page);
-  // }
-  
+
+  confirm () {
+
+  }
+
+  onWillDismiss(event: any) {
+
+  }
+
+  getName() {
+    return this.name
+  }
+
+  getAllEmployees() {
+    return this.employeeArray;
+  }
+
   findEmployee(id: string) {
     return this.employeeArray.find(e => e._id === id);
   }
+  // displayMessage() {
+  //   return this.message
+  // }
 
   onEmployeeCardClick(id: string) {
     const employee = this.findEmployee(id);
@@ -119,6 +160,30 @@ export class EmployeePage implements OnInit {
       console.log(`Employee Not Found`)
     }
   }
+  
+  onAddEmployeeClick() {
+    console.log("Cicked!")
+  }
+
+  // setOpen(modalMode: boolean) {
+
+  // }
+
+  // async openModal(modalMode: boolean) {
+  //   const modal = await this.controller.create({
+  //     component: ModalComponent,
+  //     componentProps: { data: this.data }, // Pass data to modal component
+  //   });
+  //   await modal.present();
+
+  //   // Listen for modal dismissal event
+  //   modal.onDidDismiss().then(() => {
+  //     this.isOpen = false; // Reset modal open state
+  //   });
+
+  //   this.isOpen = true; // Set modal state to open
+  // }
+  
   // getEmployeeDetailsById(index: number) {
   //   console.log(`${index}`)
   //   this.navigateTo(`employee/${index}`);

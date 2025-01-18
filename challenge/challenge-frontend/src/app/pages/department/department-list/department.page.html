@@ -10,27 +10,38 @@
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <!-- <ion-list> -->
-    <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)">
+  <ion-button (click)="onAddDepartmentClick()">
+    Add Department
+  </ion-button>
+  <div class="department-grid">
+    <ion-item *ngFor="let d of getAllDepartments()" button (click)="navigateTo(d.name)" class="content">
       <ion-card class="department-card">
         <!-- Card Header with Image -->
-        <!-- <img [src]="d.pictureUrl" alt="{{ d.name }} Picture" /> -->
+        <ion-img
+          src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
+          alt="Department Image"
+        ></ion-img>
         
         <!-- Card Content -->
         <!-- <ion-card-header> -->
-          <ion-card-title>{{ d.name }} Department</ion-card-title>
           <!-- <ion-card-title>{{ d.line_manager }} Department</ion-card-title> -->
         <!-- </ion-card-header> -->
         <!-- Card Body (Detailed Info) -->
-        <ion-card-subtitle>
-          <p>ID: {{ d._id }}</p>
-        </ion-card-subtitle> 
+        <div class="overlay">
+          <ion-card-title>{{ d.name }} Department</ion-card-title>
+          <ion-card-subtitle>ID: {{ d._id }}</ion-card-subtitle>
+        </div>
+
+        <div class="card-control">
+          <ion-icon name="expand" size="small" color="black"></ion-icon>
+          <ion-icon name="trash" size="small" color="black" (click)="onDepartmentCardClick(d._id)"></ion-icon>
+        </div>
           <!-- You can add other details as necessary -->
           <!-- <ion-card-content> -->
         <!-- </ion-card-content> -->
       </ion-card>
     </ion-item>
-  <!-- </ion-list> -->
+  </div>
   
   
 

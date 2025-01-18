@@ -47,3 +47,12 @@ html, body {
     overflow: hidden !important;
   }
   
+.grid-container {
+  display: grid;
+  // grid-template-columns: 250px 1fr; /* Column 1: 250px width for side-pane, Column 2: remaining space for content */
+  // grid-template-rows: auto 1fr; /* Row 1 (header) auto height, Row 2 takes remaining space */
+  // grid-template-areas:
+  //   "header header"   /* Header occupies the full first row */
+  //   "side-pane content"; /* Side pane in column 1, content in column 2 of row 2 */
+  height: 100vh; /* Full height of the viewport */
+}

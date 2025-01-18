@@ -5,7 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { EmployeeInformation } from '../../models/data';
+import { EmployeeModel } from '../../models/data';
 
 @Injectable(
   {providedIn: 'root'}
@@ -17,19 +17,19 @@ export class EmployeeApiService {
 
   private employeeApiUrl = 'https://localhost:3000/employees';
 
-  // private departmentData: Observable<EmployeeInformation> | null = null;
+  // private departmentData: Observable<EmployeeModel> | null = null;
 
-  // getEmployees(): Observable<EmployeeInformation> {
+  // getEmployees(): Observable<EmployeeModel> {
   //   console.log("test2");
-  //   this.departmentData = this.http.get<EmployeeInformation>(this.departmentApiUrl);
+  //   this.departmentData = this.http.get<EmployeeModel>(this.departmentApiUrl);
   //   return this.departmentData;
   // }
 
-  getEmployees(): Observable<EmployeeInformation> {
+  getEmployees(): Observable<EmployeeModel> {
     // console.log(`xx ${this.activatedRoute}`);
     console.log(`Hello from employee-api.service.ts`);
 
-    return this.http.get<EmployeeInformation>(this.employeeApiUrl)
+    return this.http.get<EmployeeModel>(this.employeeApiUrl)
     .pipe(
       map(this.extractData),
       tap(this.logResponse),
@@ -37,9 +37,9 @@ export class EmployeeApiService {
     )
   }
 
-  // public getEmployeesById(id: number): EmployeeInformation {
+  // public getEmployeesById(id: number): EmployeeModel {
   //   const url = `${this.departmentApiUrl}/${id}`
-  //   return this.http.get<EmployeeInformation>(url);
+  //   return this.http.get<EmployeeModel>(url);
   //   // return new BehaviorSubject<Department[]>.asObservable();
   //   // return this.departmentSubject.asObservable();
   // }
@@ -58,4 +58,4 @@ export class EmployeeApiService {
     return res || {};  // Here we assume res is the body of the HTTP response
   }
 }
-// export const DEPARTMENT_COLLECTION = new Observable<EmployeeInformation[]>;
+// export const DEPARTMENT_COLLECTION = new Observable<EmployeeModel[]>;

@@ -60,3 +60,35 @@ functions:
           path: employees
           method: get
           # cors: true
+
+  viewDetailsEmployee:
+    handler: handler.viewEmployee
+    events:
+      - http:
+          path: employees/{employeeId}
+          method: get
+          # cors: true
+
+  viewDetailsDepartment:
+    handler: handler.viewDepartment
+    events:
+      - http:
+          path: departments/{departmentId}
+          method: get
+          # cors: true      
+
+  deleteEmployee:
+    handler: handler.deleteEmployee
+    events:
+      - http:
+          path: employees/{employeeId}
+          method: delete
+          cors: true
+
+  deleteDepartment:
+    handler: handler.deleteDepartment
+    events:
+      - http:
+          path: departments/{departmentId}
+          method: delete
+          cors: true        

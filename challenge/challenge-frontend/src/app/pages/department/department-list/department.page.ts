@@ -90,8 +90,6 @@ export class DepartmentPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(`Hello from department.page.ts`);
-
     this.apiService.getDepartments().subscribe({
       next: (d) => {
         if (Array.isArray(d)) {

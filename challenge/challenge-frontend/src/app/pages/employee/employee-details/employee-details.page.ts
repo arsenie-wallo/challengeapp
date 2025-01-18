@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EmployeeApiService } from '../../../services/api-employee/employee-api.service';
+import { EmployeeModel } from '../../../models/data';
 import { FormsModule } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import {
   IonBackButton,
   IonButton,
@@ -8,12 +12,10 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonNote,
   IonTitle,
   IonToolbar
   } from '@ionic/angular/standalone';
-import { Router, ActivatedRoute } from '@angular/router';
-
-import { EmployeeModel } from '../../../models/data';
 
 @Component({
   selector: 'app-employee-details',
@@ -27,6 +29,7 @@ import { EmployeeModel } from '../../../models/data';
     IonContent,
     IonHeader,
     IonIcon,
+    IonNote,
     IonTitle,
     IonToolbar,
     CommonModule,
@@ -34,33 +37,68 @@ import { EmployeeModel } from '../../../models/data';
   ]
 })
 export class EmployeeDetailsPage implements OnInit {
-    private employee: EmployeeModel | undefined= undefined;
+    employee: EmployeeModel | undefined= undefined;
     // private employeeArray: EmployeeModel[] = [];
-    private currentUrl: string = ""
-    private employeeIndex: number | null = null;
+    // private currentUrl: string = ""
+    // private employeeIndex: number | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private apiService: EmployeeApiService,
+     
   ) { }
 
   ngOnInit() {
-    // Get the current route path
-    const url = this.activatedRoute.snapshot.url.join('/');
-    console.log('Current URL:', url);
+   const targetId = this.getCurrentPath()
+   this.getTargetEmployee(targetId)
+  //  this.setEmployeeDetails()
 
-    // Use a regular expression to extract the number at the end of the URL
-    const match = url.match(/employee\/(\d+)$/);
-    if (match) {
-      this.employeeIndex = +match[1];  // Convert matched string to a number
-      console.log('Extracted employee ID:', this.employeeIndex);
-    }
-  // }
+   // Use a regular expression to extract the number at the end of the URL
+  //  const match = url.match(/dev\/employees\/(\d+)$/);
+  //  const match = url.match(/dev\/employees\/(\d{8}-[A-Za-z0-9]+)$/);
+
+  //  if (match) {
+    //  this.employeeIndex = +match[1];  // Convert matched string to a number
+    //  console.log('Extracted employee ID:', this.employeeIndex);
+  //  }
+  };
+
+  getCurrentPath() {
+    const url = this.activatedRoute.snapshot.url.join('/')
+    //  console.log('Current URL:', url);
+    let targetId = "";
+     const match = url.match(/([^\/]+)$/);
+      if (match) {
+        targetId = match[1];
+        console.log(targetId);
+      } else {
+        console.log('No match found');
+      }
+    return targetId;
+  };
+
+  getTargetEmployee(targetId: string) {
+    this.apiService.getEmployeesById(targetId).subscribe({
+      next: (response) => {
+        this.employee = response
+        // console.log(response)
+        // if (Array.isArray(d)) {
+        //   this.employeeArray.push(...d);  // Spread the array into this.department
+        // }
+        //  else {
+        //   // If it's a single object, push it directly
+        //   this.employeeArray.push(d);
+        // }
+      },
+      error: (error) => {
+        console.error('Error fetching department data', console.error);
+      },
+    });
   }
 
-  // getTest() {
-    // this.currentUrl = this.router.url;
-    // console.log(`Hello from details page${this.currentUrl}`)
+  // setEmployeeDetails() {
+  //   this.employee = response
   // }
 
   // findEmployee(id: string) {

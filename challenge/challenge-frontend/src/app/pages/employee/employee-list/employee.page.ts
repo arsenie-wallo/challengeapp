@@ -172,36 +172,36 @@ export class EmployeePage implements OnInit {
   async onDeleteEmployeeClick(targetId: string) {
     console.log(`Deleting a employee record ${targetId}`);
   
-    // Step 1: Find the department by targetId
+    // Step 1: Find the employee by targetId
     let found: EmployeeModel | undefined = this.findEmployee(targetId);
   
-    // Check if department is found in local array
+    // Check if employee is found in local array
     if (found) {
-      // Step 2: Find the index of the department in the array
+      // Step 2: Find the index of the employee in the array
       let index = this.employeeArray.indexOf(found);
-      console.log(`Department index found: ${index}`);
+      console.log(`Employee index found: ${index}`);
       try {
         // Step 3: Make the HTTP DELETE request using async/await
-        await this.employeeApiService.deleteDepartment(targetId)//.toPromise(); // Convert observable to promise using toPromise()
+        await this.employeeApiService.deleteEmployee(targetId)//.toPromise(); // Convert observable to promise using toPromise()
         
-        // Step 4: Remove department from the local array
+        // Step 4: Remove employee from the local array
         if (index !== -1) {
-          this.employeeArray.splice(index, 1); // Removes the department from array
-          console.log("Department deleted successfully");
+          this.employeeArray.splice(index, 1); // Removes the employee from array
+          console.log("Employee deleted successfully");
   
           // Optionally navigate to another page
           // this.navigateTo("https:///localhost:3000//");
-          // this.navigator.navigateTo("departments")
+          // this.navigator.navigateTo("employees")
         }
       } catch (error) {
         // Step 5: Handle errors gracefully
         // if (error.status === 404) {
         //   // if (error.status === 404) {
-        //   console.error(`Department with ID ${targetId} not found.`, error);
-        //   alert('The department was not found or has already been deleted.');
+        //   console.error(`employee with ID ${targetId} not found.`, error);
+        //   alert('The employee was not found or has already been deleted.');
         // } else {
-        //   console.error('Error deleting department:', error);
-        //   alert('Failed to delete the department. Please try again later.');
+        //   console.error('Error deleting employee:', error);
+        //   alert('Failed to delete the employee. Please try again later.');
         // }
       }
     } else {

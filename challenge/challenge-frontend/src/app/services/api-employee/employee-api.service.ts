@@ -36,8 +36,7 @@ export class EmployeeApiService {
       catchError(this.catchError)
     )
   }
-  deleteDepartment(id: string) {
-    // https://localhost:3000/dev/departments/DPT-01
+  deleteEmployee(id: string) {
     let uri = `https://localhost:3000/dev/employees/${id}`
     console.log(`TARG URI: ${uri}`)
     this.http.delete(uri)
@@ -58,12 +57,19 @@ export class EmployeeApiService {
   //     )
   //   }
 
-  // public getEmployeesById(id: number): EmployeeModel {
-  //   const url = `${this.employeeApiUrl}/${id}`
-  //   return this.http.get<EmployeeModel>(url);
-  //   // return new BehaviorSubject<employee[]>.asObservable();
-  //   // return this.employeeSubject.asObservable();
-  // }
+  public getEmployeesById(id: string) {
+    const url = `https://localhost:3000/dev/employees/${id}`
+        return this.http.get<EmployeeModel>(url)
+        .pipe(
+          map(this.extractData),
+          tap(this.logResponse),
+          catchError(this.catchError)
+        )
+    // const url = `${this.employeeApiUrl}/${id}`
+    // return this.http.get<EmployeeModel>(url);
+    // return new BehaviorSubject<employee[]>.asObservable();
+    // return this.employeeSubject.asObservable();
+  }
 /* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);
@@ -72,7 +78,7 @@ export class EmployeeApiService {
   }
   
   private logResponse(res: any) {
-    console.log(res);
+    // console.log(res);
   }
   
   private extractData(res: any) {

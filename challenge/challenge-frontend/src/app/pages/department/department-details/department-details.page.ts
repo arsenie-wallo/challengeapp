@@ -53,15 +53,17 @@ export class DepartmentDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    /*
     const url = this.activatedRoute.snapshot.url.join('/');
     console.log('Current URL:', url);
-
+    
     // Use a regular expression to extract the number at the end of the URL
     const match = url.match(/department\/(\d+)$/);
     if (match) {
       this.departmentIndex = + match[1];  // Convert matched string to a number
       console.log('Extracted employee ID:', this.departmentIndex);
     }
+    */
   }
   
   getDepartmentsById(id: string) {

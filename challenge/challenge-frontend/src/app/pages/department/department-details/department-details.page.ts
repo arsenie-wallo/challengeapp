@@ -2,6 +2,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Platform, IonHeader,
+  IonButton,
   IonButtons,
   IonBackButton,
   IonContent,
@@ -9,6 +10,7 @@ import { Platform, IonHeader,
   IonItem,
   IonLabel,
   IonNote,
+  IonTitle,
   IonToolbar
  } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -16,12 +18,14 @@ import { personCircle } from 'ionicons/icons';
 import { DepartmentApiService } from '../../../services/api-department/department-api.service';
 import { DepartmentModel } from '../../../models/data';
 import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
+import { NavigationService } from '../../../services/navigation/navigation.service';
 
 @Component({
   selector: 'app-view-department',
   templateUrl: './department-details.page.html',
   styleUrls: ['./department-details.page.scss'],
   imports: [IonHeader,
+    IonButton,
     IonButtons,
     IonBackButton,
     IonContent,
@@ -29,6 +33,7 @@ import { DetailRetrieverService } from '../../../services/detail-retriever/detai
     IonItem,
     IonLabel,
     IonNote,
+    IonTitle,
     IonToolbar
   ],
 })
@@ -41,9 +46,10 @@ export class DepartmentDetailsPage implements OnInit {
 
 
   constructor(
-    private retriever: DetailRetrieverService<DepartmentModel>,
-  ) {
-    addIcons({ personCircle });
+    // private retriever: DetailRetrieverService<DepartmentModel>,
+    private navigator: NavigationService,
+    ) {
+      addIcons({ personCircle });
   }
 
   ngOnInit() {
@@ -57,20 +63,17 @@ export class DepartmentDetailsPage implements OnInit {
       console.log('Extracted employee ID:', this.departmentIndex);
     }
   }
+  
+  getDepartmentsById(id: string) {
+    this.currentDepartment.getDepartmentById(id).subscribe({
+      next: (response) => {
+        this.navigator.navigateTo(`dev/departments/${id}`)
+        console.log(`From dept details page: ${response}`);
 
-  // getCurrentDepartmentDetails<T, K extends keyof T>(object: T, key: K) {
-  //   return `${object[key]}`
-
-  // }
-
-  displayDetails(key: string) {
-    // this.getCurrentDepartmentDetails(this.department, key)
-    // return `${this.department[key]}`
-  // }
+      },
+      error: (error) => {
+        console.error('Error fetching department data', console.error);
+      }
+    })
   }
-
-  // getBackButtonText() {
-  //   const isIos = this.platform.is('ios')
-  //   return isIos ? 'Departments' : '';
-  // }
 }

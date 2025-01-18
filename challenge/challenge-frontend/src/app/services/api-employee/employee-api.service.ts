@@ -36,16 +36,27 @@ export class EmployeeApiService {
       catchError(this.catchError)
     )
   }
-
-  deleteEmployee(employeeId: string): Observable<EmployeeModel>{
-      console.log(`Hello from employee-api.service.ts. Deleting a employee: ${employeeId}`)
-      return this.http.delete<EmployeeModel>(`${this.employeeApiUrl}/${employeeId}`)
+  deleteDepartment(id: string) {
+    // https://localhost:3000/dev/departments/DPT-01
+    let uri = `https://localhost:3000/dev/employees/${id}`
+    console.log(`TARG URI: ${uri}`)
+    this.http.delete(uri)
       .pipe(
         map(this.extractData),
         tap(this.logResponse),
         catchError(this.catchError)
       )
-    }
+  }
+
+  // deleteEmployee(employeeId: string): Observable<EmployeeModel>{
+  //     console.log(`Hello from employee-api.service.ts. Deleting a employee: ${employeeId}`)
+  //     return this.http.delete<EmployeeModel>(`${this.employeeApiUrl}/${employeeId}`)
+  //     .pipe(
+  //       map(this.extractData),
+  //       tap(this.logResponse),
+  //       catchError(this.catchError)
+  //     )
+  //   }
 
   // public getEmployeesById(id: number): EmployeeModel {
   //   const url = `${this.employeeApiUrl}/${id}`

@@ -5,9 +5,13 @@
         defaultHref="/"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Employees
-    </ion-title>
+    <ion-content slot="end">
+      <ion-icon
+        name="create"
+        size="small"
+        color="black"
+      ></ion-icon>
+    </ion-content>
   </ion-toolbar>
 </ion-header>
 
@@ -35,8 +39,8 @@
         </div>
 
         <div class="card-control">
-          <ion-icon name="expand" size="small" color="black"></ion-icon>
-          <ion-icon name="trash" size="small" color="black" (click)="onEmployeeCardClick(e._id)"></ion-icon>
+          <ion-icon name="expand" size="small" color="black" button (click)="getEmployeeById(e._id)"></ion-icon>
+          <ion-icon name="trash" size="small" color="black" (click)="onDeleteEmployeeClick(e._id)"></ion-icon>
         </div>
       </ion-card>
     </ion-item>

@@ -9,9 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeApiService } from '../../../services/api-employee/employee-api.service';
 import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
 import { EmployeeModel } from '../../../models/data';
-
-
-// import { NavigationService } from '../../../services/navigation/navigation.service';
+import { NavigationService } from '../../../services/navigation/navigation.service';
 // import { ModalController } from '@ionic/angular';
 // import { ModalComponent } from '../../../components/modal/modal.component'; 
 import { addIcons } from 'ionicons';
@@ -88,7 +86,7 @@ export class EmployeePage implements OnInit {
   constructor(
     private employeeApiService: EmployeeApiService,
     // private router: Router,
-    // private navigator: NavigationService,
+    private navigator: NavigationService,
     private retriever: DetailRetrieverService<EmployeeModel>,
     // private modal: ModalComponent,
     // private controller: ModalController
@@ -120,9 +118,10 @@ export class EmployeePage implements OnInit {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
   }
+  
 
-  navigateTo(object: string) {
-    
+  navigateTo(page: string) {
+    this.navigator.navigateTo(page);
   }
 
   setOpen(isOpen: boolean) {
@@ -137,8 +136,8 @@ export class EmployeePage implements OnInit {
     this.setOpen(false)
   }
 
-  onWillDismiss(event: any) {
-
+  getEmployeeById(id: string) {
+    this.navigateTo(`dev/employees/${id}`)
   }
 
   getName() {
@@ -157,16 +156,57 @@ export class EmployeePage implements OnInit {
   // }
 
   onEmployeeCardClick(id: string) {
-    const employee = this.findEmployee(id);
-    let index;
-    if (employee) {
-      index = this.employeeArray.indexOf(employee)
-      console.log(`retrieving details`)
-      this.retriever.getDetailsById(employee, index, "employee");
-      // this.getEmployeeDetailsById(index);
-    }
-    else {
-      console.log(`Employee Not Found`)
+    // const employee = this.findEmployee(id);
+    // let index;
+    // if (employee) {
+    //   index = this.employeeArray.indexOf(employee)
+    //   console.log(`retrieving details`)
+    //   this.retriever.getDetailsById(employee, index, "employee");
+    //   // this.getEmployeeDetailsById(index);
+    // }
+    // else {
+    //   console.log(`Employee Not Found`)
+    // }
+  }
+
+  async onDeleteEmployeeClick(targetId: string) {
+    console.log(`Deleting a employee record ${targetId}`);
+  
+    // Step 1: Find the department by targetId
+    let found: EmployeeModel | undefined = this.findEmployee(targetId);
+  
+    // Check if department is found in local array
+    if (found) {
+      // Step 2: Find the index of the department in the array
+      let index = this.employeeArray.indexOf(found);
+      console.log(`Department index found: ${index}`);
+      try {
+        // Step 3: Make the HTTP DELETE request using async/await
+        await this.employeeApiService.deleteDepartment(targetId)//.toPromise(); // Convert observable to promise using toPromise()
+        
+        // Step 4: Remove department from the local array
+        if (index !== -1) {
+          this.employeeArray.splice(index, 1); // Removes the department from array
+          console.log("Department deleted successfully");
+  
+          // Optionally navigate to another page
+          // this.navigateTo("https:///localhost:3000//");
+          // this.navigator.navigateTo("departments")
+        }
+      } catch (error) {
+        // Step 5: Handle errors gracefully
+        // if (error.status === 404) {
+        //   // if (error.status === 404) {
+        //   console.error(`Department with ID ${targetId} not found.`, error);
+        //   alert('The department was not found or has already been deleted.');
+        // } else {
+        //   console.error('Error deleting department:', error);
+        //   alert('Failed to delete the department. Please try again later.');
+        // }
+      }
+    } else {
+      console.error(`Employee with ID ${targetId} not found in local data.`);
+      alert('The employee was not found in the list.');
     }
   }
 

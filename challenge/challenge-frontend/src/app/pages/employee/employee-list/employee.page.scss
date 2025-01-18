@@ -36,7 +36,7 @@
   color: white;
   text-align: center;
   padding: 8px 0;
-  opacity: 0;
+  opacity: 1;
 }
 
 .overlay ion-card-title {
@@ -51,7 +51,7 @@
   right: 10px;
   display: flex;
   gap: 8px;
-  opacity: 0;
+  opacity: 1;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0s 0.3s; /* Smooth fade-in effect */
 }

@@ -86,7 +86,7 @@ export class DepartmentApiService {
   }
   
   private logResponse(res: any) {
-    console.log(res);
+    // console.log(res);
   }
   
   private extractData(res: any) {

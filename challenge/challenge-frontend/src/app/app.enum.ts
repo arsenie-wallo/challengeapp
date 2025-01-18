@@ -5,7 +5,7 @@ export enum AppRoutes {
   DEPARTMENT = `departments`,
   EMPLOYEES = `employees`,
   DEPARTMENT_DETAILS = `dev/departments/:departmentId`,
-  EMPLOYEE_DETAILS = `dev/employees/:employeeIndex`,
+  EMPLOYEE_DETAILS = `dev/employees/:employeeId`,
   // EMPLOYEE_DETAILS = `employee/:employeeId`,
   // ADD_DEPARTMENT = `add-department`,
   // ADD_EMPLOYEE = `add-employee`,

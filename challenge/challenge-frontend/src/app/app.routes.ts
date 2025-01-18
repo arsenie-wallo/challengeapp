@@ -28,6 +28,10 @@ export const routes: Routes = [
   },
   {
     path: AppRoutes.DEPARTMENT_DETAILS,
+    loadComponent: () => import('./pages/department/department-list/department.page').then( m => m.DepartmentPage)
+  },
+  {
+    path: AppRoutes.DEPARTMENT_DETAILS,
     loadComponent: () => import('./pages/department/department-details/department-details.page').then( m => m.DepartmentDetailsPage)
   },
   {

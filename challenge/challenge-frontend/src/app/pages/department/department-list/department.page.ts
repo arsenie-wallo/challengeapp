@@ -108,8 +108,6 @@ export class DepartmentPage implements OnInit {
     });
   }
 
-  
-  
   findDepartment(id: string) {
     return this.departmentArray.find(e => e._id === id);
   }
@@ -150,7 +148,7 @@ async onDeleteDepartmentClick(targetId: string) {
     console.log(`Department index found: ${index}`);
     try {
       // Step 3: Make the HTTP DELETE request using async/await
-      await this.apiService.deleteDepartment(index)//.toPromise(); // Convert observable to promise using toPromise()
+      await this.apiService.deleteDepartment(targetId)//.toPromise(); // Convert observable to promise using toPromise()
       
       // Step 4: Remove department from the local array
       if (index !== -1) {
@@ -159,7 +157,7 @@ async onDeleteDepartmentClick(targetId: string) {
 
         // Optionally navigate to another page
         // this.navigateTo("https:///localhost:3000//");
-        this.navigator.navigateTo("departments")
+        // this.navigator.navigateTo("departments")
       }
     } catch (error) {
       // Step 5: Handle errors gracefully

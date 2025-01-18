@@ -36,16 +36,26 @@ export class DepartmentApiService {
       catchError(this.catchError)
     )
   }
-  
-  deleteDepartment(departmentIndex: number) {
-    console.log(`TARG URI: ${this.departmentApiUrl}/${departmentIndex}`)
-    this.http.delete(`${this.departmentApiUrl}/${departmentIndex}`)
-      // .pipe(
-      //   map(this.extractData),
-      //   tap(this.logResponse),
-      //   catchError(this.catchError)
-      // )
+  deleteDepartment(id: string) {
+    // https://localhost:3000/dev/departments/DPT-01
+    let uri = `https://localhost:3000/dev/departments/${id}`
+    console.log(`TARG URI: ${uri}`)
+    this.http.delete(uri)
+      .pipe(
+        map(this.extractData),
+        tap(this.logResponse),
+        catchError(this.catchError)
+      )
   }
+  // deleteDepartment(departmentIndex: number) {
+  //   console.log(`TARG URI: ${this.departmentApiUrl}/${departmentIndex}`)
+  //   this.http.delete(`${this.departmentApiUrl}/${departmentIndex}`)
+  //     // .pipe(
+  //     //   map(this.extractData),
+  //     //   tap(this.logResponse),
+  //     //   catchError(this.catchError)
+  //     // )
+  // }
 
   // deleteDepartment(departmentId: string): Observable<DepartmentModel>{
   //   console.log(`Hello from department-api.service.ts. Deleting a department: ${departmentId}`)
@@ -57,24 +67,12 @@ export class DepartmentApiService {
   //   )
   // }
 
-  // getEmployees(): Observable<DepartmentEmployees> {
-  //   // console.log(`xx ${this.activatedRoute}`);
-  //   console.log(`Hello from data.service.ts`);
-
-  //   return this.http.get<DepartmentModel>(this.departmentApiUrl)
-  //   .pipe(
-  //     map(this.extractData),
-  //     tap(this.logResponse),
-  //     catchError(this.catchError)
-  //   )
-  // }
-
-  // public getDepartmentsById(id: number): DepartmentModel {
-  //   const url = `${this.departmentApiUrl}/${id}`
-  //   return this.http.get<DepartmentModel>(url);
-  //   // return new BehaviorSubject<Department[]>.asObservable();
-  //   // return this.departmentSubject.asObservable();
-  // }
+  getDepartmentsById(id: number) {
+    const url = `https://localhost:3000/dev/departments/${id}`
+    return this.http.get<DepartmentModel>(url);
+    // return new BehaviorSubject<Department[]>.asObservable();
+    // return this.departmentSubject.asObservable();
+  }
 /* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);
@@ -83,7 +81,7 @@ export class DepartmentApiService {
   }
   
   private logResponse(res: any) {
-    // console.log(res);
+    console.log(res);
   }
   
   private extractData(res: any) {

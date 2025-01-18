@@ -166,3 +166,42 @@ module.exports.deleteDepartment = async (event) => {
         };
     }
 };
+//------------------------------------------//
+// module.exports.createEmployee = async (event) => {
+//     const { _id, email, name, address, department, line_manager } = JSON.parse(event.body);
+//     console.log(`Creating Employee: ${name} with ID: ${_id}`);
+
+//     try {
+//         await connectToDatabase();  // Ensure the database is connected before querying
+//         const employeeCollection = db.collection('employees');  // Access the collection here
+
+//         // Creating the employee document
+//         const newEmployee = {
+//             _id,
+//             email,
+//             name,
+//             address,
+//             department,
+//             line_manager
+//         };
+
+//         // Insert the new employee record into the database
+//         const result = await employeeCollection.insertOne(newEmployee);
+
+//         console.log(`Employee created with ID: ${_id}`);
+
+//         return {
+//             statusCode: 201,  // 201 Created status code
+//             body: JSON.stringify({
+//                 message: 'Employee created successfully',
+//                 employeeId: result.insertedId,
+//             }),
+//         };
+//     } catch (error) {
+//         console.error(error);
+//         return {
+//             statusCode: 500,
+//             body: JSON.stringify({ error: 'Failed to create employee' }),
+//         };
+//     }
+// };

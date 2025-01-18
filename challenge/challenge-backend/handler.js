@@ -73,41 +73,7 @@ module.exports.getDashboard = async (event) => {
     }
 };
 //------------------------------------------//
-/*
-module.exports.viewEmployee = async (event) => {
-    // Get the departmentId from path parameters (not from body)
-    const { employeeId } = event.pathParameters;
-    
-    console.log(`Viewing department with ID: ${employeeId}`);
-    //
-    try {
-        const db = await connectToDatabase();
-        const employeeCollection = db.collection('employees');
-        console.log(employeeCollection)
-        
-        // Delete the employee by their ID (convert string to ObjectId)
-        const employee = await employeeCollection.findOne({ _id: employeeId });
-        
-        if (!employee) {
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ error: 'Employee not found' }),
-            };
-        } else {
-            return {
-        statusCode: 200,
-        body: JSON.stringify({ employee }),
-    };
-}
-} catch (error) {
-    console.error(error);
-    return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Failed to retrieve department details' }),
-    };
-}
-};
-*/
+
 module.exports.viewEmployee = async (event) => {
     const { employeeId } = event.pathParameters;
     console.log(`ID: ${employeeId}`)
@@ -154,66 +120,21 @@ module.exports.viewDepartment = async (event) => {
     }
 };
 
-/*
-module.exports.viewDepartment = async (event) => {
-    // Get the departmentId from path parameters (not from body)
-    // console.log(event.MONGO_URI)
-    const { departmentId } = event.pathParameters;
-    console.log(`Viewing department with ID: ${departmentId}`);
-
-    try {
-        console.log("Trying...")
-        const db = await connectToDatabase();
-        const departmentCollection = db.collection('departments');
-        console.log(departmentCollection)
-        // Delete the department by their ID (convert string to ObjectId)
-        const department = await departmentCollection.findOne({ _id: "departmentId" });
-
-        if (!department) {
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ error: 'Department not found' }),
-            };
-        } else {
-            return {
-                statusCode: 200,
-                body: JSON.stringify({ department }),
-            };
-        }
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to retrieve department details' }),
-        };
-    }
-};
-*/
-
 //------------------------------------------//
 module.exports.deleteEmployee = async (event) => {
-    // Get the employeeId from path parameters (not from body)
     const { employeeId } = event.pathParameters;
-    console.log(`Deleting employee with ID: ${employeeId}`);
+    console.log(`ID: ${employeeId}`)
 
     try {
-        const db = await connectToDatabase();
-        const employeeCollection = db.collection('employees');
+        await connectToDatabase();  // Ensure the database is connected before querying
+        const employeeCollection = db.collection('employees');  // Access the collection here
+        const employees = await employeeCollection.deleteOne({ _id: employeeId })//.toArray();
+        console.log(employees)
 
-        // Delete the employee by their ID (convert string to ObjectId)
-        const result = await employeeCollection.deleteOne({ _id: new ObjectId(employeeId) });
-
-        if (result.deletedCount === 0) {
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ error: 'Employee not found' }),
-            };
-        } else {
-            return {
-                statusCode: 200,
-                body: JSON.stringify({ message: `Employee with ID ${employeeId} has been deleted` }),
-            };
-        }
+        return {
+            statusCode: 200,
+            body: JSON.stringify(employees),
+        };
     } catch (error) {
         console.error(error);
         return {
@@ -224,28 +145,19 @@ module.exports.deleteEmployee = async (event) => {
 };
 
 module.exports.deleteDepartment = async (event) => {
-    // Get the departmentId from path parameters (not from body)
     const { departmentId } = event.pathParameters;
-    console.log(`Deleting department with ID: ${departmentId}`);
+    console.log(`ID: ${departmentId}`)
 
     try {
-        const db = await connectToDatabase();
-        const departmentCollection = db.collection('departments');
+        await connectToDatabase();  // Ensure the database is connected before querying
+        const departmentCollection = db.collection('departments');  // Access the collection here
+        const departments = await departmentCollection.deleteOne({ _id: departmentId })//.toArray();
+        console.log(departments)
 
-        // Delete the department by their ID (convert string to ObjectId)
-        const result = await departmentCollection.deleteOne({ _id: new ObjectId(departmentId) });
-
-        if (result.deletedCount === 0) {
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ error: 'Department not found' }),
-            };
-        } else {
-            return {
-                statusCode: 200,
-                body: JSON.stringify({ message: `Department with ID ${departmentId} has been deleted` }),
-            };
-        }
+        return {
+            statusCode: 200,
+            body: JSON.stringify(departments),
+        };
     } catch (error) {
         console.error(error);
         return {

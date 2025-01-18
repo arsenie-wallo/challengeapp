@@ -30,13 +30,15 @@ export class DetailRetrieverService<T> {
     if (item) {
       // index = this.collection.indexOf(item);
       this.setItem(item);
-      this.navigateTo(`${objectType}/${index}`);
+      // this.navigateTo(`${objectType}/${index}`);
+      this.navigator.navigateTo(`${objectType}/${index}`);
+
       // this.getEmployeeDetailsById(index);
     }
   }
-    navigateTo(page: string) {
-    this.navigator.navigateTo(`${page}`);
-  }
+  //   navigateTo(page: string) {
+  //   this.navigator.navigateTo(`${page}`);
+  // }
   // getDetailsById(id: string, collection: T[]) {
   //   this.setCollection(collection)
   //   // console.log(`Hello from retriever: ${id}`)
@@ -56,10 +58,6 @@ export class DetailRetrieverService<T> {
   //   }
   // }
 
-  getEmployeeDetailsById(index: number) {
-    console.log(`Hi from retriever getEmployeeDetails: ${index}`)
-    this.navigateTo(`employee/${index}`);
-  }
 }
 
 

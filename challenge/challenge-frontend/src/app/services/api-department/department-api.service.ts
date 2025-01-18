@@ -36,6 +36,16 @@ export class DepartmentApiService {
       catchError(this.catchError)
     )
   }
+  
+  deleteDepartment(departmentIndex: number) {
+    console.log(`TARG URI: ${this.departmentApiUrl}/${departmentIndex}`)
+    this.http.delete(`${this.departmentApiUrl}/${departmentIndex}`)
+      // .pipe(
+      //   map(this.extractData),
+      //   tap(this.logResponse),
+      //   catchError(this.catchError)
+      // )
+  }
 
   // deleteDepartment(departmentId: string): Observable<DepartmentModel>{
   //   console.log(`Hello from department-api.service.ts. Deleting a department: ${departmentId}`)

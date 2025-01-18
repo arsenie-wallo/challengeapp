@@ -123,19 +123,74 @@ export class DepartmentPage implements OnInit {
     console.log("Cicked!")
   }
   // private departmentApiUrl = 'https://localhost:3000/departments';
-
-  onDeleteDepartmentClick(targetId: string) {
-    console.log(`Deleting a department record ${targetId}`)
-    let found: DepartmentModel | undefined = this.findDepartment(targetId)
-    if(found) {
-      let numero = this.departmentArray.indexOf(found)
-      console.log(numero)
+/*
+onDeleteDepartmentClick(targetId: string) {
+  console.log(`Deleting a department record ${targetId}`)
+  let found: DepartmentModel | undefined = this.findDepartment(targetId)
+  if(found) {
+    let numero = this.departmentArray.indexOf(found)
+    console.log(numero)
     this.http.delete(`https://localhost:3000/departments/${numero}`)
       console.log('Department deleted:', found);
     this.navigateTo("department/")
       this.departmentArray.splice(numero, 1);  // Remove department at given targetId
     }
   }
+*/
+async onDeleteDepartmentClick(targetId: string) {
+  console.log(`Deleting a department record ${targetId}`);
+
+  // Step 1: Find the department by targetId
+  let found: DepartmentModel | undefined = this.findDepartment(targetId);
+
+  // Check if department is found in local array
+  if (found) {
+    // Step 2: Find the index of the department in the array
+    let index = this.departmentArray.indexOf(found);
+    console.log(`Department index found: ${index}`);
+    try {
+      // Step 3: Make the HTTP DELETE request using async/await
+      await this.apiService.deleteDepartment(index)//.toPromise(); // Convert observable to promise using toPromise()
+      
+      // Step 4: Remove department from the local array
+      if (index !== -1) {
+        this.departmentArray.splice(index, 1); // Removes the department from array
+        console.log("Department deleted successfully");
+
+        // Optionally navigate to another page
+        // this.navigateTo("https:///localhost:3000//");
+        this.navigator.navigateTo("departments")
+      }
+    } catch (error) {
+      // Step 5: Handle errors gracefully
+      // if (error.status === 404) {
+      //   // if (error.status === 404) {
+      //   console.error(`Department with ID ${targetId} not found.`, error);
+      //   alert('The department was not found or has already been deleted.');
+      // } else {
+      //   console.error('Error deleting department:', error);
+      //   alert('Failed to delete the department. Please try again later.');
+      // }
+    }
+  } else {
+    console.error(`Department with ID ${targetId} not found in local data.`);
+    alert('The department was not found in the list.');
+  }
+}
+
+
+  // console.log("Record deleted")
+  
+  // let found: DepartmentModel | undefined = this.findDepartment(targetId)
+  // if(found) {
+  //   let numero = this.departmentArray.indexOf(found)
+  //   console.log(numero)
+  // this.http.delete(`https://localhost:3000/departments/${numero}`)
+  //   console.log('Department deleted:', found);
+  // this.navigateTo("department/")
+  //   this.departmentArray.splice(numero, 1);  // Remove department at given targetId
+  // }
+// }
 
   refresh(ev: any) {
     setTimeout(() => {
@@ -143,16 +198,7 @@ export class DepartmentPage implements OnInit {
     }, 3000);
   }
     
-    // this.apiService.deleteDepartment(targetId).subscribe({
-    //   next: (response) => {
-    //     console.log("Department deleted successfully", response);
-    //     // You can handle additional logic here, like updating the UI to reflect the deletion.
-    //   },
-    //   error: (error) => {
-    //     console.error('Error fetching department data', console.error);
-    //   },
-    // });
-    // // console.log("Record deleted")
+
 
   // Modal Controls
   setOpen(isOpen: boolean) {
@@ -201,7 +247,5 @@ export class DepartmentPage implements OnInit {
     // }
 
     // this.setOpen(false)
-
   }
-
 }

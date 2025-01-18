@@ -1,10 +1,19 @@
 
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Platform, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonItem, IonIcon, IonLabel, IonNote } from '@ionic/angular/standalone';
+import { Platform, IonHeader,
+  IonButtons,
+  IonBackButton,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonNote,
+  IonToolbar
+ } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
-import { DepartmentApiService } from '../../../services/department-api/department-api.service';
+import { DepartmentApiService } from '../../../services/api-department/department-api.service';
 
 import { DepartmentModel } from '../../../models/data';
 
@@ -12,7 +21,16 @@ import { DepartmentModel } from '../../../models/data';
   selector: 'app-view-department',
   templateUrl: './department-details.page.html',
   styleUrls: ['./department-details.page.scss'],
-  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonItem, IonIcon, IonLabel, IonNote],
+  imports: [IonHeader,
+    IonButtons,
+    IonBackButton,
+    IonContent,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonNote,
+    IonToolbar
+  ],
 })
 export class DepartmentDetailsPage implements OnInit {
   public department!: DepartmentModel;
@@ -28,8 +46,8 @@ export class DepartmentDetailsPage implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
 
-  getBackButtonText() {
-    const isIos = this.platform.is('ios')
-    return isIos ? 'Departments' : '';
-  }
+  // getBackButtonText() {
+  //   const isIos = this.platform.is('ios')
+  //   return isIos ? 'Departments' : '';
+  // }
 }

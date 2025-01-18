@@ -5,17 +5,22 @@ import { Router } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { NavController } from 'ionic/@angular';
+
+import { EmployeeApiService } from '../../../services/api-employee/employee-api.service';
+import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
+import { EmployeeModel } from '../../../models/data';
+
 
 // import { NavigationService } from '../../../services/navigation/navigation.service';
 // import { ModalController } from '@ionic/angular';
 // import { ModalComponent } from '../../../components/modal/modal.component'; 
-
 import { addIcons } from 'ionicons';
 import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
 import { 
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonCard,
   // IonCardHeader,
   IonCardTitle,
@@ -38,12 +43,6 @@ import {
   // IonLabel
 } from '@ionic/angular/standalone';
 
-// From Home 
-import { EmployeeApiService } from '../../../services/employee-api/employee-api.service';
-import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
-import { EmployeeModel } from '../../../models/data';
-
-
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.page.html',
@@ -52,7 +51,9 @@ import { EmployeeModel } from '../../../models/data';
   imports: [
     // ModalComponent,
     // Form,
+    IonBackButton,
     IonButton,
+    IonButtons,
     IonCard,
     // IonCardHeader,
     IonCardTitle,
@@ -120,6 +121,10 @@ export class EmployeePage implements OnInit {
     }, 3000);
   }
 
+  navigateTo(object: string) {
+    
+  }
+
   cancel() {
 
   }
@@ -160,7 +165,7 @@ export class EmployeePage implements OnInit {
       console.log(`Employee Not Found`)
     }
   }
-  
+
   onAddEmployeeClick() {
     console.log("Cicked!")
   }

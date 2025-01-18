@@ -1,5 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
     <ion-title>
       Departments
     </ion-title>
@@ -54,10 +59,23 @@
       <ion-header>
         <ion-toolbar>
           <ion-button slot="start" (click)="cancel()">Cancel</ion-button>
+
+          <!-- [text]="getBackButtonText()" -->
           <ion-title>Add Department</ion-title>
           <ion-button slot="end" (click)="confirm()" [strong]="true">Confirm</ion-button>
         </ion-toolbar>
       </ion-header>
+
+      <!-- <ion-header [translucent]="true">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button
+              [text]="getBackButtonText()"
+              defaultHref="/"
+            ></ion-back-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header> -->
 
       <ion-content class="ion-padding">
         <ion-item>

@@ -12,7 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
 
 import { 
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonCard,
   // IonCardHeader,
   IonCardTitle,
@@ -34,7 +36,7 @@ import {
   // IonLabel
 } from '@ionic/angular/standalone';
 
-import { DepartmentApiService } from '../../../services/department-api/department-api.service';
+import { DepartmentApiService } from '../../../services/api-department/department-api.service';
 import { DepartmentModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
 
@@ -44,7 +46,9 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
   styleUrls: ['./department.page.scss'],
   standalone: true,
   imports: [
+    IonBackButton,
     IonButton,
+    IonButtons,
     IonCard,
     // IonCardHeader,
     IonCardTitle,

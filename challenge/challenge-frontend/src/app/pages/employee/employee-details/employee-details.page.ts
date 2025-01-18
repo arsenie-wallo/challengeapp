@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import {
+  IonBackButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar
+  } from '@ionic/angular/standalone';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { EmployeeModel } from '../../../models/data';
@@ -11,7 +18,16 @@ import { EmployeeModel } from '../../../models/data';
   templateUrl: './employee-details.page.html',
   styleUrls: ['./employee-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonBackButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule
+  ]
 })
 export class EmployeeDetailsPage implements OnInit {
     private employee: EmployeeModel | undefined= undefined;

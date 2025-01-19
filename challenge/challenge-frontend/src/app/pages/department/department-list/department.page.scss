@@ -48,8 +48,8 @@
   display: flex;
   gap: 8px;
   opacity: 1;
-  // visibility: hidden;
-  background-color: rgb(72, 83, 83);
+  visibility: hidden;
+  // background-color: rgb(72, 83, 83);
   padding: 1rem;
   transition: opacity 0.3s ease-in-out, visibility 0s 0.3s; /* Smooth fade-in effect */
 }

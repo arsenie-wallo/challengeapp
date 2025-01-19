@@ -1,8 +1,4 @@
-import { Component, OnInit, 
-  inject
-} from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -77,9 +73,6 @@ import {
 })
 export class EmployeePage implements OnInit {
   isModalOpen = false;
-  // data = { content: 'New Content' };
-  // private message = "fsds"
-  private name = "XXX"
   private employeeArray: EmployeeModel[] = [];
   // private employee: EmployeeModel | undefined = undefined;
 
@@ -118,7 +111,9 @@ export class EmployeePage implements OnInit {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
   }
-  
+  getEmployeeById(id: string) {
+    this.navigateTo(`dev/employees/${id}`)
+  }
 
   navigateTo(page: string) {
     this.navigator.navigateTo(page);
@@ -128,20 +123,13 @@ export class EmployeePage implements OnInit {
     this.isModalOpen = isOpen;
   }
 
+  /* Modal */ 
   cancel() {
     this.setOpen(false)
   }
 
   confirm () {
     this.setOpen(false)
-  }
-
-  getEmployeeById(id: string) {
-    this.navigateTo(`dev/employees/${id}`)
-  }
-
-  getName() {
-    return this.name
   }
 
   getAllEmployees() {
@@ -155,19 +143,19 @@ export class EmployeePage implements OnInit {
   //   return this.message
   // }
 
-  onEmployeeCardClick(id: string) {
-    // const employee = this.findEmployee(id);
-    // let index;
-    // if (employee) {
-    //   index = this.employeeArray.indexOf(employee)
-    //   console.log(`retrieving details`)
-    //   this.retriever.getDetailsById(employee, index, "employee");
-    //   // this.getEmployeeDetailsById(index);
-    // }
-    // else {
-    //   console.log(`Employee Not Found`)
-    // }
-  }
+  // onEmployeeCardClick(id: string) {
+  //   // const employee = this.findEmployee(id);
+  //   // let index;
+  //   // if (employee) {
+  //   //   index = this.employeeArray.indexOf(employee)
+  //   //   console.log(`retrieving details`)
+  //   //   this.retriever.getDetailsById(employee, index, "employee");
+  //   //   // this.getEmployeeDetailsById(index);
+  //   // }
+  //   // else {
+  //   //   console.log(`Employee Not Found`)
+  //   // }
+  // }
 
   async onDeleteEmployeeClick(targetId: string) {
     console.log(`Deleting a employee record ${targetId}`);
@@ -194,7 +182,8 @@ export class EmployeePage implements OnInit {
           // this.navigator.navigateTo("employees")
         }
       } catch (error) {
-        // Step 5: Handle errors gracefully
+        console.error('Error deleting employee:', error);
+        // // Step 5: Handle errors gracefully
         // if (error.status === 404) {
         //   // if (error.status === 404) {
         //   console.error(`employee with ID ${targetId} not found.`, error);

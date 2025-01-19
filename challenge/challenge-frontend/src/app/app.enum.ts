@@ -1,7 +1,7 @@
 export enum AppRoutes {
   HOME = `home`,
   CEO = `ceo`,
-  LINE_MANAGER = `linemanager`,
+  LINE_MANAGER = `linemanagers`,
   DEPARTMENT = `departments`,
   EMPLOYEES = `employees`,
   DEPARTMENT_DETAILS = `dev/departments/:departmentId`,

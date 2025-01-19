@@ -5,13 +5,9 @@
         defaultHref="/"
       ></ion-back-button>
     </ion-buttons>
-    <ion-content slot="end">
-      <ion-icon
-        name="create"
-        size="small"
-        color="black"
-      ></ion-icon>
-    </ion-content>
+    <ion-title>
+      Employees
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,7 +22,7 @@
 
   <!-- Employee Cards Grid -->
   <div class="employee-grid">
-    <ion-item *ngFor="let e of getAllEmployees()" button (click)="onEmployeeCardClick(e._id)">
+    <ion-item *ngFor="let e of getAllEmployees()">
       <ion-card class="employee-card">
         <ion-img
           src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg"

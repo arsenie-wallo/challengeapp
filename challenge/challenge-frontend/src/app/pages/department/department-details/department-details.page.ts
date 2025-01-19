@@ -1,11 +1,21 @@
-
-import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Platform, IonHeader,
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { addIcons } from 'ionicons';
+import { personCircle } from 'ionicons/icons';
+
+import { DepartmentModel } from '../../../models/data';
+import { NavigationService } from '../../../services/navigation/navigation.service';
+import { DetailApiService } from '../../../services/api-item-details/api-item-details.service'
+import { InitializerService } from '../../../services/initializer/initializer.service'
+
+import { 
   IonButton,
   IonButtons,
   IonBackButton,
   IonContent,
+  IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
@@ -13,13 +23,6 @@ import { Platform, IonHeader,
   IonTitle,
   IonToolbar
  } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { personCircle } from 'ionicons/icons';
-import { CommonModule } from '@angular/common';
-import { DepartmentApiService } from '../../../services/api-department/department-api.service';
-import { DepartmentModel } from '../../../models/data';
-// import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
-import { NavigationService } from '../../../services/navigation/navigation.service';
 
 @Component({
   selector: 'app-view-department',
@@ -40,26 +43,26 @@ import { NavigationService } from '../../../services/navigation/navigation.servi
     IonToolbar
   ],
 })
+
 export class DepartmentDetailsPage implements OnInit {
   public department!: DepartmentModel;
-  private currentDepartment = inject(DepartmentApiService);
-  private activatedRoute = inject(ActivatedRoute);
-  private platform = inject(Platform);
-  private departmentIndex: number | null = null;
-
+  // private activatedRoute = inject(ActivatedRoute);
 
   constructor(
-    // private retriever: DetailRetrieverService<DepartmentModel>,
+    private initialize: InitializerService,
     private navigator: NavigationService,
-    private apiService: DepartmentApiService,
-    
+    private apiDetailService: DetailApiService,
+    private activatedRoute: ActivatedRoute,
     ) {
       addIcons({ personCircle });
   }
 
   ngOnInit() {
-    const targetId = this.getCurrentPath()
+    const url = this.getCurrentPath()
+    const targetId = this.initialize.setCurrentId(url)
     this.getTargetDepartment(targetId)
+    // const targetId = this.getCurrentPath()
+    // this.getTargetDepartment(targetId)
     /*
     const url = this.activatedRoute.snapshot.url.join('/');
     console.log('Current URL:', url);
@@ -72,28 +75,18 @@ export class DepartmentDetailsPage implements OnInit {
     }
     */
   }
+  
   getCurrentPath() {
-    const url = this.activatedRoute.snapshot.url.join('/')
-    //  console.log('Current URL:', url);
-    let targetId = "";
-     const match = url.match(/([^\/]+)$/);
-      if (match) {
-        targetId = match[1];
-        console.log(targetId);
-      } else {
-        console.log('No match found');
-      }
-    return targetId;
+    return this.activatedRoute.snapshot.url.join('/');
   };
 
   getTargetDepartment(targetId: string) {
-    this.apiService.getDepartmentById(targetId).subscribe({
+    this.apiDetailService.getItemById(targetId, "departments").subscribe({
       next: (response) => {
         this.department = response
-        console.log(response)
       },
       error: (error) => {
-        console.error('Error fetching department data', error);
+        console.error('Error fetching employee data', error);
       },
     });
   }

@@ -17,13 +17,6 @@ export class EmployeeApiService {
 
   private employeeApiUrl = 'https://localhost:3000/employees';
 
-  // private employeeData: Observable<EmployeeModel> | null = null;
-
-  // getEmployees(): Observable<EmployeeModel> {
-  //   console.log("test2");
-  //   this.employeeData = this.http.get<EmployeeModel>(this.employeeApiUrl);
-  //   return this.employeeData;
-  // }
 
   getEmployees(): Observable<EmployeeModel> {
     // console.log(`xx ${this.activatedRoute}`);

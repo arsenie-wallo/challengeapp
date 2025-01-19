@@ -3,11 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { EmployeeApiService } from '../../../services/api-employee/employee-api.service';
-// import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
 import { EmployeeModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
-// import { ModalController } from '@ionic/angular';
-// import { ModalComponent } from '../../../components/modal/modal.component'; 
 import { addIcons } from 'ionicons';
 import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
@@ -43,16 +40,12 @@ import {
   styleUrls: ['./employee.page.scss'],
   standalone: true,
   imports: [
-    // ModalComponent,
-    // Form,
     IonBackButton,
     IonButton,
     IonButtons,
     IonCard,
-    // IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
-    // IonCardContent,
     IonContent,
     IonHeader,
     IonIcon,
@@ -65,45 +58,26 @@ import {
     IonToolbar,
     CommonModule,
     FormsModule,
-    // IonLabel,
     IonRefresher,
-    // IonList,
     IonRefresherContent
   ]
 })
 export class EmployeePage implements OnInit {
   isModalOpen = false;
-  private employeeArray: EmployeeModel[] = [];
-  // private employee: EmployeeModel | undefined = undefined;
+  employeeArray: EmployeeModel[] = [];
 
   constructor(
     private employeeApiService: EmployeeApiService,
     // private router: Router,
     private navigator: NavigationService,
     // private retriever: DetailRetrieverService<EmployeeModel>,
-    // private modal: ModalComponent,
-    // private controller: ModalController
   ) {
     addIcons({create,trash,expand,logoIonic});
   }
 
   ngOnInit() {
-    console.log(`Hello from employee.page.ts`);
-
-    this.employeeApiService.getEmployees().subscribe({
-      next: (employee) => {
-        if (Array.isArray(employee)) {
-          this.employeeArray.push(...employee);  // Spread the array into this.employee
-        }
-         else {
-          // If it's a single object, push it directly
-          this.employeeArray.push(employee);
-        }
-      },
-      error: (error) => {
-        console.error('Error fetching employee data', console.error);
-      },
-    });
+    // console.log(`Hello from employee.page.ts`);
+    this.getAllEmployees()
   }
 
   refresh(ev: any) {
@@ -111,6 +85,24 @@ export class EmployeePage implements OnInit {
       (ev as RefresherCustomEvent).detail.complete();
     }, 3000);
   }
+
+  getAllEmployees() {
+    this.employeeApiService.getEmployees().subscribe({
+      next: (employee) => {
+        if (Array.isArray(employee)) {
+          this.employeeArray.push(...employee);  // Spread the array into this.employee
+        }
+         else {
+          this.employeeArray.push(employee);
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching employee data', console.error);
+      },
+    });
+    // return this.employeeArray;
+  }
+
   getEmployeeById(id: string) {
     this.navigateTo(`dev/employees/${id}`)
   }
@@ -130,10 +122,6 @@ export class EmployeePage implements OnInit {
 
   confirm () {
     this.setOpen(false)
-  }
-
-  getAllEmployees() {
-    return this.employeeArray;
   }
 
   findEmployee(id: string) {
@@ -183,15 +171,6 @@ export class EmployeePage implements OnInit {
         }
       } catch (error) {
         console.error('Error deleting employee:', error);
-        // // Step 5: Handle errors gracefully
-        // if (error.status === 404) {
-        //   // if (error.status === 404) {
-        //   console.error(`employee with ID ${targetId} not found.`, error);
-        //   alert('The employee was not found or has already been deleted.');
-        // } else {
-        //   console.error('Error deleting employee:', error);
-        //   alert('Failed to delete the employee. Please try again later.');
-        // }
       }
     } else {
       console.error(`Employee with ID ${targetId} not found in local data.`);
@@ -203,9 +182,6 @@ export class EmployeePage implements OnInit {
     console.log("Cicked!")
   }
 
-  // setOpen(modalMode: boolean) {
-
-  // }
 
   // async openModal(modalMode: boolean) {
   //   const modal = await this.controller.create({

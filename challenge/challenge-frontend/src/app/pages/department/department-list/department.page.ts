@@ -10,9 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DepartmentModel } from '../../../models/data';
-// import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
 import { DepartmentApiService } from '../../../services/api-department/department-api.service';
-import { DeleteDepartmentApiService } from '../../../services/department-delete/department-delete.service';
 import { NavigationService } from '../../../services/navigation/navigation.service';
 
 import { 
@@ -20,10 +18,8 @@ import {
   IonButton,
   IonButtons,
   IonCard,
-  // IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
-  // IonCardContent,
   IonContent,
   IonHeader,
   IonIcon,
@@ -36,8 +32,6 @@ import {
   RefresherCustomEvent,
   IonRefresher,
   IonRefresherContent,
-  // IonList,
-  // IonLabel
 } from '@ionic/angular/standalone';
 
 
@@ -51,10 +45,8 @@ import {
     IonButton,
     IonButtons,
     IonCard,
-    // IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
-    // IonCardContent,
     IonContent,
     IonHeader,
     IonIcon,
@@ -82,7 +74,7 @@ export class DepartmentPage implements OnInit {
     private apiService: DepartmentApiService,
     private navigator: NavigationService,
     // private retriever: DetailRetrieverService<DepartmentModel>,
-    private deleter: DeleteDepartmentApiService,
+    // private deleter: DeleteDepartmentApiService,
     private http: HttpClient
     
   ) {
@@ -90,6 +82,10 @@ export class DepartmentPage implements OnInit {
   }
 
   ngOnInit() {
+    this.initFetchData()
+  }
+
+  initFetchData() {
     this.apiService.getDepartments().subscribe({
       next: (d) => {
         if (Array.isArray(d)) {

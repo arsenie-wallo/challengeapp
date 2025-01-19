@@ -23,6 +23,7 @@ import {
   styleUrls: ['./employee-details.page.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     IonBackButton,
     IonButton,
     IonButtons,
@@ -32,7 +33,6 @@ import {
     IonNote,
     IonTitle,
     IonToolbar,
-    CommonModule,
     FormsModule
   ]
 })
@@ -82,7 +82,7 @@ export class EmployeeDetailsPage implements OnInit {
     this.apiService.getEmployeesById(targetId).subscribe({
       next: (response) => {
         this.employee = response
-        // console.log(response)
+        console.log(response)
         // if (Array.isArray(d)) {
         //   this.employeeArray.push(...d);  // Spread the array into this.department
         // }
@@ -92,9 +92,13 @@ export class EmployeeDetailsPage implements OnInit {
         // }
       },
       error: (error) => {
-        console.error('Error fetching department data', console.error);
+        console.error('Error fetching department data', error);
       },
     });
+  }
+
+  displayEmployeeDetails() {
+    return this.employee
   }
 
   // setEmployeeDetails() {

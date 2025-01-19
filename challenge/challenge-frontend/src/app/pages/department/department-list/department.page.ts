@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DepartmentModel } from '../../../models/data';
-import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
+// import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
 import { DepartmentApiService } from '../../../services/api-department/department-api.service';
 import { DeleteDepartmentApiService } from '../../../services/department-delete/department-delete.service';
 import { NavigationService } from '../../../services/navigation/navigation.service';
@@ -81,7 +81,7 @@ export class DepartmentPage implements OnInit {
     private router: Router,
     private apiService: DepartmentApiService,
     private navigator: NavigationService,
-    private retriever: DetailRetrieverService<DepartmentModel>,
+    // private retriever: DetailRetrieverService<DepartmentModel>,
     private deleter: DeleteDepartmentApiService,
     private http: HttpClient
     
@@ -250,7 +250,7 @@ getDepartmentsById(id: string) {
     if (department) {
       index = this.departmentArray.indexOf(department)
       console.log(`retrieving details`)
-      this.retriever.getDetailsById(department, index, "departments");
+      // this.retriever.getDetailsById(department, index, "departments");
       // this.getDepartmentDetailsById(index);
     }
     else {

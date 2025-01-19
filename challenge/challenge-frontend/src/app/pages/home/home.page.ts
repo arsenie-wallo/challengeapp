@@ -38,10 +38,11 @@ import {
 export class HomePage {
   constructor(
     private navigator: NavigationService,
-    private router: Router) {}
+    private router: Router
+  ) {}
   
   ngOnInit() {
-    console.log(`Hello from home.page.ts`);
+    // console.log(`Hello from home.page.ts`);
   }
 
   refresh(ev: any) {

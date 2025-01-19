@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { EmployeeApiService } from '../../../services/api-employee/employee-api.service';
-import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
+// import { DetailRetrieverService } from '../../../services/detail-retriever/detail-retriever.service';
 import { EmployeeModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
 // import { ModalController } from '@ionic/angular';
@@ -87,7 +87,7 @@ export class EmployeePage implements OnInit {
     private employeeApiService: EmployeeApiService,
     // private router: Router,
     private navigator: NavigationService,
-    private retriever: DetailRetrieverService<EmployeeModel>,
+    // private retriever: DetailRetrieverService<EmployeeModel>,
     // private modal: ModalComponent,
     // private controller: ModalController
   ) {

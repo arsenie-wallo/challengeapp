@@ -11,17 +11,16 @@ async function connectToDatabase() {
         console.log('Using existing database connection');
         return db;
     }
-    // else {
+    else {
         console.log('Connecting to MongoDB...');
         client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         await client.connect();
         db = client.db('WalloPay');  // Initialize the db object after a successful connection
         isConnected = true;
         console.log('Connected to MongoDB');
-    // }
+    }
 }
 //------------------------------------------//
-// MongoDB Collections (initialize them inside the handler functions to ensure db is ready)
 module.exports.getDepartments = async (event) => {
     try {
         await connectToDatabase();  // Ensure the database is connected before querying

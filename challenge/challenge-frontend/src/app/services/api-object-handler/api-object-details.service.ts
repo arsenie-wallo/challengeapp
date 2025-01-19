@@ -27,7 +27,6 @@ export class DetailApiService {
 
   getItemById(id: string, type: string) {
     const uri = `${this.databaseUri}/dev/${type}/${id}`
-    // console.log(uri)
     return this.http.get<DepartmentModel | EmployeeModel>(uri)
     .pipe(
       map(this.extractData),

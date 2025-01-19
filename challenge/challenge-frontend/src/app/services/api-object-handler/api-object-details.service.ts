@@ -1,34 +1,44 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 
-import { ActivatedRoute, Router } from '@angular/router';
 import { DepartmentModel } from '../../models/data';
+import { EmployeeModel } from '../../models/data';
 
 @Injectable(
   {providedIn: 'root'}
 )
-export class DepartmentApiService {
+export class DetailApiService {
+  private databaseUri = `https://localhost:3000`
   constructor(private http: HttpClient) {}
 
-  private activatedRoute = inject(ActivatedRoute);
+  getAllItems<T>(itemType: string): Observable<T> {
+    // console.log("hi from details api service")
+    let uri = `${this.databaseUri}/${itemType}`
 
-  private departmentApiUrl = 'https://localhost:3000/departments';
-
-  getDepartments(): Observable<DepartmentModel> {
-    // console.log(`Hello from data.service.ts`);
-    return this.http.get<DepartmentModel>(this.departmentApiUrl)
+    return this.http.get<T>(uri)
     .pipe(
       map(this.extractData),
       tap(this.logResponse),
       catchError(this.catchError)
     )
   }
-  deleteDepartment(id: string) {
-    // https://localhost:3000/dev/departments/DPT-01
-    let uri = `https://localhost:3000/dev/departments/${id}`
-    console.log(`TARG URI: ${uri}`)
+
+  getItemById(id: string, type: string) {
+    const uri = `${this.databaseUri}/dev/${type}/${id}`
+    // console.log(uri)
+    return this.http.get<DepartmentModel | EmployeeModel>(uri)
+    .pipe(
+      map(this.extractData),
+      tap(this.logResponse),
+      catchError(this.catchError)
+    )
+  }
+
+  deleteItem(id: string, type: string) {
+    let uri = `${this.databaseUri}/dev/${type}/${id}`
+    console.log(`Hey from details api: ${uri}`)
     this.http.delete(uri)
       .pipe(
         map(this.extractData),
@@ -36,7 +46,6 @@ export class DepartmentApiService {
         catchError(this.catchError)
       )
   }
-
 /* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);
@@ -45,6 +54,7 @@ export class DepartmentApiService {
   }
   
   private logResponse(res: any) {
+    // console.log(`Hello from API details page:`)
     // console.log(res);
   }
   
@@ -52,4 +62,3 @@ export class DepartmentApiService {
     return res || {};  // Here we assume res is the body of the HTTP response
   }
 }
-// export const DEPARTMENT_COLLECTION = new Observable<DepartmentModel[]>;

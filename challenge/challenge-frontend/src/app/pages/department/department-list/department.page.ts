@@ -5,9 +5,8 @@ import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { DepartmentModel } from '../../../models/data';
-import { DepartmentApiService } from '../../../services/api-department/department-api.service';
+import { DetailApiService } from '../../../services/api-object-handler/api-object-details.service'
 import { NavigationService } from '../../../services/navigation/navigation.service';
 
 import { 
@@ -66,10 +65,8 @@ export class DepartmentPage implements OnInit {
   departmentArray: DepartmentModel[] = [];
 
   constructor(
-    private apiService: DepartmentApiService,
+    private apiDetailService: DetailApiService,
     private navigator: NavigationService,
-    private http: HttpClient
-    // private deleter: DeleteDepartmentApiService,
   ) {
     addIcons({expand,trash,create,logoIonic});
   }
@@ -85,13 +82,13 @@ export class DepartmentPage implements OnInit {
   }
 
   getAllDepartments() {
-    this.apiService.getDepartments().subscribe({
-      next: (d) => {
-        if (Array.isArray(d)) {
-          this.departmentArray.push(...d);  // Spread the array into this.department
+    this.apiDetailService.getAllItems<DepartmentModel>("departments").subscribe({
+      next: (department) => {
+        if (Array.isArray(department)) {
+          this.departmentArray.push(...department);  // Spread the array into this.department
         }
          else {
-          this.departmentArray.push(d);
+          this.departmentArray.push(department);
         }
       },
       error: (error) => {
@@ -143,7 +140,7 @@ async onDeleteDepartmentClick(targetId: string) {
     console.log(`Department index found: ${index}`);
     try {
       // Step 3: Make the HTTP DELETE request using async/await
-      await this.apiService.deleteDepartment(targetId)//.toPromise(); // Convert observable to promise using toPromise()
+      await this.apiDetailService.deleteItem(targetId, "departments")//.toPromise(); // Convert observable to promise using toPromise()
       
       // Step 4: Remove department from the local array
       if (index !== -1) {

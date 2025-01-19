@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { EmployeeApiService } from '../../../services/api-employee/employee-api.service';
 import { EmployeeModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
+import { DetailApiService } from '../../../services/api-object-handler/api-object-details.service'
+
 import { addIcons } from 'ionicons';
 import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
@@ -63,9 +64,8 @@ export class EmployeePage implements OnInit {
   employeeArray: EmployeeModel[] = [];
 
   constructor(
-    private employeeApiService: EmployeeApiService,
+    private apiDetailService: DetailApiService,
     private navigator: NavigationService,
-    // private deleter: DeleteDepartmentApiService,
   ) {
     addIcons({create,trash,expand,logoIonic});
   }
@@ -82,7 +82,7 @@ export class EmployeePage implements OnInit {
   }
 
   getAllEmployees() {
-    this.employeeApiService.getEmployees().subscribe({
+    this.apiDetailService.getAllItems<EmployeeModel>("employees").subscribe({
       next: (employee) => {
         if (Array.isArray(employee)) {
           this.employeeArray.push(...employee);  // Spread the array into this.employee
@@ -135,7 +135,7 @@ export class EmployeePage implements OnInit {
       console.log(`Employee index found: ${index}`);
       try {
         // Step 3: Make the HTTP DELETE request using async/await
-        await this.employeeApiService.deleteEmployee(targetId)//.toPromise(); // Convert observable to promise using toPromise()
+        await this.apiDetailService.deleteItem(targetId, "employees")//.toPromise(); // Convert observable to promise using toPromise()
         
         // Step 4: Remove employee from the local array
         if (index !== -1) {

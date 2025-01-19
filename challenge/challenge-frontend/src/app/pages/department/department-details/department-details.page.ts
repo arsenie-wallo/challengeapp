@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { DepartmentModel } from '../../../models/data';
-import { DetailApiService } from '../../../services/api-item-details/api-item-details.service'
+import { DetailApiService } from '../../../services/api-object-handler/api-object-details.service'
 import { InitializerService } from '../../../services/initializer/initializer.service'
 // import { NavigationService } from '../../../services/navigation/navigation.service';
 // import { addIcons } from 'ionicons';

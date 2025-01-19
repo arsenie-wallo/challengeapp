@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmployeeModel } from '../../../models/data';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
+import { EmployeeModel } from '../../../models/data';
 import { DetailApiService } from '../../../services/api-item-details/api-item-details.service'
 import { InitializerService } from '../../../services/initializer/initializer.service'
 
@@ -34,11 +34,11 @@ import {
     IonNote,
     IonTitle,
     IonToolbar,
-    FormsModule
+    // FormsModule
   ]
 })
 export class EmployeeDetailsPage implements OnInit {
-    employee: EmployeeModel | undefined= undefined;
+  employee!: EmployeeModel;
 
   constructor(
     private initialize: InitializerService,

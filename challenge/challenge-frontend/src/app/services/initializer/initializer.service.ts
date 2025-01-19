@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EmployeeModel } from '../../models/data';
-
+// import { RefresherCustomEvent } from '@ionic/angular/standalone';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +24,12 @@ export class InitializerService {
     return this.targetId;
   }
 
+  // refresh(ev: any) {
+  //   setTimeout(() => {
+  //     (ev as RefresherCustomEvent).detail.complete();
+  //   }, 3000);
+  // }
+
   // getTargetItem(id: string, itemType: string) {
   //   switch(itemType) {
   //     case "department" : {
@@ -39,29 +45,4 @@ export class InitializerService {
   //     }
   //   }
   // }
-
-  // getEmployeeById() {
-  //   this.apiService.getEmployeesById(this.targetId).subscribe({
-  //     next: (response) => {
-  //       this.employee = response
-  //       console.log(response)
-  //     },
-  //     error: (error) => {
-  //       console.error('Error fetching employee data', error);
-  //     },
-  //   });
-  // }
-
-  // getDepartmentById() {
-  //   this.apiService.getDepartmentById(this.targetId).subscribe({
-  //     next: (response) => {
-  //       this.employee = response
-  //       console.log(response)
-  //     },
-  //     error: (error) => {
-  //       console.error('Error fetching employee data', error);
-  //     },
-  //   });
-  // }
-
 }

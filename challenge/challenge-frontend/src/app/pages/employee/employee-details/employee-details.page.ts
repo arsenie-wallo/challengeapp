@@ -72,16 +72,4 @@ export class EmployeeDetailsPage implements OnInit {
   displayEmployeeDetails() {
     return this.employee
   }
-
-  //   console.log(`retrieving details`)
-  //   const employee = this.findEmployee(id);
-  //   let index;
-  //   if (employee) {
-  //     index = this.employeeArray.indexOf(employee)
-  //     // this.retriever.getDetailsById(employee, index);
-  //     // this.getEmployeeDetailsById(index);
-  //   }
-  //   else {
-  //     console.log(`Employee Not Found`)
-    // }
 }

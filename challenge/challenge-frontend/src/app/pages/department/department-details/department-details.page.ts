@@ -53,7 +53,6 @@ export class DepartmentDetailsPage implements OnInit {
     private apiDetailService: DetailApiService,
     private activatedRoute: ActivatedRoute,
     ) {
-      // addIcons({ personCircle });
   }
 
   ngOnInit() {

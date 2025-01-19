@@ -26,32 +26,10 @@ export class DetailApiService {
       catchError(this.catchError)
     )
   }
-
-  deleteItem(id: string, type: string) {
-    // let uri = `https://localhost:3000/dev/departments/${id}`
-    let uri = `${this.databaseUri}/dev/${type}/${id}`
-    console.log(`TARG URI: ${uri}`)
-    this.http.delete(uri)
-      .pipe(
-        map(this.extractData),
-        tap(this.logResponse),
-        catchError(this.catchError)
-      )
-  }
-
+  
   getItemById(id: string, type: string) {
     const uri = `${this.databaseUri}/dev/${type}/${id}`
-    console.log(uri)
-    let model
-    // switch(type) {
-    //   case "departments":
-    //     model = DepartmentModel
-    //     break;
-    //   case "employees" :
-    //     model = EmployeeModel
-    //     break;
-    // }
-
+    // console.log(uri)
     return this.http.get<DepartmentModel | EmployeeModel>(uri)
     .pipe(
       map(this.extractData),

@@ -1,7 +1,4 @@
-import { Component, OnInit, 
-  inject
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 import { addIcons } from 'ionicons';
 import { logoIonic, create, trash, expand } from 'ionicons/icons';
@@ -58,41 +55,42 @@ import {
     IonToolbar,
     CommonModule,
     FormsModule,
-    // IonLabel,
     IonTitle,
     IonRefresher,
-    // IonList,
     IonRefresherContent
   ]
 })
 
 export class DepartmentPage implements OnInit {
   isModalOpen = false;
-  private departmentArray: DepartmentModel[] = [];
-    constructor(
-    private router: Router,
+  departmentArray: DepartmentModel[] = [];
+
+  constructor(
     private apiService: DepartmentApiService,
     private navigator: NavigationService,
-    // private retriever: DetailRetrieverService<DepartmentModel>,
-    // private deleter: DeleteDepartmentApiService,
     private http: HttpClient
-    
+    // private deleter: DeleteDepartmentApiService,
   ) {
     addIcons({expand,trash,create,logoIonic});
   }
 
   ngOnInit() {
-    this.initFetchData()
+    this.getAllDepartments()
   }
 
-  initFetchData() {
+  refresh(ev: any) {
+    setTimeout(() => {
+      (ev as RefresherCustomEvent).detail.complete();
+    }, 3000);
+  }
+
+  getAllDepartments() {
     this.apiService.getDepartments().subscribe({
       next: (d) => {
         if (Array.isArray(d)) {
           this.departmentArray.push(...d);  // Spread the array into this.department
         }
          else {
-          // If it's a single object, push it directly
           this.departmentArray.push(d);
         }
       },
@@ -105,16 +103,19 @@ export class DepartmentPage implements OnInit {
   findDepartment(id: string) {
     return this.departmentArray.find(e => e._id === id);
   }
-
-  navigateTo(page: string) {
-    this.navigator.navigateTo(page);
-  }
   
+  getDepartmentsById(id: string) {
+    this.navigator.navigateTo(`dev/departments/${id}`);
+  }
+
+  getManager(id: string) {
+    let _id = id;
+  }
+
   // Data Controls
   onAddDepartmentClick() {
     console.log("Cicked!")
   }
-  // private departmentApiUrl = 'https://localhost:3000/departments';
 /*
 onDeleteDepartmentClick(targetId: string) {
   console.log(`Deleting a department record ${targetId}`)
@@ -170,89 +171,28 @@ async onDeleteDepartmentClick(targetId: string) {
   }
 }
 
-getDepartmentsById(id: string) {
-  this.navigateTo(`dev/departments/${id}`)
-
-  // this.apiService.getDepartmentById(id).subscribe({
-  //   next: (response) => {
-  //     this.navigateTo(`dev/departments/${id}`)
-  //     // const url = `https://localhost:3000/dev/departments/${id}`
-  //     // console.log(`${url} ${response}`)
-  //     // return this.http.get<DepartmentModel>(url);
-
-  //     // if (Array.isArray(d)) {
-  //     //   this.departmentArray.push(...d);  // Spread the array into this.department
-  //     // }
-  //     //  else {
-  //     //   // If it's a single object, push it directly
-  //     //   this.departmentArray.push(d);
-  //     // }
-  //   },
-  //   error: (error) => {
-  //     console.error('Error fetching department data', console.error);
-  //   },
-  // });
-
-  // const url = `https://localhost:3000/dev/departments/${id}`
-  // console.log(`${url}`)
-  // return this.http.get<DepartmentModel>(url);
-  // return new BehaviorSubject<Department[]>.asObservable();
-  // return this.departmentSubject.asObservable();
+  /* Modal */ 
+setOpen(isOpen: boolean) {
+  this.isModalOpen = isOpen;
 }
 
-  // console.log("Record deleted")
-  
-  // let found: DepartmentModel | undefined = this.findDepartment(targetId)
-  // if(found) {
-  //   let numero = this.departmentArray.indexOf(found)
-  //   console.log(numero)
-  // this.http.delete(`https://localhost:3000/departments/${numero}`)
-  //   console.log('Department deleted:', found);
-  // this.navigateTo("department/")
-  //   this.departmentArray.splice(numero, 1);  // Remove department at given targetId
-  // }
+cancel() {
+  this.setOpen(false)
+}
+
+// onDepartmentCardClick(id: string) {
+//   const department = this.findDepartment(id);
+//   let index;
+//   if (department) {
+//     index = this.departmentArray.indexOf(department)
+//     console.log(`retrieving details`)
+//     // this.retriever.getDetailsById(department, index, "departments");
+//     // this.getDepartmentDetailsById(index);
+//   }
+//   else {
+//     console.log(`Department Not Found`)
+//   }
 // }
-
-  refresh(ev: any) {
-    setTimeout(() => {
-      (ev as RefresherCustomEvent).detail.complete();
-    }, 3000);
-  }
-    
-
-
-  // Modal Controls
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
-
-  cancel() {
-    this.setOpen(false)
-  }
-
-
-  getAllDepartments() {
-    return this.departmentArray;
-    // return this.data.getDepartments();
-  }
-
-  getManager(id: string) {
-    let _id = id;
-  }
-
-  onDepartmentCardClick(id: string) {
-    const department = this.findDepartment(id);
-    let index;
-    if (department) {
-      index = this.departmentArray.indexOf(department)
-      console.log(`retrieving details`)
-      // this.retriever.getDetailsById(department, index, "departments");
-      // this.getDepartmentDetailsById(index);
-    }
-    else {
-      console.log(`Department Not Found`)
-    }
-  }
 
   confirm() {
     // // Handle the modal input and capture the entered department details

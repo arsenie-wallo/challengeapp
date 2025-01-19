@@ -13,10 +13,8 @@ import {
   IonButton,
   IonButtons,
   IonCard,
-  // IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
-  // IonCardContent,
   IonContent,
   IonHeader,
   IonIcon,
@@ -30,8 +28,6 @@ import {
   RefresherCustomEvent,
   IonRefresher,
   IonRefresherContent,
-  IonList,
-  // IonLabel
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -68,9 +64,8 @@ export class EmployeePage implements OnInit {
 
   constructor(
     private employeeApiService: EmployeeApiService,
-    // private router: Router,
     private navigator: NavigationService,
-    // private retriever: DetailRetrieverService<EmployeeModel>,
+    // private deleter: DeleteDepartmentApiService,
   ) {
     addIcons({create,trash,expand,logoIonic});
   }
@@ -100,50 +95,32 @@ export class EmployeePage implements OnInit {
         console.error('Error fetching employee data', console.error);
       },
     });
-    // return this.employeeArray;
-  }
-
-  getEmployeeById(id: string) {
-    this.navigateTo(`dev/employees/${id}`)
-  }
-
-  navigateTo(page: string) {
-    this.navigator.navigateTo(page);
-  }
-
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
-
-  /* Modal */ 
-  cancel() {
-    this.setOpen(false)
-  }
-
-  confirm () {
-    this.setOpen(false)
   }
 
   findEmployee(id: string) {
     return this.employeeArray.find(e => e._id === id);
   }
-  // displayMessage() {
-  //   return this.message
+
+  getEmployeeById(id: string) {
+    this.navigator.navigateTo(`dev/employees/${id}`)
+  }
+
+  // getManager(employeeId: string): string | null {
+  //   const employee = this.employeeArray.find(e => e._id === employeeId);
+  //   const ma = employee?.line_manager;
+
+  //   console.log(employee);
+  //   if (employee && employee.line_manager) {
+  //     const manager = this.employeeArray.find(e => e._id === ma?._id);
+  //     return manager ? manager.name : null;
+  //   }
+  //   return null;
   // }
 
-  // onEmployeeCardClick(id: string) {
-  //   // const employee = this.findEmployee(id);
-  //   // let index;
-  //   // if (employee) {
-  //   //   index = this.employeeArray.indexOf(employee)
-  //   //   console.log(`retrieving details`)
-  //   //   this.retriever.getDetailsById(employee, index, "employee");
-  //   //   // this.getEmployeeDetailsById(index);
-  //   // }
-  //   // else {
-  //   //   console.log(`Employee Not Found`)
-  //   // }
-  // }
+    // Data Controls
+    onAddEmployeeClick() {
+      console.log("Cicked!")
+    }
 
   async onDeleteEmployeeClick(targetId: string) {
     console.log(`Deleting a employee record ${targetId}`);
@@ -177,41 +154,17 @@ export class EmployeePage implements OnInit {
       alert('The employee was not found in the list.');
     }
   }
-
-  onAddEmployeeClick() {
-    console.log("Cicked!")
-  }
-
-
-  // async openModal(modalMode: boolean) {
-  //   const modal = await this.controller.create({
-  //     component: ModalComponent,
-  //     componentProps: { data: this.data }, // Pass data to modal component
-  //   });
-  //   await modal.present();
-
-  //   // Listen for modal dismissal event
-  //   modal.onDidDismiss().then(() => {
-  //     this.isOpen = false; // Reset modal open state
-  //   });
-
-  //   this.isOpen = true; // Set modal state to open
-  // }
   
-  // getEmployeeDetailsById(index: number) {
-  //   console.log(`${index}`)
-  //   this.navigateTo(`employee/${index}`);
-  // }
-
-  // getManager(employeeId: string): string | null {
-  //   const employee = this.employeeArray.find(e => e._id === employeeId);
-  //   const ma = employee?.line_manager;
-
-  //   console.log(employee);
-  //   if (employee && employee.line_manager) {
-  //     const manager = this.employeeArray.find(e => e._id === ma?._id);
-  //     return manager ? manager.name : null;
-  //   }
-  //   return null;
-  // }
+  /* Modal */ 
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+  
+  cancel() {
+    this.setOpen(false)
+  }
+  
+  confirm () {
+    this.setOpen(false)
+  }
 }

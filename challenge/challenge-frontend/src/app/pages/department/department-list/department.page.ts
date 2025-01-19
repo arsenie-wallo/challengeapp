@@ -84,15 +84,20 @@ export class DepartmentPage implements OnInit {
   getAllDepartments() {
     this.apiDetailService.getAllItems<DepartmentModel>("departments").subscribe({
       next: (department) => {
-        if (Array.isArray(department)) {
-          this.departmentArray.push(...department);  // Spread the array into this.department
-        }
-         else {
-          this.departmentArray.push(department);
+        try {
+          if (Array.isArray(department)) {
+            this.departmentArray.push(...department);  // Spread the array into this.department
+          }
+          else {
+            this.departmentArray.push(department);
+          }
+        } catch (error) {
+          console.error('Error processing department data:', error)
         }
       },
+      
       error: (error) => {
-        console.error('Error fetching department data', console.error);
+        console.error('Error fetching department data', error);
       },
     });
   }

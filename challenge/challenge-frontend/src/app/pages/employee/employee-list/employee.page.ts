@@ -73,6 +73,7 @@ export class EmployeePage implements OnInit {
   ngOnInit() {
     // console.log(`Hello from employee.page.ts`);
     this.getAllEmployees()
+    console.log(this.employeeArray.length)
   }
 
   refresh(ev: any) {
@@ -92,7 +93,7 @@ export class EmployeePage implements OnInit {
         }
       },
       error: (error) => {
-        console.error('Error fetching employee data', console.error);
+        console.error('Error fetching employee data', error);
       },
     });
   }
@@ -123,7 +124,8 @@ export class EmployeePage implements OnInit {
     }
 
   async onDeleteEmployeeClick(targetId: string) {
-    console.log(`Deleting a employee record ${targetId}`);
+    // console.log(`Deleting a employee record ${targetId}`);
+    console.log(this.employeeArray.length)
   
     // Step 1: Find the employee by targetId
     let found: EmployeeModel | undefined = this.findEmployee(targetId);

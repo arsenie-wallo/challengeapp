@@ -14,10 +14,18 @@ async function connectToDatabase() {
     else {
         console.log('Connecting to MongoDB...');
         client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        await client.connect();
-        db = client.db('WalloPay');  // Initialize the db object after a successful connection
-        isConnected = true;
-        console.log('Connected to MongoDB');
+        // try {
+            await client.connect();
+            // Initialize the db object after a successful connection
+            db = client.db('WalloPay');
+            isConnected = true;
+            console.log('Connected to MongoDB');
+        // } catch (error) {
+            // console.error("Error connectinf to MongoDB")
+        // } 
+        // finally {
+        //     await client.close()
+        // }
     }
 }
 //------------------------------------------//
@@ -36,7 +44,10 @@ module.exports.getDepartments = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to fetch departments' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 
 module.exports.getEmployees = async (event) => {
@@ -54,7 +65,10 @@ module.exports.getEmployees = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to fetch employees' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 
 module.exports.getDashboard = async (event) => {
@@ -69,7 +83,10 @@ module.exports.getDashboard = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to fetch dashboard' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 //------------------------------------------//
 
@@ -93,7 +110,10 @@ module.exports.viewEmployee = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to fetch employees' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 
 module.exports.viewDepartment = async (event) => {
@@ -116,7 +136,10 @@ module.exports.viewDepartment = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to fetch departments' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 
 //------------------------------------------//
@@ -140,12 +163,15 @@ module.exports.deleteEmployee = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to delete employee' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 
 module.exports.deleteDepartment = async (event) => {
     const { departmentId } = event.pathParameters;
-    console.log(`ID: ${departmentId}`)
+    console.log(`Deleting ID: ${departmentId}`)
 
     try {
         await connectToDatabase();  // Ensure the database is connected before querying
@@ -163,7 +189,10 @@ module.exports.deleteDepartment = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to delete department' }),
         };
-    }
+    } 
+    // finally {
+    //     await client.close()
+    // }
 };
 //------------------------------------------//
 // module.exports.createEmployee = async (event) => {

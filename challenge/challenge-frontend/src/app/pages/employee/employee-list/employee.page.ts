@@ -71,25 +71,22 @@ import {
 })
 export class EmployeePage implements OnInit {
   isModalOpen = false;
-  firstName: string = ""
-  lastName: string = ""
-  email: string = ""
-  lineManager: string = "Test"
-  selectedDepartment: string = "";
+  // firstName: string = ""
+  // lastName: string = ""
+  // email: string = ""
+  // lineManager: string = ""
+  // selectedDepartment: string = "";
   
   departments: DepartmentModel[] = [];
   employeeArray: EmployeeModel[] = [];
-  // dept = DepartmentPage;
-  // selectedDepartment: DepartmentModel = {
-  //   pictureUrl: "",
-  //   _id: "",
-  //   name: "",
-  //   line_manager:"",
-  //   employees: []
-  // };
-
-
-  
+  newEmployee = {
+    id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    lineManager: "",
+    selectedDepartment: ""
+  }
 
   constructor(
     private apiDetailService: DetailApiService,
@@ -138,47 +135,22 @@ export class EmployeePage implements OnInit {
     this.navigator.navigateTo(`dev/employees/${id}`)
   }
 
-  // getManager(employeeId: string): string | null {
-  //   const employee = this.employeeArray.find(e => e._id === employeeId);
-  //   const ma = employee?.line_manager;
-
-  //   console.log(employee);
-  //   if (employee && employee.line_manager) {
-  //     const manager = this.employeeArray.find(e => e._id === ma?._id);
-  //     return manager ? manager.name : null;
-  //   }
-  //   return null;
-  // }
-
     // Data Controls
-    onAddEmployeeClick() {
-      console.log("Cicked!")
-    }
-
   async onDeleteEmployeeClick(targetId: string) {
-    // console.log(`Deleting a employee record ${targetId}`);
     console.log(this.employeeArray.length)
   
-    // Step 1: Find the employee by targetId
     let found: EmployeeModel | undefined = this.findEmployee(targetId);
   
-    // Check if employee is found in local array
     if (found) {
-      // Step 2: Find the index of the employee in the array
       let index = this.employeeArray.indexOf(found);
       console.log(`Employee index found: ${index}`);
       try {
-        // Step 3: Make the HTTP DELETE request using async/await
-        await this.apiDetailService.deleteItem(targetId, "employees")//.toPromise(); // Convert observable to promise using toPromise()
+        await this.apiDetailService.deleteItem(targetId, "employees")
         
-        // Step 4: Remove employee from the local array
         if (index !== -1) {
-          this.employeeArray.splice(index, 1); // Removes the employee from array
+          this.employeeArray.splice(index, 1);
           console.log("Employee deleted successfully");
   
-          // Optionally navigate to another page
-          // this.navigateTo("https:///localhost:3000//");
-          // this.navigator.navigateTo("employees")
         }
       } catch (error) {
         console.error('Error deleting employee:', error);
@@ -200,18 +172,22 @@ export class EmployeePage implements OnInit {
   
   confirm () {
     this.setOpen(false)
+    console.log(`Creating new employee record...`)
+  }
+  onAddEmployeeClick() {
+    console.log("Cicked!")
   }
   updateEmail() {
-    this.email = `${this.firstName.toLowerCase()}.${this.lastName.toLowerCase()}@wallopay.com`;
+    this.newEmployee.email = `${this.newEmployee.firstName.toLowerCase()}.${this.newEmployee.lastName.toLowerCase()}@wallopay.com`;
   }
   
   onDepartmentChange(event:CustomEvent) {
     const response = event.detail.value
-    this.lineManager = response.line_manager
+    this.newEmployee.lineManager = response.line_manager
   }
 
-  getManager(departmentName: string): string {
-    const department = this.departments.find(dept => dept.name === departmentName);
-    return department ? department.line_manager : 'Not available';  // Default if department is not found
-  }
+  // getManager(departmentName: string): string {
+  //   const department = this.departments.find(dept => dept.name === departmentName);
+  //   return department ? department.line_manager : 'Not available';  // Default if department is not found
+  // }
 }

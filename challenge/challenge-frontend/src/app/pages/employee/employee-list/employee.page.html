@@ -56,10 +56,11 @@
       <ion-content class="ion-padding">
         <ion-item>
           <ion-input
-            label="Enter Employee ID"
+            label="Employee ID [YYYYMMMDD-ABC123]"
             labelPlacement="stacked"
             type="text"
             placeholder="YYYYMMMDD-ABC123"
+            [(ngModel)]="newEmployee.id"
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -68,7 +69,7 @@
             labelPlacement="stacked"
             type="text"
             placeholder="Jane"
-            [(ngModel)]="firstName"
+            [(ngModel)]="newEmployee.firstName"
             (ngModelChange)="updateEmail()"
           ></ion-input>
         </ion-item>
@@ -78,7 +79,7 @@
             labelPlacement="stacked"
             type="text"
             placeholder="Doe"
-            [(ngModel)]="lastName"
+            [(ngModel)]="newEmployee.lastName"
             (ngModelChange)="updateEmail()"
           ></ion-input>
         </ion-item>
@@ -88,19 +89,19 @@
             labelPlacement="stacked"
             type="text"
             placeholder="jane.doe@wallopay.com"
-            [value]="email"
+            [value]="newEmployee.email"
             [readonly]="true"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Department</ion-label>
-          <ion-select [(ngModel)]="selectedDepartment" (ionChange)="onDepartmentChange($event)">
+          <ion-select [(ngModel)]="newEmployee.selectedDepartment" (ionChange)="onDepartmentChange($event)" placeholder="Select a department">
             <ion-select-option *ngFor="let department of departments" [value]="department">{{ department.name }}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Line Manager</ion-label>
-          <ion-input [(ngModel)]="lineManager" [readonly]="true"></ion-input>
+          <ion-input [(ngModel)]="newEmployee.lineManager" [readonly]="true"></ion-input>
         </ion-item>
 
       </ion-content>

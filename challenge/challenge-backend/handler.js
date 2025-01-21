@@ -24,9 +24,7 @@ export async function getDepartments(event) {
 }
 
 export async function getEmployees(event) {
-    const test = employee.get()
-    // console.log(test)
-    return test
+    return employee.get()
     // try {
     //     await handler.connect(); 
     //     const employeeCollection = handler.db.collection('employees');
@@ -42,44 +40,6 @@ export async function getEmployees(event) {
     //         body: JSON.stringify({ error: 'Failed to fetch employees' }),
     //     };
     // } 
-}
-
-export async function getDashboard(event) {
-    try {
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Hello, this is the dashboard!' }),
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch dashboard' }),
-        };
-    } 
-}
-
-export async function viewEmployee(event) {
-    const { employeeId } = event.pathParameters;
-    console.log(`ID: ${employeeId}`)
-
-    try {
-        await handler.connect();  
-        const employeeCollection = handler.db.collection('employees');  
-        const employees = await employeeCollection.findOne({ _id: employeeId })
-        
-
-        return {
-            statusCode: 200,
-            body: JSON.stringify(employees),
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch employees' }),
-        };
-    } 
 }
 
 export async function viewDepartment(event) {
@@ -105,28 +65,72 @@ export async function viewDepartment(event) {
     } 
 }
 
-//------------------------------------------//
-export async function deleteEmployee(event) {
-    const { employeeId } = event.pathParameters;
-    console.log(`ID: ${employeeId}`)
-
+export async function getDashboard(event) {
     try {
-        await handler.connect();
-        const employeeCollection = handler.db.collection('employees');
-        const employees = await employeeCollection.deleteOne({ _id: employeeId })
-        console.log(employees)
-
         return {
             statusCode: 200,
-            body: JSON.stringify(employees),
+            body: JSON.stringify({ message: 'Hello, this is the dashboard!' }),
         };
     } catch (error) {
         console.error(error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to delete employee' }),
+            body: JSON.stringify({ error: 'Failed to fetch dashboard' }),
         };
     } 
+}
+
+export async function viewEmployee(event) {
+    return employee.view(event)
+
+    // const { employeeId } = event.pathParameters;
+    // console.log(`ID: ${employeeId}`)
+
+    // try {
+    //     await handler.connect();  
+    //     const employeeCollection = handler.db.collection('employees');  
+    //     const employees = await employeeCollection.findOne({ _id: employeeId })
+        
+
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify(employees),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to fetch employees' }),
+    //     };
+    // } 
+}
+
+
+
+//------------------------------------------//
+export async function deleteEmployee(event) {
+    return employee.delete(event)
+
+    // const { employeeId } = event.pathParameters;
+    // console.log(`ID: ${employeeId}`)
+
+    // try {
+    //     await handler.connect();
+    //     const employeeCollection = handler.db.collection('employees');
+    //     const employees = await employeeCollection.deleteOne({ _id: employeeId })
+    //     console.log(employees)
+
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify(employees),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to delete employee' }),
+    //     };
+    // } 
 }
 
 export async function deleteDepartment(event) {

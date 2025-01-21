@@ -50,9 +50,39 @@ export async function deleteDepartment(event) {
 
 
 export async function createEmployee(event) {
-    return employee.create(event)
+    employee.create(event)
 }
 
 export async function createDepartment(event) {
     return department.create(event)
+    // try {
+    //     // Extract employee details from the request body
+    //     const { _id, name, line_manager } = JSON.parse(event.body);
+
+    //     if (!_id || !name || !line_manager) {
+    //         return {
+    //             statusCode: 400,
+    //             body: JSON.stringify({ error: 'Missing required fields (_id, name, line_manager)' }),
+    //         };
+    //     } 
+    //     else {
+    //         console.log(`${_id}`)
+    //         console.log(`${name}`)
+    //         console.log(`${line_manager}`)
+    //     }
+
+    //     // Pass the event to the create method to handle MongoDB insertion
+    //     const result = await employee.create({ _id, name, line_manager });
+
+    //     return {
+    //         statusCode: 201,  // Created
+    //         body: JSON.stringify(result),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to create employee' }),
+    //     };
+    // }
 }

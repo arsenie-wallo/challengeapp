@@ -73,25 +73,61 @@ export class Employee {
 
     // }
 
-    async create(event) {
-        const { employeeId } = event.pathParameters;
-        console.log(`ID: ${employeeId}`)
+    // async create(event) {
+    //     const { employeeId } = event.pathParameters;
+    //     console.log(`ID: ${employeeId}`)
 
+    //     try {
+    //         await this.handler.connect();
+    //         const employeeCollection = this.handler.db.collection('employees');
+    //         const employees = await employeeCollection.insertOne({ _id: employeeId })
+
+    //         return {
+    //             statusCode: 200,
+    //             body: JSON.stringify(employees),
+    //         };
+    //     } catch (error) {
+    //         console.error(error);
+    //         return {
+    //             statusCode: 500,
+    //             body: JSON.stringify({ error: 'Failed to insert department' }),
+    //         };
+    //     } 
+    // }
+
+    async create(event) {
         try {
-            await this.handler.connect();
-            const employeeCollection = this.handler.db.collection('employees');
-            const employees = await employeeCollection.insertOne({ _id: employeeId })
+            console.log("Parsing employee data...")
+            const { _id, email, name, address, department, line_manager } = JSON.parse(event.body);
+
+            console.log('Employee ID:', _id);
+            console.log('Email:', email);
+            console.log('Employee Name:', name);
+            console.log('Address:', address);
+            console.log('Department:', department);
+            console.log('Line Manager:', line_manager);
 
             return {
-                statusCode: 200,
-                body: JSON.stringify(employees),
-            };
+                statusCode: 201,
+                body: JSON.stringify({
+                    message: 'Employee created successfully',
+                    _id,
+                    email,
+                    name,
+                    address,
+                    department,
+                    line_manager
+                }),
+            }
         } catch (error) {
-            console.error(error);
+            console.error('Error:', error);
             return {
                 statusCode: 500,
-                body: JSON.stringify({ error: 'Failed to insert department' }),
+                body: JSON.stringify({
+                    message: 'Failed to create employee',
+                    error: error.message
+                }),
             };
-        } 
+        }
     }
 }

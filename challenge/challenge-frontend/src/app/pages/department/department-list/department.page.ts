@@ -6,7 +6,7 @@ import { logoIonic, create, trash, expand } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DepartmentModel } from '../../../models/data';
-import { DetailApiService } from '../../../services/api-object-handler/api-object-details.service'
+import { DetailApiService } from '../../../services/api-object-handler/api-object-handler.service'
 import { NavigationService } from '../../../services/navigation/navigation.service';
 
 import { 
@@ -86,7 +86,7 @@ export class DepartmentPage implements OnInit {
       next: (department) => {
         try {
           if (Array.isArray(department)) {
-            this.departmentArray.push(...department);  // Spread the array into this.department
+            this.departmentArray.push(...department); 
           }
           else {
             this.departmentArray.push(department);
@@ -118,54 +118,22 @@ export class DepartmentPage implements OnInit {
   onAddDepartmentClick() {
     console.log("Cicked!")
   }
-/*
-onDeleteDepartmentClick(targetId: string) {
-  console.log(`Deleting a department record ${targetId}`)
-  let found: DepartmentModel | undefined = this.findDepartment(targetId)
-  if(found) {
-    let numero = this.departmentArray.indexOf(found)
-    console.log(numero)
-    this.http.delete(`https://localhost:3000/departments/${numero}`)
-      console.log('Department deleted:', found);
-    this.navigateTo("department/")
-      this.departmentArray.splice(numero, 1);  // Remove department at given targetId
-    }
-  }
-*/
 async onDeleteDepartmentClick(targetId: string) {
   console.log(`Deleting a department record ${targetId}`);
 
-  // Step 1: Find the department by targetId
   let found: DepartmentModel | undefined = this.findDepartment(targetId);
 
-  // Check if department is found in local array
   if (found) {
-    // Step 2: Find the index of the department in the array
     let index = this.departmentArray.indexOf(found);
     console.log(`Department index found: ${index}`);
     try {
-      // Step 3: Make the HTTP DELETE request using async/await
-      await this.apiDetailService.deleteItem(targetId, "departments")//.toPromise(); // Convert observable to promise using toPromise()
+      await this.apiDetailService.deleteItem(targetId, "departments")
       
-      // Step 4: Remove department from the local array
       if (index !== -1) {
-        this.departmentArray.splice(index, 1); // Removes the department from array
+        this.departmentArray.splice(index, 1); 
         console.log("Department deleted successfully");
-
-        // Optionally navigate to another page
-        // this.navigateTo("https:///localhost:3000//");
-        // this.navigator.navigateTo("departments")
       }
     } catch (error) {
-      // Step 5: Handle errors gracefully
-      // if (error.status === 404) {
-      //   // if (error.status === 404) {
-      //   console.error(`Department with ID ${targetId} not found.`, error);
-      //   alert('The department was not found or has already been deleted.');
-      // } else {
-      //   console.error('Error deleting department:', error);
-      //   alert('Failed to delete the department. Please try again later.');
-      // }
     }
   } else {
     console.error(`Department with ID ${targetId} not found in local data.`);
@@ -182,33 +150,6 @@ cancel() {
   this.setOpen(false)
 }
 
-// onDepartmentCardClick(id: string) {
-//   const department = this.findDepartment(id);
-//   let index;
-//   if (department) {
-//     index = this.departmentArray.indexOf(department)
-//     console.log(`retrieving details`)
-//     // this.retriever.getDetailsById(department, index, "departments");
-//     // this.getDepartmentDetailsById(index);
-//   }
-//   else {
-//     console.log(`Department Not Found`)
-//   }
-// }
-
   confirm() {
-    // // Handle the modal input and capture the entered department details
-    // if (this.departmentName.trim() && this.departmentDescription.trim() && this.departmentCode.trim()) {
-    //   console.log(`New Department Name: ${this.departmentName}`);
-    //   console.log(`Department Description: ${this.departmentDescription}`);
-    //   console.log(`Department Code: ${this.departmentCode}`);
-      
-    //   // Optionally, add the new department to the list or save it to the database
-    //   this.isModalOpen = false; // Close the modal
-    // } else {
-    //   console.error('All fields are required');
-    // }
-
-    // this.setOpen(false)
   }
 }

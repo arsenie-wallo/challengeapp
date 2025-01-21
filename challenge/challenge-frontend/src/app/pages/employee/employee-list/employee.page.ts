@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { EmployeeModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
-import { DetailApiService } from '../../../services/api-object-handler/api-object-details.service'
+import { DetailApiService } from '../../../services/api-object-handler/api-object-handler.service'
 
 import { addIcons } from 'ionicons';
 import { logoIonic, create, trash, expand } from 'ionicons/icons';

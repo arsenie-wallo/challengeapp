@@ -14,7 +14,6 @@ export class DetailApiService {
   constructor(private http: HttpClient) {}
 
   getAllItems<T>(itemType: string): Observable<T> {
-    // console.log("hi from details api service")
     let uri = `${this.databaseUri}/${itemType}`
 
     return this.http.get<T>(uri)
@@ -48,16 +47,14 @@ export class DetailApiService {
 /* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);
-    // Handle errors properly based on the environment
     return throwError(() => new Error(`ERROR: ${error.error}`));
   }
   
   private logResponse(res: any) {
-    // console.log(`Hello from API details page:`)
-    // console.log(res);
+    console.log(res);
   }
   
   private extractData(res: any) {
-    return res || {};  // Here we assume res is the body of the HTTP response
+    return res || {};
   }
 }

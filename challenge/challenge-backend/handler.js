@@ -1,38 +1,11 @@
-require('dotenv').config();
-const { MongoClient } = require('mongodb');
+import { MongoDatabase } from './handler_files/db.js'
 
-const uri = process.env.MONGO_URI;
-let client;
-let db;
-let isConnected = false;
+const handler = new MongoDatabase()
 
-async function connectToDatabase() {
-    if (isConnected) {
-        console.log('Using existing database connection');
-        return db;
-    }
-    else {
-        console.log('Connecting to MongoDB...');
-        client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        // try {
-            await client.connect();
-            // Initialize the db object after a successful connection
-            db = client.db('WalloPay');
-            isConnected = true;
-            console.log('Connected to MongoDB');
-        // } catch (error) {
-            // console.error("Error connectinf to MongoDB")
-        // } 
-        // finally {
-        //     await client.close()
-        // }
-    }
-}
-//------------------------------------------//
-module.exports.getDepartments = async (event) => {
+export async function getDepartments(event) {
     try {
-        await connectToDatabase();  // Ensure the database is connected before querying
-        const departmentCollection = db.collection('departments');  // Access the collection here
+        await handler.connect(); 
+        const departmentCollection = handler.db.collection('departments'); 
         const departments = await departmentCollection.find().toArray();
         return {
             statusCode: 200,
@@ -45,15 +18,12 @@ module.exports.getDepartments = async (event) => {
             body: JSON.stringify({ error: 'Failed to fetch departments' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
+}
 
-module.exports.getEmployees = async (event) => {
+export async function getEmployees(event) {
     try {
-        await connectToDatabase();  // Ensure the database is connected before querying
-        const employeeCollection = db.collection('employees');  // Access the collection here
+        await handler.connect(); 
+        const employeeCollection = handler.db.collection('employees');
         const employees = await employeeCollection.find().toArray();
         return {
             statusCode: 200,
@@ -66,12 +36,9 @@ module.exports.getEmployees = async (event) => {
             body: JSON.stringify({ error: 'Failed to fetch employees' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
+}
 
-module.exports.getDashboard = async (event) => {
+export async function getDashboard(event) {
     try {
         return {
             statusCode: 200,
@@ -84,21 +51,17 @@ module.exports.getDashboard = async (event) => {
             body: JSON.stringify({ error: 'Failed to fetch dashboard' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
-//------------------------------------------//
+}
 
-module.exports.viewEmployee = async (event) => {
+export async function viewEmployee(event) {
     const { employeeId } = event.pathParameters;
     console.log(`ID: ${employeeId}`)
 
     try {
-        await connectToDatabase();  // Ensure the database is connected before querying
-        const employeeCollection = db.collection('employees');  // Access the collection here
-        const employees = await employeeCollection.findOne({ _id: employeeId })//.toArray();
-        console.log(employees)
+        await handler.connect();  
+        const employeeCollection = handler.db.collection('employees');  
+        const employees = await employeeCollection.findOne({ _id: employeeId })
+        
 
         return {
             statusCode: 200,
@@ -111,19 +74,16 @@ module.exports.viewEmployee = async (event) => {
             body: JSON.stringify({ error: 'Failed to fetch employees' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
+}
 
-module.exports.viewDepartment = async (event) => {
+export async function viewDepartment(event) {
     const { departmentId } = event.pathParameters;
     console.log(`ID: ${departmentId}`)
 
     try {
-        await connectToDatabase();  // Ensure the database is connected before querying
-        const departmentCollection = db.collection('departments');  // Access the collection here
-        const departments = await departmentCollection.findOne({ _id: departmentId })//.toArray();
+        await handler.connect();  
+        const departmentCollection = handler.db.collection('departments');
+        const departments = await departmentCollection.findOne({ _id: departmentId })
         console.log(departments)
 
         return {
@@ -137,20 +97,17 @@ module.exports.viewDepartment = async (event) => {
             body: JSON.stringify({ error: 'Failed to fetch departments' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
+}
 
 //------------------------------------------//
-module.exports.deleteEmployee = async (event) => {
+export async function deleteEmployee(event) {
     const { employeeId } = event.pathParameters;
     console.log(`ID: ${employeeId}`)
 
     try {
-        await connectToDatabase();  // Ensure the database is connected before querying
-        const employeeCollection = db.collection('employees');  // Access the collection here
-        const employees = await employeeCollection.deleteOne({ _id: employeeId })//.toArray();
+        await handler.connect();
+        const employeeCollection = handler.db.collection('employees');
+        const employees = await employeeCollection.deleteOne({ _id: employeeId })
         console.log(employees)
 
         return {
@@ -164,19 +121,16 @@ module.exports.deleteEmployee = async (event) => {
             body: JSON.stringify({ error: 'Failed to delete employee' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
+}
 
-module.exports.deleteDepartment = async (event) => {
+export async function deleteDepartment(event) {
     const { departmentId } = event.pathParameters;
     console.log(`Deleting ID: ${departmentId}`)
 
     try {
-        await connectToDatabase();  // Ensure the database is connected before querying
-        const departmentCollection = db.collection('departments');  // Access the collection here
-        const departments = await departmentCollection.deleteOne({ _id: departmentId })//.toArray();
+        await handler.connect(); 
+        const departmentCollection = handler.db.collection('departments');
+        const departments = await departmentCollection.deleteOne({ _id: departmentId })
         console.log(departments)
 
         return {
@@ -190,46 +144,4 @@ module.exports.deleteDepartment = async (event) => {
             body: JSON.stringify({ error: 'Failed to delete department' }),
         };
     } 
-    // finally {
-    //     await client.close()
-    // }
-};
-//------------------------------------------//
-// module.exports.createEmployee = async (event) => {
-//     const { _id, email, name, address, department, line_manager } = JSON.parse(event.body);
-//     console.log(`Creating Employee: ${name} with ID: ${_id}`);
-
-//     try {
-//         await connectToDatabase();  // Ensure the database is connected before querying
-//         const employeeCollection = db.collection('employees');  // Access the collection here
-
-//         // Creating the employee document
-//         const newEmployee = {
-//             _id,
-//             email,
-//             name,
-//             address,
-//             department,
-//             line_manager
-//         };
-
-//         // Insert the new employee record into the database
-//         const result = await employeeCollection.insertOne(newEmployee);
-
-//         console.log(`Employee created with ID: ${_id}`);
-
-//         return {
-//             statusCode: 201,  // 201 Created status code
-//             body: JSON.stringify({
-//                 message: 'Employee created successfully',
-//                 employeeId: result.insertedId,
-//             }),
-//         };
-//     } catch (error) {
-//         console.error(error);
-//         return {
-//             statusCode: 500,
-//             body: JSON.stringify({ error: 'Failed to create employee' }),
-//         };
-//     }
-// };
+}

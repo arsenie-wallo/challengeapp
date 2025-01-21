@@ -1,6 +1,9 @@
 import { MongoDatabase } from './handler_files/db.js'
+import { Employee } from './handler_files/employee.js'
+
 
 const handler = new MongoDatabase()
+const employee = new Employee()
 
 export async function getDepartments(event) {
     try {
@@ -21,21 +24,24 @@ export async function getDepartments(event) {
 }
 
 export async function getEmployees(event) {
-    try {
-        await handler.connect(); 
-        const employeeCollection = handler.db.collection('employees');
-        const employees = await employeeCollection.find().toArray();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(employees),
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch employees' }),
-        };
-    } 
+    const test = employee.get()
+    // console.log(test)
+    return test
+    // try {
+    //     await handler.connect(); 
+    //     const employeeCollection = handler.db.collection('employees');
+    //     const employees = await employeeCollection.find().toArray();
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify(employees),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to fetch employees' }),
+    //     };
+    // } 
 }
 
 export async function getDashboard(event) {

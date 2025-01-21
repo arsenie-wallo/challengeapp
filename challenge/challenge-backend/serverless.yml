@@ -90,11 +90,20 @@ functions:
       - http:
           path: departments/{departmentId}
           method: delete
-          # cors: false        
+          # cors: false
+          
   createEmployee:
       handler: handler.createEmployee
       events:
         - http:
-            path: employees  # The endpoint path, for example: /employees
-            method: post     # The HTTP method, in this case POST to create a new record
+            path: employees/{employeeId}
+            method: post
             # cors: false       # Enable CORS if needed for cross-origin requests
+
+  createDepartment:
+      handler: handler.createDepartment
+      events:
+        - http:
+            path: departments/{departmentId}
+            method: post
+            # cors: false       # Enable CORS if needed for cross-origin requests        

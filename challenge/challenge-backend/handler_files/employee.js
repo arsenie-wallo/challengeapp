@@ -72,4 +72,26 @@ export class Employee {
     // async editEmployee(event) {
 
     // }
+
+    async create(event) {
+        const { employeeId } = event.pathParameters;
+        console.log(`ID: ${employeeId}`)
+
+        try {
+            await this.handler.connect();
+            const employeeCollection = this.handler.db.collection('employees');
+            const employees = await employeeCollection.insertOne({ _id: employeeId })
+
+            return {
+                statusCode: 200,
+                body: JSON.stringify(employees),
+            };
+        } catch (error) {
+            console.error(error);
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'Failed to insert department' }),
+            };
+        } 
+    }
 }

@@ -48,7 +48,7 @@ export class Department {
 
     async delete(event) {
         const { departmentId } = event.pathParameters;
-        console.log(`ID: ${departmentId}`)
+        // console.log(`ID: ${departmentId}`)
 
         try {
             await this.handler.connect();
@@ -72,4 +72,28 @@ export class Department {
     // async editDepartment(event) {
 
     // }
+
+    
+    async create(event) {
+        const { departmentId } = event.pathParameters;
+        console.log(`ID: ${departmentId}`)
+
+        try {
+            await this.handler.connect();
+            const departmentCollection = this.handler.db.collection('departments');
+            const departments = await departmentCollection.insertOne({ _id: departmentId })
+            // console.log(departments)
+
+            return {
+                statusCode: 200,
+                body: JSON.stringify(departments),
+            };
+        } catch (error) {
+            console.error(error);
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'Failed to insert department' }),
+            };
+        } 
+    }
 }

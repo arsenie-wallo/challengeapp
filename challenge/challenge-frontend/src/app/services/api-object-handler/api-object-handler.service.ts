@@ -36,8 +36,9 @@ export class DetailApiService {
 
   deleteItem(id: string, type: string) {
     let uri = `${this.databaseUri}/dev/${type}/${id}`
-    console.log(`Hey from details api: ${uri}`)
-    this.http.delete(uri)
+    console.log(`Sending DELETE request to: ${uri}`)
+
+    return this.http.delete(uri)
       .pipe(
         map(this.extractData),
         tap(this.logResponse),
@@ -51,7 +52,7 @@ export class DetailApiService {
   }
   
   private logResponse(res: any) {
-    console.log(res);
+    // console.log(res);
   }
   
   private extractData(res: any) {

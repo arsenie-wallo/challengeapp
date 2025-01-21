@@ -43,7 +43,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/employee/employee-details/employee-details.page').then( m => m.EmployeeDetailsPage)
   },
 ];
-
 //   {
 //     path: `department/:id`,
 //     loadChildren: () =>

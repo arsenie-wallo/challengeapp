@@ -56,12 +56,53 @@
       <ion-content class="ion-padding">
         <ion-item>
           <ion-input
-            label="Enter your name"
+            label="Enter Employee ID"
             labelPlacement="stacked"
             type="text"
-            placeholder="Your name"
+            placeholder="YYYYMMMDD-ABC123"
           ></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-input
+            label="Employee First Name"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Jane"
+            [(ngModel)]="firstName"
+            (ngModelChange)="updateEmail()"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Employee Last Name"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Doe"
+            [(ngModel)]="lastName"
+            (ngModelChange)="updateEmail()"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Employee Email Address"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="jane.doe@wallopay.com"
+            [value]="email"
+            [readonly]="true"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Department</ion-label>
+          <ion-select [(ngModel)]="selectedDepartment" (ionChange)="onDepartmentChange($event)">
+            <ion-select-option *ngFor="let department of departments" [value]="department">{{ department.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Line Manager</ion-label>
+          <ion-input [(ngModel)]="lineManager" [readonly]="true"></ion-input>
+        </ion-item>
+
       </ion-content>
     </ng-template>
   </ion-modal>

@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { DepartmentModel } from '../../../models/data';
 import { EmployeeModel } from '../../../models/data';
 import { NavigationService } from '../../../services/navigation/navigation.service';
 import { DetailApiService } from '../../../services/api-object-handler/api-object-handler.service'
 
+import { DepartmentPage } from '../../department/department-list/department.page'
 import { addIcons } from 'ionicons';
 import { logoIonic, create, trash, expand } from 'ionicons/icons';
 
@@ -22,14 +24,19 @@ import {
   IonImg,
   IonInput,
   IonItem,
+  IonLabel,
   IonModal,
   IonNav,
+  IonSelectOption,
   IonTitle,
   IonToolbar,
   RefresherCustomEvent,
   IonRefresher,
   IonRefresherContent,
+  IonSelect,
+  // DepartmentModel
 } from '@ionic/angular/standalone';
+// import { IonLabel, IonSelectOption } from '@ionic/angular';
 
 @Component({
   selector: 'app-employee',
@@ -49,31 +56,56 @@ import {
     IonImg,
     IonInput,
     IonItem,
+    IonLabel,
     IonModal,
     IonNav,
+    IonSelectOption,
     IonTitle,
     IonToolbar,
     CommonModule,
     FormsModule,
     IonRefresher,
-    IonRefresherContent
+    IonRefresherContent,
+    // DepartmentModel
   ]
 })
 export class EmployeePage implements OnInit {
   isModalOpen = false;
+  firstName: string = ""
+  lastName: string = ""
+  email: string = ""
+  lineManager: string = "Test"
+  selectedDepartment: string = "";
+  
+  departments: DepartmentModel[] = [];
   employeeArray: EmployeeModel[] = [];
+  // dept = DepartmentPage;
+  // selectedDepartment: DepartmentModel = {
+  //   pictureUrl: "",
+  //   _id: "",
+  //   name: "",
+  //   line_manager:"",
+  //   employees: []
+  // };
+
+
+  
 
   constructor(
     private apiDetailService: DetailApiService,
     private navigator: NavigationService,
+    private departmentPage: DepartmentPage,
+    // private selectedDepartment: string
   ) {
     addIcons({create,trash,expand,logoIonic});
+
   }
 
   ngOnInit() {
-    // console.log(`Hello from employee.page.ts`);
     this.getAllEmployees()
     console.log(this.employeeArray.length)
+    this.departmentPage.getAllDepartments()
+    this.departments = this.departmentPage.departmentArray
   }
 
   refresh(ev: any) {
@@ -168,5 +200,18 @@ export class EmployeePage implements OnInit {
   
   confirm () {
     this.setOpen(false)
+  }
+  updateEmail() {
+    this.email = `${this.firstName.toLowerCase()}.${this.lastName.toLowerCase()}@wallopay.com`;
+  }
+  
+  onDepartmentChange(event:CustomEvent) {
+    const response = event.detail.value
+    this.lineManager = response.line_manager
+  }
+
+  getManager(departmentName: string): string {
+    const department = this.departments.find(dept => dept.name === departmentName);
+    return department ? department.line_manager : 'Not available';  // Default if department is not found
   }
 }

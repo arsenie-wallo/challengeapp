@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { DepartmentModel } from '../../../models/data';
 import { DetailApiService } from '../../../services/api-object-handler/api-object-handler.service'
 import { NavigationService } from '../../../services/navigation/navigation.service';
+import { Injectable } from '@angular/core';
 
 import { 
   IonBackButton,
@@ -59,10 +60,12 @@ import {
     IonRefresherContent
   ]
 })
-
+@Injectable({
+  providedIn: 'root',
+})
 export class DepartmentPage implements OnInit {
   isModalOpen = false;
-  departmentArray: DepartmentModel[] = [];
+  public departmentArray: DepartmentModel[] = [];
 
   constructor(
     private apiDetailService: DetailApiService,

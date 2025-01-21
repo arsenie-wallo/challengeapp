@@ -69,7 +69,7 @@ export class Department {
         } 
     }
 
-    // async editdepartment(event) {
+    // async editDepartment(event) {
 
     // }
 }

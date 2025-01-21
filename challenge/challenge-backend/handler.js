@@ -1,26 +1,30 @@
 import { MongoDatabase } from './handler_files/db.js'
 import { Employee } from './handler_files/employee.js'
+import { Department } from './handler_files/department.js'
 
 
 const handler = new MongoDatabase()
 const employee = new Employee()
+const department = new Department()
 
 export async function getDepartments(event) {
-    try {
-        await handler.connect(); 
-        const departmentCollection = handler.db.collection('departments'); 
-        const departments = await departmentCollection.find().toArray();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(departments),
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch departments' }),
-        };
-    } 
+    return department.get()
+
+    // try {
+    //     await handler.connect(); 
+    //     const departmentCollection = handler.db.collection('departments'); 
+    //     const departments = await departmentCollection.find().toArray();
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify(departments),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to fetch departments' }),
+    //     };
+    // } 
 }
 
 export async function getEmployees(event) {
@@ -43,26 +47,28 @@ export async function getEmployees(event) {
 }
 
 export async function viewDepartment(event) {
-    const { departmentId } = event.pathParameters;
-    console.log(`ID: ${departmentId}`)
+    return department.view()
 
-    try {
-        await handler.connect();  
-        const departmentCollection = handler.db.collection('departments');
-        const departments = await departmentCollection.findOne({ _id: departmentId })
-        console.log(departments)
+    // const { departmentId } = event.pathParameters;
+    // console.log(`ID: ${departmentId}`)
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify(departments),
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch departments' }),
-        };
-    } 
+    // try {
+    //     await handler.connect();  
+    //     const departmentCollection = handler.db.collection('departments');
+    //     const departments = await departmentCollection.findOne({ _id: departmentId })
+    //     console.log(departments)
+
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify(departments),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to fetch departments' }),
+    //     };
+    // } 
 }
 
 export async function getDashboard(event) {
@@ -134,24 +140,26 @@ export async function deleteEmployee(event) {
 }
 
 export async function deleteDepartment(event) {
-    const { departmentId } = event.pathParameters;
-    console.log(`Deleting ID: ${departmentId}`)
+    return department.delete(event)
 
-    try {
-        await handler.connect(); 
-        const departmentCollection = handler.db.collection('departments');
-        const departments = await departmentCollection.deleteOne({ _id: departmentId })
-        console.log(departments)
+    // const { departmentId } = event.pathParameters;
+    // console.log(`Deleting ID: ${departmentId}`)
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify(departments),
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to delete department' }),
-        };
-    } 
+    // try {
+    //     await handler.connect(); 
+    //     const departmentCollection = handler.db.collection('departments');
+    //     const departments = await departmentCollection.deleteOne({ _id: departmentId })
+    //     console.log(departments)
+
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify(departments),
+    //     };
+    // } catch (error) {
+    //     console.error(error);
+    //     return {
+    //         statusCode: 500,
+    //         body: JSON.stringify({ error: 'Failed to delete department' }),
+    //     };
+    // } 
 }

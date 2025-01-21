@@ -49,7 +49,7 @@
         <ion-toolbar>
           <ion-title>Add Employee</ion-title>
           <ion-button slot="start" (click)="cancel()">Cancel</ion-button>
-          <ion-button slot="end" (click)="confirm()" [strong]="true">Confirm</ion-button>
+          <ion-button slot="end" (click)="confirm()" [strong]="true" [disabled]="!isFormComplete()">Confirm</ion-button>
         </ion-toolbar>
       </ion-header>
 

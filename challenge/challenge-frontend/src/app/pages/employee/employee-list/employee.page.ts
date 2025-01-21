@@ -177,13 +177,38 @@ export class EmployeePage implements OnInit {
   onAddEmployeeClick() {
     console.log("Cicked!")
   }
+  
+  // updateEmail() {
+  //   const firstName = this.newEmployee.firstName.toLowerCase()
+  //   const lastName = this.newEmployee.lastName !== "" ?
+  //     `.${this.newEmployee.lastName.toLowerCase()}` :
+  //     `${this.newEmployee.lastName.toLowerCase()}`;
+  //   this.newEmployee.email = `${firstName}${lastName}@wallopay.com`;
+  // }
+
   updateEmail() {
-    this.newEmployee.email = `${this.newEmployee.firstName.toLowerCase()}.${this.newEmployee.lastName.toLowerCase()}@wallopay.com`;
+    const { firstName, lastName } = this.newEmployee;
+    this.newEmployee.email = `${firstName.toLowerCase()}${lastName ? 
+      `.${lastName.toLowerCase()}` : 
+      ''}@wallopay.com`;
   }
+  
   
   onDepartmentChange(event:CustomEvent) {
     const response = event.detail.value
     this.newEmployee.lineManager = response.line_manager
+  }
+
+  isFormComplete() {
+    let check = 
+      this.newEmployee.id !== "" 
+      && this.newEmployee.email !== "" 
+      // && this.newEmployee.firstName !== "" 
+      // && this.newEmployee.lastName !== "" 
+      // && this.newEmployee.selectedDepartment !== "" 
+      // && this.newEmployee.lineManager !== ""
+
+    return check
   }
 
   // getManager(departmentName: string): string {

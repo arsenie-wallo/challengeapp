@@ -47,7 +47,7 @@ export async function getEmployees(event) {
 }
 
 export async function viewDepartment(event) {
-    return department.view()
+    return department.view(event)
 
     // const { departmentId } = event.pathParameters;
     // console.log(`ID: ${departmentId}`)

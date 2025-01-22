@@ -150,29 +150,47 @@ async onDeleteDepartmentClick(targetId: string) {
 }
 
   /* Modal */ 
-setOpen(isOpen: boolean) {
-  this.isModalOpen = isOpen;
-}
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 
-isFormComplete() {
-  let result = 
-    this.newDepartment.id !== "" 
-    && this.newDepartment.name !== "" 
-    && this.newDepartment.lineManager !== ""
+  isFormComplete() {
+    let result = 
+      this.newDepartment.id !== "" 
+      && this.newDepartment.name !== "" 
+      && this.newDepartment.lineManager !== ""
 
-  return result
-}
+    return result
+  }
 
-cancel() {
-  this.setOpen(false)
-}
+  cancel() {
+    this.setOpen(false)
+  }
 
-confirm () {
-  this.setOpen(false)
-  console.log(`Creating new department record...`)
-  // Create department
-  console.log(JSON.stringify(this.newDepartment))
-  // const department = JSON.stringify(this.newDepartment)
-  // this.apiDetailService.createItem(this.newDepartment.id, "departments", department)
-}
+  createDeparment() {
+      // JSON.stringify(this.newEmployee)
+      // let employee = JSON.parse()
+      // console.log(employee)
+  
+      let newDepartment: DepartmentModel = {
+        pictureUrl: "",
+        _id: this.newDepartment.id,
+        name: this.newDepartment.name,
+        line_manager: this.newDepartment.lineManager,
+        employees: []
+      }
+
+      this.departmentArray.push(newDepartment)
+      return newDepartment
+    }
+
+  confirm () {
+    this.setOpen(false)
+    console.log(`Creating new department record...`)
+    // Create department
+    // console.log(JSON.stringify(this.newDepartment))
+    const department = this.createDeparment()
+    // const department = JSON.stringify(this.newDepartment)
+    this.apiDetailService.createItem(this.newDepartment.id, "departments", department)
+  }
 }

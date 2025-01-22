@@ -216,6 +216,7 @@ export class EmployeePage implements OnInit {
       line_manager: this.newEmployee.lineManager
     }
 
+    this.employeeArray.push(newEmployee)
     return newEmployee
   }
 

@@ -66,6 +66,10 @@ export class DetailApiService {
     }
     // console.log(`The body: ${newEmployee}`)
     */
+   
+  //  console.log(`The body: ${newItem._id}`)
+  //  console.log(`The body: ${newItem.name}`)
+  //  console.log(`The body: ${newItem.line_manager}`)
 
     return this.http.post(uri, newItem)
       .pipe(

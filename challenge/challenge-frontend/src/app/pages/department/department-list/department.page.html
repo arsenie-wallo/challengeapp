@@ -58,13 +58,17 @@
 
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-input
-            label="Department Code"
-            labelPlacement="stacked"
-            type="text"
-            placeholder="DPT-123"
-            [(ngModel)]="newDepartment.id"
-          ></ion-input>
+          <ion-label position="stacked">Department Code</ion-label>
+          <div style="display: flex; align-items: center;">
+            <span style="margin-right: 5px;">DPT-</span>
+            <ion-input
+              type="text"
+              placeholder="123"
+              [(ngModel)]="newDepartment.id"
+              (input)="formatDepartmentCode()"
+              maxlength="6" 
+            ></ion-input>
+          </div>
         </ion-item>
         <ion-item>
           <ion-input

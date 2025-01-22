@@ -71,6 +71,7 @@ import {
 })
 export class EmployeePage implements OnInit {
   isModalOpen = false;
+  todayStr = this.generateEmployeeID()
   
   departments: DepartmentModel[] = [];
   employeeArray: EmployeeModel[] = [];
@@ -202,13 +203,14 @@ export class EmployeePage implements OnInit {
     this.apiDetailService.createItem(this.newEmployee.id, "employees", employee)
   }
 
-  createEmployee() {
-    // JSON.stringify(this.newEmployee)
-    // let employee = JSON.parse()
-    // console.log(employee)
+  generateEmployeeID() {
+    const today = new Date();
+    return today.toISOString().slice(0, 10).replace(/-/g, '');
+  }
 
+  createEmployee() {
     let newEmployee: EmployeeModel = {
-      _id: this.newEmployee.id,
+      _id: `${this.todayStr}-${this.newEmployee.id}`,
       email: this.newEmployee.email,
       name: `${this.newEmployee.firstName} ${this.newEmployee.lastName}`,
       address: this.newEmployee.address,

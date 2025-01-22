@@ -55,14 +55,26 @@
 
       <ion-content class="ion-padding">
         <ion-item>
+          <ion-label position="stacked">Employee ID</ion-label>
+          <div style="display: flex; align-items: center;">
+            <span style="margin-right: 5px;">{{generateEmployeeID()}}-</span>
+            <ion-input
+              type="text"
+              placeholder="ABC123"
+              [(ngModel)]="newEmployee.id"
+              maxlength="15" 
+            ></ion-input>
+          </div>
+        </ion-item>
+        <!-- <ion-item>
           <ion-input
-            label="Employee ID [YYYYMMMDD-ABC123]"
+            label="Employee ID [YYYYMMDD-ABC123]"
             labelPlacement="stacked"
             type="text"
             placeholder="YYYYMMMDD-ABC123"
             [(ngModel)]="newEmployee.id"
           ></ion-input>
-        </ion-item>
+        </ion-item> -->
         <ion-item>
           <ion-input
             label="Employee First Name"

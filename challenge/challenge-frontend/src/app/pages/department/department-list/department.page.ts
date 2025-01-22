@@ -23,6 +23,7 @@ import {
   IonImg,
   IonInput,
   IonItem,
+  IonLabel,
   IonModal,
   IonTitle,
   IonToolbar,
@@ -50,6 +51,7 @@ import {
     IonImg,
     IonInput,
     IonItem,
+    IonLabel,
     IonModal,
     IonTitle,
     IonToolbar,
@@ -154,6 +156,12 @@ async onDeleteDepartmentClick(targetId: string) {
     this.isModalOpen = isOpen;
   }
 
+  formatDepartmentCode() {
+    // If there's any non-numeric character, replace it with an empty string
+    this.newDepartment.id = this.newDepartment.id.replace(/[^0-9]/g, '');
+  }
+
+
   isFormComplete() {
     let result = 
       this.newDepartment.id !== "" 
@@ -168,13 +176,9 @@ async onDeleteDepartmentClick(targetId: string) {
   }
 
   createDeparment() {
-      // JSON.stringify(this.newEmployee)
-      // let employee = JSON.parse()
-      // console.log(employee)
-  
       let newDepartment: DepartmentModel = {
         pictureUrl: "",
-        _id: this.newDepartment.id,
+        _id: `DPT-${this.newDepartment.id}`,
         name: this.newDepartment.name,
         line_manager: this.newDepartment.lineManager,
         employees: []
@@ -188,9 +192,7 @@ async onDeleteDepartmentClick(targetId: string) {
     this.setOpen(false)
     console.log(`Creating new department record...`)
     // Create department
-    // console.log(JSON.stringify(this.newDepartment))
     const department = this.createDeparment()
-    // const department = JSON.stringify(this.newDepartment)
     this.apiDetailService.createItem(this.newDepartment.id, "departments", department)
   }
 }

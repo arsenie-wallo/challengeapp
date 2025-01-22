@@ -66,6 +66,11 @@ import {
 export class DepartmentPage implements OnInit {
   isModalOpen = false;
   public departmentArray: DepartmentModel[] = [];
+  newDepartment = {
+    id: "",
+    name: "",
+    lineManager: "" 
+  }
 
   constructor(
     private apiDetailService: DetailApiService,
@@ -149,10 +154,25 @@ setOpen(isOpen: boolean) {
   this.isModalOpen = isOpen;
 }
 
+isFormComplete() {
+  let result = 
+    this.newDepartment.id !== "" 
+    && this.newDepartment.name !== "" 
+    && this.newDepartment.lineManager !== ""
+
+  return result
+}
+
 cancel() {
   this.setOpen(false)
 }
 
-  confirm() {
-  }
+confirm () {
+  this.setOpen(false)
+  console.log(`Creating new department record...`)
+  // Create department
+  console.log(JSON.stringify(this.newDepartment))
+  // const department = JSON.stringify(this.newDepartment)
+  // this.apiDetailService.createItem(this.newDepartment.id, "departments", department)
+}
 }

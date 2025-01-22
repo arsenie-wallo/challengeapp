@@ -5,6 +5,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 import { DepartmentModel } from '../../models/data';
 import { EmployeeModel } from '../../models/data';
+import { body } from 'ionicons/icons';
+import { EmployeePage } from 'src/app/pages/employee/employee-list/employee.page';
 
 @Injectable(
   {providedIn: 'root'}
@@ -45,6 +47,45 @@ export class DetailApiService {
         catchError(this.catchError)
       )
   }
+
+  createItem(id: string, type: string, newItem: EmployeeModel | DepartmentModel) {
+    let uri = `${this.databaseUri}/dev/${type}/${id}`
+    console.log(`Sending POST request to: ${uri}`)
+
+    /*
+    let employee = JSON.parse(body)
+    // console.log(employee)
+
+    let newEmployee: EmployeeModel = {
+      _id: employee.id,
+      email: employee.email,
+      name: `${employee.firstName} ${employee.lastName}`,
+      address: employee.address,
+      department: employee.selectedDepartment,
+      line_manager: employee.lineManager
+    }
+    // console.log(`The body: ${newEmployee}`)
+    */
+
+    return this.http.post(uri, newItem)
+      .pipe(
+        map(this.extractData),
+        tap(this.logResponse),
+        catchError(this.catchError)
+      )
+  }
+
+  /*
+export type EmployeeModel = {
+    // index: number;
+    _id: string;
+    email: string;
+    name: string;
+    address: string;
+    line_manager: EmployeeModel | null;
+    department: DepartmentModel;
+}
+*/
 /* ----------------------------------<< Error Handling >>---------------------------------- */
   private catchError(error: HttpErrorResponse | any): Observable<never> {
     console.log(error);

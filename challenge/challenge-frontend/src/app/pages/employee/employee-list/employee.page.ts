@@ -71,11 +71,6 @@ import {
 })
 export class EmployeePage implements OnInit {
   isModalOpen = false;
-  // firstName: string = ""
-  // lastName: string = ""
-  // email: string = ""
-  // lineManager: string = ""
-  // selectedDepartment: string = "";
   
   departments: DepartmentModel[] = [];
   employeeArray: EmployeeModel[] = [];
@@ -84,6 +79,7 @@ export class EmployeePage implements OnInit {
     firstName: "",
     lastName: "",
     email: "",
+    address: "",
     lineManager: "",
     selectedDepartment: ""
   }
@@ -166,18 +162,6 @@ export class EmployeePage implements OnInit {
     this.isModalOpen = isOpen;
   }
   
-  cancel() {
-    this.setOpen(false)
-  }
-  
-  confirm () {
-    this.setOpen(false)
-    console.log(`Creating new employee record...`)
-  }
-  onAddEmployeeClick() {
-    console.log("Cicked!")
-  }
-  
   // updateEmail() {
   //   const firstName = this.newEmployee.firstName.toLowerCase()
   //   const lastName = this.newEmployee.lastName !== "" ?
@@ -200,19 +184,47 @@ export class EmployeePage implements OnInit {
   }
 
   isFormComplete() {
-    let check = 
+    let result = 
       this.newEmployee.id !== "" 
       && this.newEmployee.email !== "" 
-      // && this.newEmployee.firstName !== "" 
-      // && this.newEmployee.lastName !== "" 
-      // && this.newEmployee.selectedDepartment !== "" 
-      // && this.newEmployee.lineManager !== ""
+      && this.newEmployee.lineManager !== ""
+    return result
+  }
+  
+  confirm () {
+    this.setOpen(false)
+    console.log(`Creating new employee record...`)
+    // Create employee
+    // console.log(JSON.stringify(this.newEmployee))
+    const employee = this.createEmployee()
+    // const employee = JSON.stringify(this.newEmployee)
 
-    return check
+    this.apiDetailService.createItem(this.newEmployee.id, "employees", employee)
   }
 
+  createEmployee() {
+    // JSON.stringify(this.newEmployee)
+    // let employee = JSON.parse()
+    // console.log(employee)
+
+    let newEmployee: EmployeeModel = {
+      _id: this.newEmployee.id,
+      email: this.newEmployee.email,
+      name: `${this.newEmployee.firstName} ${this.newEmployee.lastName}`,
+      address: this.newEmployee.address,
+      department: this.newEmployee.selectedDepartment,
+      line_manager: this.newEmployee.lineManager
+    }
+
+    return newEmployee
+  }
+
+  cancel() {
+    this.setOpen(false)
+  }
   // getManager(departmentName: string): string {
   //   const department = this.departments.find(dept => dept.name === departmentName);
   //   return department ? department.line_manager : 'Not available';  // Default if department is not found
   // }
 }
+

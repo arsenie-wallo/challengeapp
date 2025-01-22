@@ -94,6 +94,15 @@
           ></ion-input>
         </ion-item>
         <ion-item>
+          <ion-input
+            label="Employee Home Address"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="123 XY Street, ABC Suburb, DE City, FG Region, HI Country"
+            [value]="newEmployee.address"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label position="stacked">Department</ion-label>
           <ion-select [(ngModel)]="newEmployee.selectedDepartment" (ionChange)="onDepartmentChange($event)" placeholder="Select a department">
             <ion-select-option *ngFor="let department of departments" [value]="department">{{ department.name }}</ion-select-option>

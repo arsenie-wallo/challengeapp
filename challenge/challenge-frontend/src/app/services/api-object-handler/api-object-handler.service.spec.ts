@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiItemDetailsService } from './api-object-handler.service';
+import { DetailApiService } from './api-object-handler.service';
 
 describe('ApiItemDetailsService', () => {
-  let service: ApiItemDetailsService;
+  let service: DetailApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ApiItemDetailsService);
+    service = TestBed.inject(DetailApiService);
   });
 
   it('should be created', () => {

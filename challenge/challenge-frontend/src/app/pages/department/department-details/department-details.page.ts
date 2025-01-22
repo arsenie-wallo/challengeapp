@@ -66,7 +66,7 @@ export class DepartmentDetailsPage implements OnInit {
   };
 
   getTargetDepartment(targetId: string) {
-    this.apiDetailService.getItemById(targetId, "departments").subscribe({
+    return this.apiDetailService.getItemById(targetId, "departments").subscribe({
       next: (response) => {
         this.department = response
       },

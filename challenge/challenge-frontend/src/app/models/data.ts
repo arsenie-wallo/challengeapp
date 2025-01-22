@@ -1,9 +1,3 @@
-// export type Model = {
-//     department?: DepartmentModel;
-//     employee?: EmployeeModel;
-//     // lineManager?: LineManager;
-// }
-
 export type DepartmentModel = {
     pictureUrl: string;
     _id: string;

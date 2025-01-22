@@ -5,8 +5,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 import { DepartmentModel } from '../../models/data';
 import { EmployeeModel } from '../../models/data';
-import { body } from 'ionicons/icons';
-import { EmployeePage } from 'src/app/pages/employee/employee-list/employee.page';
+// import { body } from 'ionicons/icons';
+// import { EmployeePage } from 'src/app/pages/employee/employee-list/employee.page';
 
 @Injectable(
   {providedIn: 'root'}
@@ -27,7 +27,9 @@ export class DetailApiService {
   }
 
   getItemById(id: string, type: string) {
+    console.log(`Getting ${type.replace("s", "")} by id...`)
     const uri = `${this.databaseUri}/dev/${type}/${id}`
+    // console.log(id)
     return this.http.get<DepartmentModel | EmployeeModel>(uri)
     .pipe(
       map(this.extractData),
@@ -51,7 +53,7 @@ export class DetailApiService {
   createItem(id: string, type: string, newItem: EmployeeModel | DepartmentModel) {
     let uri = `${this.databaseUri}/dev/${type}/${id}`
     console.log(`Sending POST request to: ${uri}`)
-    console.log(`ID: ${newItem._id}`)
+    // console.log(`ID: ${newItem._id}`)
 
     return this.http.post(uri, newItem)
       .pipe(

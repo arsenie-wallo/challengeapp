@@ -61,7 +61,7 @@ export class EmployeeDetailsPage implements OnInit {
       next: (response) => {
         this.employee = response
         // console.log(`Hello from details page:`)
-        // console.log(response)
+        console.log(response._id)
       },
       error: (error) => {
         console.error('Error fetching employee data', error);

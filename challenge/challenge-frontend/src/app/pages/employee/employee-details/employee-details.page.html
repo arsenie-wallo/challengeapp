@@ -20,11 +20,13 @@
 <ion-content *ngIf="employee" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
+      <!-- <p>fj</p> -->
       <ion-title size="large">{{ employee.name }}</ion-title>
       <p>ID: {{ employee._id }}</p>
       <p>Email Address: {{ employee.email }}</p>
       <p>Address: {{ employee.address }}</p>
       <p>Manager: {{ employee.line_manager }}</p>
+      <p>Department: {{ employee.department }}</p>
     </ion-toolbar>
   </ion-header>
 </ion-content>

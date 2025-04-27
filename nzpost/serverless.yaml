@@ -1,0 +1,17 @@
+service: nzpost-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-2
+
+plugins:
+  - serverless-offline
+
+functions:
+  suggest:
+    handler: handler.handler
+    events:
+      - http:
+          path: suggest
+          method: get
